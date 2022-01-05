@@ -115,3 +115,51 @@
     flex-direction: column;
   }
 }
+
+/* login */
+.imgSize{
+  width: 50%;
+  height: 50%;
+}
+
+.padtop{
+  margin-top: 50%;
+}
+
+.centeringText{
+  text-align: center;
+}
+
+.roundedTube{
+  width: 100px;
+  height: 40px;
+  border-radius: 20px;
+  border-style: solid;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 3px;
+  transition: 0.5s;
+}
+
+.roundedTube:hover{
+  background-color: antiquewhite;
+}
+
+.inputWidth{
+  padding-right: 50px;
+  padding-left: 50px;
+}
+
+.centerBtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.widthBtn{
+  width: 220px;
+}
+
+.padtop2{
+  margin-top: 20%;
+}
