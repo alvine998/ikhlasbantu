@@ -19,7 +19,7 @@ function Navbar(props) {
                                 <a className={'nav-link ' + (props.donasi?'active':'')} href="/donasi">Donasi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Tentang Kami</a>
+                                <a className={'nav-link ' + (props.tentang?'active':'')} href="/tentang-kami">Tentang Kami</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Hubungi Kami</a>
