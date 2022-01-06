@@ -1,11 +1,14 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Router, useRouter } from 'next/router'
+import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
   const router = useRouter();
+  const [banner, setBanner] = ('https://dummyimage.com/1200x600/000/fff');
+
   return (
     <div>
       <Head>
@@ -17,9 +20,9 @@ export default function Home() {
       <div>
         <Navbar />
 
-        <div className='container'>
+        <div className='container' style={{ paddingBottom: 50 }}>
           {/* Start Carousel */}
-          <div style={{paddingTop:20}}>
+          <div style={{ paddingTop: 20 }}>
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -28,25 +31,25 @@ export default function Home() {
               </div>
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img src="..." class="d-block w-100" alt="..."/>
-                    <div class="carousel-caption d-none d-md-block">
-                      <h5>First slide label</h5>
-                      <p>Some representative placeholder content for the first slide.</p>
-                    </div>
+                  <img src={'https://dummyimage.com/1200x600/000/fff'} class="d-block w-100" alt="..." />
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>First slide label</h5>
+                    <p>Some representative placeholder content for the first slide.</p>
+                  </div>
                 </div>
                 <div class="carousel-item">
-                  <img src="..." class="d-block w-100" alt="..."/>
-                    <div class="carousel-caption d-none d-md-block">
-                      <h5>Second slide label</h5>
-                      <p>Some representative placeholder content for the second slide.</p>
-                    </div>
+                  <img src={'https://dummyimage.com/1200x600/000/fff'} class="d-block w-100" alt="..." />
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Second slide label</h5>
+                    <p>Some representative placeholder content for the second slide.</p>
+                  </div>
                 </div>
                 <div class="carousel-item">
-                  <img src="..." class="d-block w-100" alt="..."/>
-                    <div class="carousel-caption d-none d-md-block">
-                      <h5>Third slide label</h5>
-                      <p>Some representative placeholder content for the third slide.</p>
-                    </div>
+                  <img src={'https://dummyimage.com/1200x600/000/fff'} class="d-block w-100" alt="..." />
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Third slide label</h5>
+                    <p>Some representative placeholder content for the third slide.</p>
+                  </div>
                 </div>
               </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
@@ -59,7 +62,136 @@ export default function Home() {
               </button>
             </div>
           </div>
+          {/* End Carousel */}
+
+          {/* Start Donasi Terkini */}
+          <div className={styles.donasiTop}>
+            <h2><u>Donasi Terkini</u></h2>
+            <div className='container'>
+              <div className='row'>
+                <div className='col-4'>
+                  <div className={styles.boxDonasi}>
+                    <img className={styles.imgPosition} />
+                    <h5>Bantuan Erupsi Gunung Semeru</h5>
+                    <div>
+                      <p>Dana Terkumpul : </p>
+                      <p>Rp. 101.500.000</p>
+                    </div>
+                    <div className={styles.btnWidth}>
+                      <button className={'btn btn-outline-success ' + styles.btnWidth}>Donasi</button>
+                    </div>
+                  </div>
+                </div>
+                <div className='col-4'>
+                  <div className={styles.boxDonasi}>
+                    <img className={styles.imgPosition} />
+                    <h5>Sedekah Spesial Jum'at</h5>
+                    <div>
+                      <p>Dana Terkumpul : </p>
+                      <p>Rp. 101.500.000</p>
+                    </div>
+                    <div className={styles.btnWidth}>
+                      <button className={'btn btn-outline-success ' + styles.btnWidth}>Donasi</button>
+                    </div>
+                  </div>
+                </div>
+                <div className='col-4'>
+                  <div className={styles.boxDonasi}>
+                    <img className={styles.imgPosition} />
+                    <h5>Bantu Kanker Ibu Siti</h5>
+                    <div>
+                      <p>Dana Terkumpul : </p>
+                      <p>Rp. 101.500.000</p>
+                    </div>
+                    <div className={styles.btnWidth}>
+                      <button className={'btn btn-outline-success ' + styles.btnWidth}>Donasi</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* End Donasi Terkini */}
+
+          {/* Start Harapan Kami */}
+          <div className={styles.harapanTop}>
+            <h2><u>Harapan Kami</u></h2>
+            <div className={styles.boxHarapan}>
+              <div className='container'>
+                <div className='row'>
+                  <div className='col-1'>
+                    <img className={styles.imgProfile} />
+                  </div>
+                  <div className={'col-2 ' + styles.marginProfile}>
+                    <p>Rita Kurnia <br /> Pada 09.45</p>
+                  </div>
+                  <div className={'col ' + styles.marginProfileStatus}>
+                    <p>"Semoga selalu diberikan kesehatan dan diberkati setiap harinya"</p>
+                    <hr />
+                  </div>
+                </div>
+
+                <div className='row'>
+                  <div className='col-1'>
+                    <img className={styles.imgProfile} />
+                  </div>
+                  <div className={'col-2 ' + styles.marginProfile}>
+                    <p>Rita Kurnia <br /> Pada 09.45</p>
+                  </div>
+                  <div className={'col ' + styles.marginProfileStatus}>
+                    <p>"Semoga selalu diberikan kesehatan dan diberkati setiap harinya"</p>
+                    <hr />
+                  </div>
+                </div>
+
+                <div className='row'>
+                  <div className='col-1'>
+                    <img className={styles.imgProfile} />
+                  </div>
+                  <div className={'col-2 ' + styles.marginProfile}>
+                    <p>Rita Kurnia <br /> Pada 09.45</p>
+                  </div>
+                  <div className={'col ' + styles.marginProfileStatus}>
+                    <p>"Semoga selalu diberikan kesehatan dan diberkati setiap harinya"</p>
+                    <hr />
+                  </div>
+                </div>
+
+                <div className='row'>
+                  <div className='col-1'>
+                    <img className={styles.imgProfile} />
+                  </div>
+                  <div className={'col-2 ' + styles.marginProfile}>
+                    <p>Rita Kurnia <br /> Pada 09.45</p>
+                  </div>
+                  <div className={'col ' + styles.marginProfileStatus}>
+                    <p>"Semoga selalu diberikan kesehatan dan diberkati setiap harinya"</p>
+                    <hr />
+                  </div>
+                </div>
+
+                <div className='row'>
+                  <div className='col-1'>
+                    <img className={styles.imgProfile} />
+                  </div>
+                  <div className={'col-2 ' + styles.marginProfile}>
+                    <p>Rita Kurnia <br /> Pada 09.45</p>
+                  </div>
+                  <div className={'col ' + styles.marginProfileStatus}>
+                    <p>"Semoga selalu diberikan kesehatan dan diberkati setiap harinya"</p>
+                    <hr />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className={styles.rightSide}>
+              <button className={'btn btn-outline-primary ' + styles.btnWidth}>+ Buat Harapan</button>
+            </div>
+          </div>
+          {/* End Harapan Kami */}
         </div>
+
+        <Footer/>
       </div>
     </div>
   )

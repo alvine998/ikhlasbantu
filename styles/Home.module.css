@@ -116,6 +116,81 @@
   }
 }
 
+/* Home */
+.donasiTop{
+  margin-top: 20px;
+  padding-bottom: 30px;
+}
+
+.imgPosition{
+  width: 300px;
+  height: 200px;
+}
+
+.boxDonasi{
+  width: 350px;
+  height: 400px;
+  background-color: #F0F0F0;
+  border-radius: 20px;
+  margin-top: 20px;
+  padding: 25px;
+}
+
+.btnWidth{
+  width: 300px;
+}
+
+.harapanTop{
+  margin-top: 20px;
+}
+
+.boxHarapan{
+  width: 100%;
+  height: 430px;
+  margin-top: 20px;
+  padding: 25px;
+  border-style: groove;
+  overflow: scroll;
+}
+
+.boxHarapan::-webkit-scrollbar{
+  width: 10px;
+}
+
+.boxHarapan::-webkit-scrollbar-track{
+  background: #f1f1f1;
+}
+
+.boxHarapan::-webkit-scrollbar-thumb{
+  background: #888;
+}
+
+.boxHarapan::-webkit-scrollbar-thumb:hover{
+  background: #555;
+}
+
+.imgProfile{
+  width: 80px;
+  height: 80px;
+  border-style: groove;
+  border-radius: 50px;
+}
+
+.marginProfile{
+  margin-top: 20px;
+}
+
+.marginProfileStatus{
+  margin-top: 40px;
+}
+
+.rightSide{
+  justify-content: end;
+  align-items: flex-end;
+  display: flex;
+  padding-top: 10px;
+}
+
 /* login */
 .imgSize{
   width: 50%;
@@ -162,4 +237,16 @@
 
 .padtop2{
   margin-top: 20%;
+}
+
+/* Footer */
+.boxFooter{
+  background: #98D97A;
+  width: 100%;
+  height: 200px;
+  padding: 30px;
+}
+
+.sosmed{
+  color: #555;
 }
