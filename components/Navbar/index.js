@@ -22,7 +22,7 @@ function Navbar(props) {
                                 <a className={'nav-link ' + (props.tentang?'active':'')} href="/tentang-kami">Tentang Kami</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Hubungi Kami</a>
+                                <a className={'nav-link ' + (props.hubungi?'active':'')} href="hubungi-kami">Hubungi Kami</a>
                             </li>
                         </ul>
                         <form class="d-flex">
