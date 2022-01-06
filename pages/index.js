@@ -18,7 +18,7 @@ export default function Home() {
       </Head>
 
       <div>
-        <Navbar />
+        <Navbar beranda />
 
         <div className='container' style={{ paddingBottom: 50 }}>
           {/* Start Carousel */}

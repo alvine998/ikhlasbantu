@@ -1,8 +1,11 @@
 import '../styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.bundle.js'
+import { useEffect } from 'react'
 
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    import('bootstrap/dist/js/bootstrap.bundle.min.js')
+  }, [])
   return <Component {...pageProps} />
 }
 

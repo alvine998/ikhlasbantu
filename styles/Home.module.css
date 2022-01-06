@@ -250,3 +250,14 @@
 .sosmed{
   color: #555;
 }
+
+/* Donasi */
+.imgDonasi{
+  width: 600px;
+  height: 500px;
+  margin-top: 20px;
+}
+
+.textPad{
+  margin-top: 40%;
+}
