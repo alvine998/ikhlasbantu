@@ -1,10 +1,20 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import styles from '../../styles/Home.module.css'
 
 function Pembayaran(props) {
+    const [harga, setHarga] = useState('');
+
+    const clickHarga = (total) => {
+        setHarga(total);
+        console.log('Rp. ' , total);
+    }
+
+    useEffect(() => {
+        clickHarga();
+    },[])
     return (
         <div>
             <Navbar donasi />
@@ -30,25 +40,25 @@ function Pembayaran(props) {
                             <h5>Pilih Jumlah Uang Yang Akan Didonasikan : </h5>
                             <div className='row'>
                                 <div className='col-md-3'>
-                                    <div className={styles.boxUangDonasi}>
+                                    <div onClick={()=>clickHarga('10000')} className={styles.boxUangDonasi}>
                                         <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 10.000</p>
                                     </div>
                                 </div>
 
                                 <div className='col-md-3'>
-                                    <div className={styles.boxUangDonasi}>
+                                    <div onClick={()=>clickHarga('50000')} className={styles.boxUangDonasi}>
                                         <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 50.000</p>
                                     </div>
                                 </div>
 
                                 <div className='col-md-3'>
-                                    <div className={styles.boxUangDonasi}>
+                                    <div onClick={()=>clickHarga('100000')} className={styles.boxUangDonasi}>
                                         <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 100.000</p>
                                     </div>
                                 </div>
 
                                 <div className='col-md-3'>
-                                    <div className={styles.boxUangDonasi}>
+                                    <div onClick={()=>clickHarga('200000')} className={styles.boxUangDonasi}>
                                         <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 200.000</p>
                                     </div>
                                 </div>
@@ -56,33 +66,33 @@ function Pembayaran(props) {
 
                             <div className='row'>
                                 <div className='col-md-3'>
-                                    <div className={styles.boxUangDonasi}>
+                                    <div onClick={()=>clickHarga('500000')} className={styles.boxUangDonasi}>
                                         <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 500.000</p>
                                     </div>
                                 </div>
 
                                 <div className='col-md-3'>
-                                    <div className={styles.boxUangDonasi}>
+                                    <div onClick={()=>clickHarga('1000000')} className={styles.boxUangDonasi}>
                                         <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 1.000.000</p>
                                     </div>
                                 </div>
 
                                 <div className='col-md-3'>
-                                    <div className={styles.boxUangDonasi}>
+                                    <div onClick={()=>clickHarga('2000000')} className={styles.boxUangDonasi}>
                                         <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 2.000.000</p>
                                     </div>
                                 </div>
 
                                 <div className='col-md-3'>
-                                    <div className={styles.boxUangDonasi}>
-                                        <input className='form-control' placeholder='Masukkan nominal' style={{ textAlign: 'center', fontSize: 18 }} />
+                                    <div onClick={()=>clickHarga(harga)} className={styles.boxUangDonasi}>
+                                        <input className='form-control' value={harga} placeholder='Masukkan nominal' style={{ textAlign: 'center', fontSize: 18 }} />
                                     </div>
                                 </div>
                             </div>
 
                             <div className={styles.inputWidthDonasi}>
                                 <label>Jumlah Donasi : </label>
-                                <input className='form-control' placeholder='Masukkan nominal' />
+                                <input className='form-control' value={harga} placeholder='Masukkan nominal' />
                             </div>
 
                             <div className={styles.boxDataDiri}>
