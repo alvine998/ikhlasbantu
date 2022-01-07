@@ -306,3 +306,42 @@
 .btnDetailDonasi{
   width: 300px;
 }
+
+.boxUangDonasi{
+  width: 200px;
+  height: 100px;
+  border-style: groove;
+  border-radius: 20px;
+  padding: 30px;
+  margin-top: 20px;
+  transition: 0.3s;
+}
+
+.boxUangDonasi:hover{
+  background: #98D97A;
+  color: #eaeaea;
+}
+
+.inputWidthDonasi{
+  width: 200px;
+  padding-top: 20px;
+}
+
+.boxDataDiri{
+  border: 1px solid #C4C4C4;
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: 600px;
+  height: 200px;
+  margin-top: 30px;
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+.textUpper{
+  margin-top: -45px;
+}
+
+.widthInputPesan{
+  width: 600px;
+}
