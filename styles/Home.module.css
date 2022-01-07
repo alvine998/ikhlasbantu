@@ -295,3 +295,14 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+/* Detail Donasi */
+.imgDetailDonasi{
+  width: 100%;
+  height: 600px;
+  margin-top: 20px;
+}
+
+.btnDetailDonasi{
+  width: 300px;
+}

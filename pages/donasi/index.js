@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { dokter } from '../../assets';
 import Footer from '../../components/Footer';
@@ -48,7 +49,9 @@ function index(props) {
                                                 <p>Rp. 101.500.000</p>
                                             </div>
                                             <div className={styles.btnWidth}>
-                                                <button className={'btn btn-outline-success ' + styles.btnWidth}>Donasi</button>
+                                                <Link href={"/donasi/detail-donasi"}>
+                                                    <button className={'btn btn-outline-success ' + styles.btnWidth}>Donasi</button>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
