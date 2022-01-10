@@ -1,10 +1,42 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useRef, useState } from 'react';
 import { view1 } from '../../assets';
 import styles from '../../styles/Home.module.css'
 
 function index(props) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [flag, setFlag] = useState(false);
+
+    const router = useRouter();
+
+    const adminLogin = () => {
+        if (email == 'admin@ikhlasbantu.com' && password == '12345678') {
+            alert("Selamat datang admin Ikhlas Bantu")
+            router.push('/admin')
+        } else {
+            alert("Password atau email salah!")
+        }
+    }
+
+    const mounted = useRef()
+    useEffect(() => {
+        if(!mounted.current){
+            mounted.current = true
+        } else {
+            console.log("Testing")
+        }
+    },[])
+
+    const handlingEmail = (e) => {
+        setEmail(e.target.value)
+    }
+
+    const handlingPass = (e) => {
+        setPassword(e.target.value)
+    }
     return (
         <div>
             <div className='container-fluid'>
@@ -23,14 +55,16 @@ function index(props) {
                                 <form>
                                     <div className={styles.inputWidth}>
                                         <label>Email</label>
-                                        <input className='form-control' placeholder='email@domain.com' type={"email"} required />
+                                        <input className='form-control' onChange={handlingEmail.bind(this)} value={email} placeholder='email@domain.com' type={"email"} required />
                                     </div>
                                     <div className={styles.inputWidth} style={{ marginTop: 10 }}>
                                         <label>Password</label>
-                                        <input className='form-control' placeholder='********' type={"password"} required />
+                                        <input className='form-control' onChange={handlingPass.bind(this)} value={password} placeholder='********' type={"password"} required />
                                     </div>
                                     <div className={styles.centerBtn} style={{ marginTop: 20 }}>
-                                        <button className={'btn btn-outline-success ' + styles.widthBtn}>Masuk</button>
+                                        <Link href={flag == true ? "/admin" : "#"}>
+                                            <button onClick={() => adminLogin()} className={'btn btn-outline-success ' + styles.widthBtn}>Masuk</button>
+                                        </Link>
                                     </div>
                                     <div className={styles.centerBtn} style={{ marginTop: 10 }}>
                                         <Link href={"/register"}>

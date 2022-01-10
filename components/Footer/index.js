@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { logo } from '../../assets';
 import styles from '../../styles/Home.module.css'
 
 function Footer(props) {
@@ -9,37 +11,37 @@ function Footer(props) {
                 <div className='container'>
                     <div className='row'>
                         <div className='col'>
-                            <h5>Ikhlas Bantu</h5>
-                            <p>D'Kranji Residence 1 <br/>No.67, Kranji, Bekasi Barat, 17134</p>
+                            <Image src={logo} width={80} height={80}/>
+                            <p style={{color:'white'}}>D'Kranji Residence 1 <br/>No.67, Kranji, Bekasi Barat, 17134</p>
                         </div>
                         <div className='col'>
-                            <h5>Sosial Media</h5>
+                            <h5 style={{color:'white'}}>Sosial Media</h5>
                             <ul className='list-unstyled text-muted'>
                                 <li>
-                                    <a href='#' style={{color:'black', textDecoration:'none'}}>Instagram : @ikhlas_bantu</a>
+                                    <a href='#' style={{color:'white', textDecoration:'none'}}>Instagram : @ikhlas_bantu</a>
                                 </li>
                                 <li>
-                                    <a href='#' style={{color:'black', textDecoration:'none'}}>Facebook : Ikhlas Bantu</a>
+                                    <a href='#' style={{color:'white', textDecoration:'none'}}>Facebook : Ikhlas Bantu</a>
                                 </li>
                                 <li>
-                                    <a href='#' style={{color:'black', textDecoration:'none'}}>Youtube : Semesta TV</a>
+                                    <a href='#' style={{color:'white', textDecoration:'none'}}>Youtube : Semesta TV</a>
                                 </li>
                             </ul>
                         </div>
                         <div className='col'>
-                            <h5>Menu Navigasi</h5>
+                            <h5 style={{color:'white'}}>Menu Navigasi</h5>
                             <ul className='list-unstyled text-muted'>
                                 <li>
-                                    <a href='#' style={{color:'black', textDecoration:'none'}}>Donasi</a>
+                                    <a href='#' style={{color:'white', textDecoration:'none'}}>Donasi</a>
                                 </li>
                                 <li>
-                                    <a href='#' style={{color:'black', textDecoration:'none'}}>Tentang Kami</a>
+                                    <a href='#' style={{color:'white', textDecoration:'none'}}>Tentang Kami</a>
                                 </li>
                                 <li>
-                                    <a href='#' style={{color:'black', textDecoration:'none'}}>Hubungi Kami</a>
+                                    <a href='#' style={{color:'white', textDecoration:'none'}}>Hubungi Kami</a>
                                 </li>
                                 <li>
-                                    <a href='#' style={{color:'black', textDecoration:'none'}}>Syarat & Ketentuan</a>
+                                    <a href='#' style={{color:'white', textDecoration:'none'}}>Syarat & Ketentuan</a>
                                 </li>
                             </ul>
                         </div>
