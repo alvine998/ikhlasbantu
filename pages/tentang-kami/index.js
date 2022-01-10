@@ -19,9 +19,11 @@ function index(props) {
                         <h2 style={{ fontWeight: 'bold' }}><u>Tentang Ikhlas Bantu</u></h2>
                         <div className={styles.padTextTentang}>
                             <p style={{ textAlign: 'justify' }}>
-                                Ikhlas Bantu adalah suatu program yang dibuat untuk menyalurkan bantuan bagi orang-orang yang
-                                kurang mampu dalam mengatasi sebuah kejadian tak terduga dan memerlukan bantuan biaya
-                                operasional dari orang baik yang ada di sekitar dan peduli terhadap sesama manusia.
+                                Lembaga ikhlas bantu pertama kali berdiri merupakan gerakan sosial yang mengajak 
+                                kalangan teman, sahabat untuk membantu orang yang terkena musibah dan tidak memiliki
+                                biaya untuk dirawat di Rumah Sakit. Ikhlas bantu kemudian menjadi lembaga sosial berbadan hukum
+                                bernama Yayasan Semesta Bertasbih sehingga kegiatan kami menjadi gerakan membantu dengan 
+                                skala yang lebih luas dan berbadan hukum.
                             </p>
                         </div>
                     </div>

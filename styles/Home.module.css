@@ -345,3 +345,10 @@
 .widthInputPesan{
   width: 600px;
 }
+
+/* Konfirmasi Pembayaran */
+.flexImg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
