@@ -352,3 +352,9 @@
   justify-content: center;
   align-items: center;
 }
+
+/* Admin */
+.mainAdmin{
+  padding-top: 3%;
+  padding-left: 10%;
+}

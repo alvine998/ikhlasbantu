@@ -5,6 +5,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { view1 } from '../../assets';
 import styles from '../../styles/Home.module.css'
 
+index.title = 'Login - Ikhlas bantu';
+
 function index(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

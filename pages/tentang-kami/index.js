@@ -5,6 +5,7 @@ import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import styles from '../../styles/Home.module.css'
 
+index.title = 'Tentang Kami';
 function index(props) {
     return (
         <div>
