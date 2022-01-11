@@ -67,7 +67,7 @@ export default function Home() {
 
           {/* Start Donasi Terkini */}
           <div className={styles.donasiTop}>
-            <h2><u>Donasi Terkini</u></h2>
+            <h2 style={{fontWeight:'bold'}}><u>Donasi Terkini</u></h2>
             <div className='container'>
               <div className='row'>
                 <div className='col-4'>
@@ -116,7 +116,7 @@ export default function Home() {
 
           {/* Start Harapan Kami */}
           <div className={styles.harapanTop}>
-            <h2><u>Harapan Kami</u></h2>
+            <h2 style={{fontWeight:'bold'}}><u>Harapan Kami</u></h2>
             <div className={styles.boxHarapan}>
               <div className='container'>
                 <div className='row'>

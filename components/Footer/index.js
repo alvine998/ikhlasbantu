@@ -32,13 +32,13 @@ function Footer(props) {
                             <h5 style={{color:'white'}}>Menu Navigasi</h5>
                             <ul className='list-unstyled text-muted'>
                                 <li>
-                                    <a href='#' style={{color:'white', textDecoration:'none'}}>Donasi</a>
+                                    <a href='/donasi' style={{color:'white', textDecoration:'none'}}>Donasi</a>
                                 </li>
                                 <li>
-                                    <a href='#' style={{color:'white', textDecoration:'none'}}>Tentang Kami</a>
+                                    <a href='/tentang-kami' style={{color:'white', textDecoration:'none'}}>Tentang Kami</a>
                                 </li>
                                 <li>
-                                    <a href='#' style={{color:'white', textDecoration:'none'}}>Hubungi Kami</a>
+                                    <a href='/hubungi-kami' style={{color:'white', textDecoration:'none'}}>Hubungi Kami</a>
                                 </li>
                                 <li>
                                     <a href='#' style={{color:'white', textDecoration:'none'}}>Syarat & Ketentuan</a>
