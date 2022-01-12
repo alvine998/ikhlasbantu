@@ -356,5 +356,14 @@
 /* Admin */
 .mainAdmin{
   padding-top: 3%;
-  padding-left: 10%;
+  padding-left: 5%;
+}
+
+.boxTotalDonasi{
+  width: 300px;
+  height: 150px;
+  border-style: groove;
+  border-radius: 20px;
+  transition: 0.5s;
+  padding: 30px;
 }

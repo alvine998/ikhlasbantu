@@ -24,7 +24,7 @@ function Footer(props) {
                                     <a href='#' style={{color:'white', textDecoration:'none'}}>Facebook : Ikhlas Bantu</a>
                                 </li>
                                 <li>
-                                    <a href='#' style={{color:'white', textDecoration:'none'}}>Youtube : Semesta TV</a>
+                                    <a href='#' style={{color:'white', textDecoration:'none'}}>Youtube : Semestaku TV</a>
                                 </li>
                             </ul>
                         </div>

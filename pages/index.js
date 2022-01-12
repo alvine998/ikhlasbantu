@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link';
 import { Router, useRouter } from 'next/router'
+import { useEffect, useState } from 'react';
 import { banners } from '../assets';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
@@ -8,7 +10,19 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
   const router = useRouter();
-  const [banner, setBanner] = ('https://dummyimage.com/1200x600/000/fff');
+  const [banner, setBanner] = useState('https://dummyimage.com/1200x600/000/fff');
+  const [keys, setKeys] = useState('');
+
+  const getId = () => {
+    var idKey = localStorage.getItem('idKey')
+    var keys = idKey;
+    setKeys(keys)
+    console.log(keys)
+  }
+
+  useEffect(() => {
+    getId();
+  }, [])
 
   return (
     <div>
@@ -67,7 +81,7 @@ export default function Home() {
 
           {/* Start Donasi Terkini */}
           <div className={styles.donasiTop}>
-            <h2 style={{fontWeight:'bold'}}><u>Donasi Terkini</u></h2>
+            <h2 style={{ fontWeight: 'bold' }}><u>Donasi Terkini</u></h2>
             <div className='container'>
               <div className='row'>
                 <div className='col-4'>
@@ -116,7 +130,7 @@ export default function Home() {
 
           {/* Start Harapan Kami */}
           <div className={styles.harapanTop}>
-            <h2 style={{fontWeight:'bold'}}><u>Harapan Kami</u></h2>
+            <h2 style={{ fontWeight: 'bold' }}><u>Harapan Kami</u></h2>
             <div className={styles.boxHarapan}>
               <div className='container'>
                 <div className='row'>
@@ -186,13 +200,15 @@ export default function Home() {
               </div>
             </div>
             <div className={styles.rightSide}>
-              <button className={'btn btn-outline-primary ' + styles.btnWidth}>+ Buat Harapan</button>
+              <Link href={keys == null ? '/login' : '/donasi'}>
+                <button className={'btn btn-outline-primary ' + styles.btnWidth}>+ Buat Harapan</button>
+              </Link>
             </div>
           </div>
           {/* End Harapan Kami */}
         </div>
 
-        <Footer/>
+        <Footer />
       </div>
     </div>
   )

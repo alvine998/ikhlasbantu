@@ -15,35 +15,39 @@ function Navadmin(props) {
                     <hr style={{ marginTop: -10 }} />
                     <ul class="nav nav-pills flex-column mb-auto">
                         <li class="nav-item">
-                            <a href="/admin" className={"nav-link " + (props.home ? "active" : "link-dark")} aria-current="page">
-                                Home
-                            </a>
+                            <Link href={"/admin"}>
+                                <a className={"nav-link " + (props.home ? "active" : "link-dark")} aria-current="page">
+                                    Dasboard
+                                </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="#" className={"nav-link " + (props.banners ? "active" : "link-dark")}>
-                                Dashboard
-                            </a>
+                            <Link href={"/admin/user-profile"}>
+                                <a className={"nav-link " + (props.userprofile ? "active" : "link-dark")}>
+                                    User Profile
+                                </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="#" className={"nav-link " + (props.profil ? "active" : "link-dark")}>
-                                Orders
+                            <a href="#" className={"nav-link " + (props.banner ? "active" : "link-dark")}>
+                                Banner
                             </a>
                         </li>
                         <li>
                             <a href="#" class="nav-link link-dark">
-                                Products
+                                Company Profile
                             </a>
                         </li>
                         <li>
                             <a href="#" class="nav-link link-dark">
-                                Customers
+                                Promo
                             </a>
                         </li>
                     </ul>
                     <hr />
                 </div>
             </div>
-                
+
         </div>
     );
 }

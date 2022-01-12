@@ -55,7 +55,7 @@ function index(props) {
                                             <div className={styles.imgSosmed}>
                                                 <Image src={youtube} alt='youtube logo' />
                                             </div>
-                                            <h5 style={{textAlign:'center'}}>Semesta TV</h5>
+                                            <h5 style={{textAlign:'center'}}>Semestaku TV</h5>
                                         </div>
                                     </div>
                                 </div>
