@@ -2,6 +2,11 @@ import Link from 'next/link';
 import React from 'react';
 
 function NavMain(props) {
+    const deleteDataLogin = () => {
+        localStorage.removeItem('loginKey')
+        console.log("Success remove keys")
+    }
+
     return (
         <div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -16,7 +21,7 @@ function NavMain(props) {
                         </ul>
                         <form class="d-flex">
                             <Link href={"/login"}>
-                                <button class="btn btn-outline-danger" type="submit">Logout</button>
+                                <button onClick={()=>deleteDataLogin()} class="btn btn-outline-danger" type="submit">Logout</button>
                             </Link>
                         </form>
                     </div>

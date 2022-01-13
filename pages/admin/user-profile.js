@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import Navadmin from '../../components/NavAdmin';
 import NavMain from '../../components/NavMain';
 import styles from '../../styles/Home.module.css'
@@ -7,6 +8,26 @@ import styles from '../../styles/Home.module.css'
 UserProfile.title = "User Profile"
 
 function UserProfile(props) {
+    const [key, setKey] = useState(null);
+
+    const getDataLogin = () => {
+        var key = localStorage.getItem('loginKey')
+        setKey(key)
+        console.log(key)
+    }
+
+    const router = useRouter();
+
+    const checkDataLogin = () => {
+        if(key == null){
+            router.push('/login')
+        }
+    }
+
+    useEffect(() => {
+        getDataLogin();
+        checkDataLogin();
+    })
     return (
         <div style={{overflow:'hidden'}}>
             <div className='row'>

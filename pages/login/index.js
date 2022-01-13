@@ -11,12 +11,24 @@ function index(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [flag, setFlag] = useState(false);
+    const [keys, setKeys] = useState(null);
 
     const router = useRouter();
 
-    const adminLogin = () => {
+    const checkDataLogin = () => {
+        var keys = localStorage.getItem('loginKey')
+        setKeys(keys)
+        console.log(keys)
+    }
+
+    const dataLogin = (id) => {
+        localStorage.setItem("loginKey", id)
+    }
+
+    const adminLogin = (emails) => {
         if (email == 'admin@ikhlasbantu.com' && password == '12345678') {
             alert("Selamat datang admin Ikhlas Bantu")
+            dataLogin(emails)
             router.push('/admin')
         } else {
             alert("Password atau email salah!")
@@ -30,6 +42,8 @@ function index(props) {
         } else {
             console.log("Testing")
         }
+
+        checkDataLogin();
     },[])
 
     const handlingEmail = (e) => {
@@ -65,7 +79,7 @@ function index(props) {
                                     </div>
                                     <div className={styles.centerBtn} style={{ marginTop: 20 }}>
                                         <Link href={flag == true ? "/admin" : "#"}>
-                                            <button onClick={() => adminLogin()} className={'btn btn-outline-success ' + styles.widthBtn}>Masuk</button>
+                                            <button onClick={() => adminLogin(email)} className={'btn btn-outline-success ' + styles.widthBtn}>Masuk</button>
                                         </Link>
                                     </div>
                                     <div className={styles.centerBtn} style={{ marginTop: 10 }}>
