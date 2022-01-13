@@ -29,14 +29,18 @@ function Navadmin(props) {
                             </Link>
                         </li>
                         <li>
-                            <a href="#" className={"nav-link " + (props.banner ? "active" : "link-dark")}>
-                                Banner
-                            </a>
+                            <Link href={"/admin/banner"}>
+                                <a className={"nav-link " + (props.banner ? "active" : "link-dark")}>
+                                    Banner
+                                </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="#" class="nav-link link-dark">
-                                Company Profile
-                            </a>
+                            <Link href={"/admin/company-profile"}>
+                                <a className={"nav-link " + (props.companyprofile ? "active" : "link-dark")}>
+                                    Company Profile
+                                </a>
+                            </Link>
                         </li>
                         <li>
                             <a href="#" class="nav-link link-dark">

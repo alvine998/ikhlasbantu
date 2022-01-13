@@ -367,3 +367,10 @@
   transition: 0.5s;
   padding: 30px;
 }
+
+/* User Profile */
+.toRight{
+  display: flex;
+  justify-content: end;
+  align-items: flex-end;
+}
