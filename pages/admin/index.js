@@ -7,11 +7,8 @@ import styles from '../../styles/Home.module.css'
 index.title="Dashboard"
 
 function index(props) {
-    const [key, setKey] = useState(null);
-
     const getDataLogin = () => {
         var key = localStorage.getItem('loginKey')
-        setKey(key)
         console.log(key)
         if(key == null){
             router.push('/login')

@@ -8,25 +8,18 @@ import styles from '../../styles/Home.module.css'
 UserProfile.title = "User Profile"
 
 function UserProfile(props) {
-    const [key, setKey] = useState(null);
-
     const getDataLogin = () => {
         var key = localStorage.getItem('loginKey')
-        setKey(key)
         console.log(key)
-    }
-
-    const router = useRouter();
-
-    const checkDataLogin = () => {
         if(key == null){
             router.push('/login')
         }
     }
 
+    const router = useRouter();
+
     useEffect(() => {
         getDataLogin();
-        checkDataLogin();
     })
     return (
         <div style={{overflow:'hidden'}}>

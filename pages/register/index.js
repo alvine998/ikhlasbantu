@@ -31,7 +31,7 @@ function index(props) {
 
     return (
         <div>
-            <div className='container-fluid'>
+            <div style={{overflow:'hidden'}}>
                 <div className='row'>
                     <div className='col'>
                         <Image src={view1} alt='mountain' width={984} height={610} layout='responsive' />

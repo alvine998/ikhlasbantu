@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import Navadmin from '../../components/NavAdmin';
 import NavMain from '../../components/NavMain';
 import styles from '../../styles/Home.module.css'
@@ -6,6 +7,21 @@ import styles from '../../styles/Home.module.css'
 Banner.title = "Banner"
 
 function Banner(props) {
+
+    const getDataLogin = () => {
+        var key = localStorage.getItem('loginKey')
+        console.log(key)
+        if(key == null){
+            router.push('/login')
+        }
+    }
+
+    const router = useRouter();
+
+    useEffect(() => {
+        getDataLogin();
+    })
+
     const [judul, setJudul] = useState('');
     const [image, setImage] = useState(null);
     const [imageName, setImageName] = useState(null);
