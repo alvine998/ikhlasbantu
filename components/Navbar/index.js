@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
@@ -5,11 +6,21 @@ import { logo } from '../../assets';
 
 function Navbar(props) {
     const [key, setKey] = useState('');
+    const [poin, setPoin] = useState('');
+    const [freq, setFreq] = useState('');
 
     const getDataUsers = () => {
         var key = localStorage.getItem('loginKey');
         console.log(key)
         setKey(key)
+
+        axios.get(`http://localhost:4000/users/mail/${key}`).then(
+            res => {
+                const result = res.data;
+                setPoin(result.poin); setFreq(result.frekuensi_donasi)
+                console.log(result)
+            }
+        )
     }
 
     const deleteDataLogin = () => {
@@ -54,6 +65,21 @@ function Navbar(props) {
                                             <li>
                                                 <Link href={"/profile"}>
                                                     <a class="dropdown-item">Profil</a>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link href={"/buat-donasi"}>
+                                                    <a class="dropdown-item">+ Buat Donasi</a>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link href={"#"}>
+                                                    <a class="dropdown-item">Donasimu {freq}x</a>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link href={"#"}>
+                                                    <a class="dropdown-item">Cek Reward</a>
                                                 </Link>
                                             </li>
                                             <li><hr class="dropdown-divider" /></li>

@@ -414,3 +414,12 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.inputProfile{
+  padding-top: 20px;
+}
+
+.inputProfileBtn{
+  margin-top: 20px;
+  width: 100%;
+}
