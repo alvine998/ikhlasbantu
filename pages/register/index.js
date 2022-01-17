@@ -1,6 +1,9 @@
+import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import swal from 'sweetalert';
 import { view1 } from '../../assets';
 import styles from '../../styles/Home.module.css'
 
@@ -8,10 +11,12 @@ index.title = 'Daftar - Ikhlas bantu';
 
 function index(props) {
 
-    const[nama, setNama] = useState('');
-    const[nohp, setNohp] = useState('');
-    const[email, setEmail] = useState('');
-    const[password, setPassword] = useState('');
+    const [nama, setNama] = useState('');
+    const [nohp, setNohp] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const [sukses, setSukses] = useState('');
 
     const handlingNama = (e) => {
         setNama(e.target.value)
@@ -29,9 +34,37 @@ function index(props) {
         setPassword(e.target.value)
     }
 
+    const router = useRouter();
+
+    const handleSukses = () => {
+        setSukses("berhasil")
+    }
+
+    useEffect(() => {
+        handleSukses();
+    },[])
+
+    const saveData = () => {
+        const data = {
+            nama: nama,
+            nohp: nohp,
+            email: email,
+            password: password
+        }
+
+        console.log(data)
+        axios.post(`http://localhost:4000/users`, data).then(
+            res => {
+                console.log(res.data);
+                swal("Berhasil mendaftar", { icon: "success" });
+                handleSukses();
+            }
+        )
+    }
+
     return (
         <div>
-            <div style={{overflow:'hidden'}}>
+            <div style={{ overflow: 'hidden' }}>
                 <div className='row'>
                     <div className='col'>
                         <Image src={view1} alt='mountain' width={984} height={610} layout='responsive' />
@@ -62,7 +95,9 @@ function index(props) {
                                         <input value={password} onChange={handlingPass.bind(this)} className='form-control' placeholder='********' type={"password"} required />
                                     </div>
                                     <div className={styles.centerBtn} style={{ marginTop: 20 }}>
-                                        <button className={'btn btn-outline-primary ' + styles.widthBtn}>Daftar</button>
+                                        <Link href={ sukses === "berhasil" ? "/login" : "/register?pendaftaran=gagal"}>
+                                            <button className={'btn btn-outline-primary ' + styles.widthBtn} onClick={()=>saveData()}>Daftar</button>
+                                        </Link>
                                     </div>
                                     <div className={styles.centerBtn} style={{ marginTop: 10 }}>
                                         <Link href={"/login"} >
