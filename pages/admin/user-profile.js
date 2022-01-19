@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -11,39 +12,52 @@ function UserProfile(props) {
     const getDataLogin = () => {
         var key = localStorage.getItem('loginKey')
         console.log(key)
-        if(key == null){
+        if (key == null) {
             router.push('/login')
         }
     }
 
     const router = useRouter();
+    const [collection, setCollection] = useState([])
+
+    const getDataUsers = () => {
+        axios.get(`http://localhost:4000/users`).then(
+            res => {
+                const collection = res.data;
+                console.log(collection);
+                setCollection(collection)
+            }
+        )
+    }
 
     useEffect(() => {
         getDataLogin();
-    })
+        getDataUsers();
+    },[])
+    
     return (
-        <div style={{overflow:'hidden'}}>
+        <div style={{ overflow: 'hidden' }}>
             <div className='row'>
                 <div className='col-2'>
                     <Navadmin userprofile />
                 </div>
                 <div className='col'>
                     <NavMain />
-                    <div className={styles.mainAdmin} style={{overflow:'scroll', width:'100%', height:570, overflowX:'hidden'}}>
+                    <div className={styles.mainAdmin} style={{ overflow: 'scroll', width: '100%', height: 570, overflowX: 'hidden' }}>
                         <div className='container'>
                             <h2 style={{ fontWeight: 'bold', textAlign: 'center' }}>Profil User</h2>
-                            <form className={styles.toRight}>
+                            <div className={styles.toRight}>
                                 <div className='row'>
                                     <div className='col'>
-                                        <input type={"text"} style={{width:200, marginLeft:20}} className='form-control me-2' placeholder='Cari disini' />
+                                        <input type={"text"} style={{ width: 200, marginLeft: 20 }} className='form-control me-2' placeholder='Cari disini' />
                                     </div>
                                     <div className='col'>
-                                        <button className='btn btn-outline-primary' style={{width:70}}>Cari</button>
+                                        <button className='btn btn-outline-primary' style={{ width: 70 }}>Cari</button>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
 
-                            <div style={{paddingTop:20}}>
+                            <div style={{ paddingTop: 20 }}>
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -51,26 +65,21 @@ function UserProfile(props) {
                                             <th scope="col">Id</th>
                                             <th scope="col">Nama</th>
                                             <th scope="col">Email</th>
+                                            <th scope="col">No Hp</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
+                                        {
+                                            collection.reverse().map((res, i) => (
+                                                <tr>
+                                                    <th scope="row">{i + 1}</th>
+                                                    <td>{res._id.substr(0,10)}</td>
+                                                    <td>{res.nama}</td>
+                                                    <td>{res.email}</td>
+                                                    <td>{res.nohp}</td>
+                                                </tr>
+                                            ))
+                                        }
                                     </tbody>
                                 </table>
                             </div>

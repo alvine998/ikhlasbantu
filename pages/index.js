@@ -52,15 +52,19 @@ export default function Home() {
           <div style={{ paddingTop: 20 }}>
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                {
+                  collection.map((res,i) => (
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={i} className={i == 0 ? "active" : ""} aria-current={i == 0 ? "true" : "false"} aria-label={"Slide " + (i + 1)}></button>
+                  ))
+                }
+                {/* <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button> */}
               </div>
               <div class="carousel-inner">
                 {
                   collection.map((res, i) => (
                     <div className={"carousel-item " + (i==0 ? "active" : "")} key={i}>
-                      <img src={`http://localhost:4000/resources/uploads/${res.gambar}`} class="d-block w-100" alt="..." width={1200} height={600} w />
+                      <img src={`http://localhost:4000/resources/uploads/${res.gambar}`} class="d-block w-100" alt="..." width={1200} height={500} w />
                       <div class="carousel-caption d-none d-md-block">
                         {/* <h5>{res.judul}</h5>
                         <p>{res.deskripsi}</p> */}
