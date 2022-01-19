@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link';
@@ -11,6 +12,17 @@ import styles from '../styles/Home.module.css'
 export default function Home() {
   const router = useRouter();
   const [keys, setKeys] = useState('');
+  const [collection, setCollection] = useState([]);
+
+  const getDataBanner = () => {
+    axios.get(`http://localhost:4000/banners`).then(
+      res => {
+        console.log(res.data)
+        const collection = res.data;
+        setCollection(collection);
+      }
+    )
+  }
 
   const getId = () => {
     var idKey = localStorage.getItem('idKey')
@@ -21,6 +33,7 @@ export default function Home() {
 
   useEffect(() => {
     getId();
+    getDataBanner();
   }, [])
 
   return (
@@ -44,13 +57,17 @@ export default function Home() {
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
               </div>
               <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <Image src={banners} class="d-block w-100" alt="..." width={1200} height={600} />
-                  <div class="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
-                    <p>Some representative placeholder content for the first slide.</p>
-                  </div>
-                </div>
+                {
+                  collection.map((res, i) => (
+                    <div className={"carousel-item " + (i==0 ? "active" : "")} key={i}>
+                      <img src={`http://localhost:4000/resources/uploads/${res.gambar}`} class="d-block w-100" alt="..." width={1200} height={600} w />
+                      <div class="carousel-caption d-none d-md-block">
+                        {/* <h5>{res.judul}</h5>
+                        <p>{res.deskripsi}</p> */}
+                      </div>
+                    </div>
+                  ))
+                }
               </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
