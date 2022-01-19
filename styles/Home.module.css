@@ -394,8 +394,8 @@
 }
 
 .boxProfile{
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
   border-radius: 50px;
   border-style: groove;
   margin-top: 20px;
@@ -406,10 +406,11 @@
 
 .boxDonasiProfile{
   width: 200px;
-  height: 100px;
+  height: 80px;
   border-radius: 20px;
   border-style: groove;
-  margin-top: 20px;
+  margin-top: 0px;
+  margin-bottom: 20px;
   padding: 10px;
   margin-left: auto;
   margin-right: auto;
@@ -422,4 +423,15 @@
 .inputProfileBtn{
   margin-top: 20px;
   width: 100%;
+}
+
+/* Buat Donasi */
+.textTitle{
+  font-weight: bold;
+  text-decoration: dashed;
+  padding-top: 10px;
+}
+
+.centering{
+  margin-left: 25%
 }

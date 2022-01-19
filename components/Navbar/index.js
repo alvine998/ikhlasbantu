@@ -20,7 +20,9 @@ function Navbar(props) {
                 setPoin(result.poin); setFreq(result.frekuensi_donasi)
                 console.log(result)
             }
-        )
+        ) .catch(err => {
+            console.log(err)
+        })
     }
 
     const deleteDataLogin = () => {
