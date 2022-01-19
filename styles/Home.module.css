@@ -198,7 +198,7 @@
 }
 
 .padtop{
-  margin-top: 50%;
+  margin-top: 20%;
 }
 
 .centeringText{
@@ -232,11 +232,11 @@
 }
 
 .widthBtn{
-  width: 220px;
+  width: 85%;
 }
 
 .padtop2{
-  margin-top: 20%;
+  margin-top: 10%;
 }
 
 /* Footer */
@@ -434,4 +434,12 @@
 
 .centering{
   margin-left: 25%
+}
+
+/* All */
+.hiddenScroll{
+  overflow-y: hidden;
+  overflow-x: hidden;
+  padding: 0px;
+  margin: 0px;
 }

@@ -76,10 +76,10 @@ function index(props) {
         <div>
             <div style={{ overflow: 'hidden' }}>
                 <div className='row'>
-                    <div className='col'>
-                        <Image src={view1} alt='mountain' width={984} height={610} layout='responsive' />
+                    <div className='col-md'>
+                        <Image src={view1} alt='mountain' width={700} height={650} className='h-100' layout='responsive' />
                     </div>
-                    <div className='col-3'>
+                    <div className='col-md'>
                         <div className={styles.padtop}>
                             <h3 className={styles.centeringText}>Ikhlas Bantu</h3>
                             <div className={styles.roundedTube}>
@@ -97,7 +97,7 @@ function index(props) {
                                         <input className='form-control' onChange={handlingPass.bind(this)} value={password} placeholder='********' type={"password"} required />
                                     </div>
                                     <div className={styles.centerBtn} style={{ marginTop: 20 }}>
-                                        <Link href={flag == true ? "/profile" : "/login?email=wrong"}>
+                                        <Link href={flag == true ? "/profile" : "/login?email=wrong or password=wrong"}>
                                             <button onClick={() => { usersLogin(email) }} className={'btn btn-outline-success ' + styles.widthBtn}>Masuk</button>
                                         </Link>
                                     </div>

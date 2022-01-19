@@ -66,10 +66,10 @@ function index(props) {
         <div>
             <div style={{ overflow: 'hidden' }}>
                 <div className='row'>
-                    <div className='col'>
-                        <Image src={view1} alt='mountain' width={984} height={610} layout='responsive' />
+                    <div className='col-md'>
+                        <Image src={view1} alt='mountain' width={700} height={650} layout='responsive' />
                     </div>
-                    <div className='col-3'>
+                    <div className='col-md'>
                         <div className={styles.padtop2}>
                             <h3 className={styles.centeringText}>Ikhlas Bantu</h3>
                             <div className={styles.roundedTube}>

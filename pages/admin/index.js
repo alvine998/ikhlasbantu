@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Navadmin from '../../components/NavAdmin';
@@ -14,12 +15,25 @@ function index(props) {
             router.push('/login')
         }
     }
+    const [collection, setCollection] = useState([])
+
+
+    const getDataUsers = () => {
+        axios.get(`http://localhost:4000/users`).then(
+            res => {
+                const collection = res.data;
+                console.log(collection);
+                setCollection(collection)
+            }
+        )
+    }
 
     const router = useRouter();
 
     useEffect(() => {
         getDataLogin();
-    })
+        getDataUsers();
+    },[])
 
     return (
         <div>
@@ -43,7 +57,7 @@ function index(props) {
                                 <div className='col'>
                                     <div className={styles.boxTotalDonasi}>
                                         <h5>Total User :</h5>
-                                        <h3>50</h3>
+                                        <h3>{collection.length}</h3>
                                     </div>
                                 </div>
                                 <div className='col'>
