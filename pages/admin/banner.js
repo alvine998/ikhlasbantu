@@ -98,7 +98,7 @@ function Banner(props) {
     }
 
     const deleteImage = (name) => {
-        axios.delete(`http://localhost:4000/delete/${name}`).then(
+        axios.delete(`http://localhost:4000/delete/banner/${name}`).then(
             res => console.log("Deleted Image")
         )
     }

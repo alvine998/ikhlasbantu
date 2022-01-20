@@ -81,6 +81,28 @@ function index(props) {
         )
     }
 
+    const uploadImage = () => {
+        let formdata = new FormData()
+        formdata.append("images", image)
+
+        if(image.name == foto){
+            console.log("Foto sama")
+            return foto;
+        } else {
+            axios.post(`http://localhost:4000/upload/`, formdata).then(
+                res => {
+                    const respon = res.data;
+                }
+            )
+        }   
+    }
+
+    // const deleteImage = (name) => {
+    //     axios.delete(`http://localhost:4000/delete/${name}`).then(
+    //         res => console.log("Deleted Image")
+    //     )
+    // }
+
     useEffect(() => {
         getDataUsers();
     }, [])
@@ -117,7 +139,7 @@ function index(props) {
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                        <button type="button" class="btn btn-primary" onClick={()=>updateFoto()} data-bs-dismiss="modal">Simpan</button>
+                                        <button type="button" class="btn btn-primary" onClick={()=>{updateFoto(), uploadImage();}} data-bs-dismiss="modal">Simpan</button>
                                     </div>
                                 </div>
                             </div>
