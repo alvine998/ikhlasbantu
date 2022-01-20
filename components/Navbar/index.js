@@ -76,7 +76,7 @@ function Navbar(props) {
                                             </li>
                                             <li>
                                                 <Link href={"#"}>
-                                                    <a class="dropdown-item">Donasimu {freq}x</a>
+                                                    <a class="dropdown-item">Donasimu</a>
                                                 </Link>
                                             </li>
                                             <li>

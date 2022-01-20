@@ -436,6 +436,16 @@
   margin-left: 25%
 }
 
+.centeringImg{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.imgBuatDonasi{
+  width: 50%;
+  height: 200px;
+}
+
 /* All */
 .hiddenScroll{
   overflow-y: hidden;
