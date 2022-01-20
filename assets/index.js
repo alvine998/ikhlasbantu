@@ -8,6 +8,8 @@ import logo_bsi from './images/logo_bsi.png'
 import logo from './images/logo_ikhlasbantu.png'
 import thanks from './images/thnks.jpg'
 import default_profile from './images/usr_profile.png'
+import ktp from './images/ktp.jpg'
+
 
 export {
     view1,
@@ -19,5 +21,6 @@ export {
     logo_bsi,
     logo,
     thanks,
-    default_profile
+    default_profile,
+    ktp
 }
