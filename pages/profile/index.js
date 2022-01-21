@@ -19,6 +19,7 @@ function index(props) {
     const [jenisk, setJenisk] = useState('');
     const [alamat, setAlamat] = useState('');
     const [pekerjaan, setPekerjaan] = useState('');
+    const [status, setStatus] = useState('');
 
     const [id, setId] = useState('');
 
@@ -39,7 +40,7 @@ function index(props) {
                 setEmail(result.email); setNama(result.nama); setNohp(result.nohp);
                 setFoto(result.foto); setAlamat(result.alamat); setFotoktp(result.fotoktp);
                 setJenisk(result.jeniskelamin); setPekerjaan(result.pekerjaan);
-                setId(result._id);
+                setId(result._id); setStatus(result.statususer);
                 console.log(result)
             }
         )
@@ -111,7 +112,8 @@ function index(props) {
 
     const updateFotoKtp = () => {
         const dataUpdate = {
-            foto: 'images_' + image2.name
+            fotoktp: 'images_' + image2.name,
+            statususer: 'hold'
         }
 
         axios.put(`http://localhost:4000/users/${id}`, dataUpdate).then(
@@ -143,7 +145,7 @@ function index(props) {
         let formdata = new FormData()
         formdata.append("images", image2)
 
-        if (image.name == foto) {
+        if (image2.name == foto) {
             console.log("Foto sama")
             return foto;
         } else {
@@ -264,15 +266,15 @@ function index(props) {
                                                     }
                                                 </div>
                                             ) : (
-                                                <img />
+                                                <img src={`http://localhost:4000/resources/uploads/${fotoktp}`} className='w-100 h-100' />
                                             )
                                         }
-                                        <input id='fileid' onChange={handleFotoktp.bind(this)} hidden type={"file"} />
+                                        <input id='fileid' disabled={status == 'verified' ? true : status === 'hold' ? true : false} onChange={handleFotoktp.bind(this)} hidden type={"file"} />
                                     </a>
                                 </div>
                                 <div className='d-grid gap-2' style={{ paddingTop: 20 }}>
-                                    <button onClick={() => fileButton()} className='btn btn-outline-primary'>
-                                        Upload
+                                    <button disabled={status == 'verified' ? true : status === 'hold' ? true : false} onClick={() => { uploadImageKtp(), updateFotoKtp() }} className='btn btn-outline-primary'>
+                                        {status == 'hold' ? 'Menunggu Verifikasi' : status == 'verified' ? 'KTP Telah Diverifikasi' : 'Upload'}
                                     </button>
                                 </div>
                             </div>

@@ -2,12 +2,14 @@ import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import swal from 'sweetalert';
 import { logo } from '../../assets';
 
 function Navbar(props) {
     const [key, setKey] = useState('');
     const [poin, setPoin] = useState('');
     const [freq, setFreq] = useState('');
+    const [statususer, setStatususer] = useState('');
 
     const getDataUsers = () => {
         var key = localStorage.getItem('loginKey');
@@ -17,7 +19,8 @@ function Navbar(props) {
         axios.get(`http://localhost:4000/users/mail/${key}`).then(
             res => {
                 const result = res.data;
-                setPoin(result.poin); setFreq(result.frekuensi_donasi)
+                setPoin(result.poin); setFreq(result.frekuensi_donasi);
+                setStatususer(result.statususer)
                 console.log(result)
             }
         ) .catch(err => {
@@ -70,12 +73,12 @@ function Navbar(props) {
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href={"/buat-donasi"}>
-                                                    <a class="dropdown-item">+ Buat Donasi</a>
+                                                <Link href={ statususer == 'verified' ? "/buat-donasi-dashboard" : "/profile"}>
+                                                    <a onClick={()=>{statususer === 'verified' ? null : swal("Silahkan Lengkapi Data Diri Dahulu!", {icon:"warning"})}} class="dropdown-item">+ Buat Donasi</a>
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href={"#"}>
+                                                <Link href={"/donasimu"}>
                                                     <a class="dropdown-item">Donasimu</a>
                                                 </Link>
                                             </li>

@@ -193,6 +193,59 @@ function index(props) {
                             </div>
                         </div>
                     </div>
+
+                    {/* Donasi Lainnya */}
+                    <div>
+                        <h2 style={{ fontFamily: 'quicksand', fontWeight: 'bold', paddingTop: 20 }}><u>DONASI LAINNYA</u></h2>
+                        <div>
+                            <div className='container'>
+                                <div className={styles.rightSide}>
+                                    <a href='#' style={{ textDecoration: 'none', color: 'black' }}>Lihat lainnya</a>
+                                </div>
+                                <div className='row'>
+                                    <div className='col-4'>
+                                        <div className={styles.boxDonasi}>
+                                            <img className={styles.imgPosition} />
+                                            <h5>Bantuan Erupsi Gunung Semeru</h5>
+                                            <div>
+                                                <p>Dana Terkumpul : </p>
+                                                <p>Rp. 101.500.000</p>
+                                            </div>
+                                            <div className={styles.btnWidth}>
+                                                <button className={'btn btn-outline-success ' + styles.btnWidth}>Donasi</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='col-4'>
+                                        <div className={styles.boxDonasi}>
+                                            <img className={styles.imgPosition} />
+                                            <h5>Sedekah Spesial Jum'at</h5>
+                                            <div>
+                                                <p>Dana Terkumpul : </p>
+                                                <p>Rp. 101.500.000</p>
+                                            </div>
+                                            <div className={styles.btnWidth}>
+                                                <button className={'btn btn-outline-success ' + styles.btnWidth}>Donasi</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='col-4'>
+                                        <div className={styles.boxDonasi}>
+                                            <img className={styles.imgPosition} />
+                                            <h5>Bantu Kanker Ibu Siti</h5>
+                                            <div>
+                                                <p>Dana Terkumpul : </p>
+                                                <p>Rp. 101.500.000</p>
+                                            </div>
+                                            <div className={styles.btnWidth}>
+                                                <button className={'btn btn-outline-success ' + styles.btnWidth}>Donasi</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <Footer />
