@@ -84,7 +84,7 @@ function Navbar(props) {
                                             </li>
                                             <li>
                                                 <Link href={"#"}>
-                                                    <a class="dropdown-item">Cek Reward</a>
+                                                    <a class="dropdown-item" onClick={()=>swal("Coming Soon")}>Cek Reward</a>
                                                 </Link>
                                             </li>
                                             <li><hr class="dropdown-divider" /></li>

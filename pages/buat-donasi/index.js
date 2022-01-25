@@ -15,6 +15,7 @@ function index(props) {
     const [targetDonasi, setTargetDonasi] = useState('');
     const [kategori, setKategori] = useState('');
     const [ids, setIds] = useState('');
+    const [durasi, setDurasi] = useState(0);
 
     const [image, setImage] = useState(null);
     const [imageName, setImageName] = useState(null);
@@ -31,6 +32,17 @@ function index(props) {
     }
     const handleKategori = (e) => {
         setKategori(e.target.value)
+    }
+    const handleDurasi = (e) => {
+        if(e.target.value < 0){
+            setDurasi(0)
+            swal("Durasi tidak boleh kurang dari 0 hari", {icon:"warning"})
+        } else if(e.target.value > 90){
+            setDurasi(0);
+            swal("Durasi tidak boleh lebih dari 90 hari", {icon:"warning"})
+        } else {
+            setDurasi(e.target.value)
+        }
     }
     const handleFoto = (e) => {
         if (e.target.files && e.target.files[0]) {
@@ -62,6 +74,7 @@ function index(props) {
             target : targetDonasi,
             kategori: kategori,
             terkumpul: '0',
+            durasi: durasi,
             foto : 'donasiimages_' + image.name,
             status_donasi : 'Sedang Diproses'
         }
@@ -71,7 +84,7 @@ function index(props) {
             res => {
                 console.log(res.data)
                 setImageName(null); setDeskripsi(''); setJudul('');
-                setKategori(null); setTargetDonasi('');
+                setKategori(''); setTargetDonasi(''); setDurasi(0)
                 swal("Donasi Berhasil Diajukan", {icon:"success"})
             }
         )
@@ -113,6 +126,11 @@ function index(props) {
                         <div style={{ paddingTop: 10 }}>
                             <label className='form-label'>Target Donasi</label>
                             <input className='form-control' value={targetDonasi} onChange={handleTarget.bind(this)} placeholder='Rp' type={"text"} required />
+                        </div>
+
+                        <div style={{ paddingTop: 10 }}>
+                            <label className='form-label'>Durasi Donasi</label>
+                            <input className='form-control' value={durasi} onChange={handleDurasi.bind(this)}  type={"number"} required />
                         </div>
 
                         <div style={{ paddingTop: 10 }}>

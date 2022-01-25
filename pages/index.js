@@ -13,6 +13,7 @@ export default function Home() {
   const router = useRouter();
   const [keys, setKeys] = useState('');
   const [collection, setCollection] = useState([]);
+  const [collection2, setCollection2] = useState([]);
 
   const getDataBanner = () => {
     axios.get(`http://localhost:4000/banners`).then(
@@ -20,6 +21,20 @@ export default function Home() {
         console.log(res.data)
         const collection = res.data;
         setCollection(collection);
+      }
+    )
+  }
+
+  const SendIdDonasi = (id) => {
+    localStorage.setItem('donasiKey', id);
+  }
+
+  const getDataDonasiValid = () => {
+    axios.get(`http://localhost:4000/donasis/valid`).then(
+      res => {
+        const collection2 = res.data;
+        console.log(collection2);
+        setCollection2(collection2)
       }
     )
   }
@@ -34,6 +49,7 @@ export default function Home() {
   useEffect(() => {
     getId();
     getDataBanner();
+    getDataDonasiValid();
   }, [])
 
   return (
@@ -53,7 +69,7 @@ export default function Home() {
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-indicators">
                 {
-                  collection.map((res,i) => (
+                  collection.map((res, i) => (
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={i} className={i == 0 ? "active" : ""} aria-current={i == 0 ? "true" : "false"} aria-label={"Slide " + (i + 1)}></button>
                   ))
                 }
@@ -63,7 +79,7 @@ export default function Home() {
               <div class="carousel-inner">
                 {
                   collection.map((res, i) => (
-                    <div className={"carousel-item " + (i==0 ? "active" : "")} key={i}>
+                    <div className={"carousel-item " + (i == 0 ? "active" : "")} key={i}>
                       <img src={`http://localhost:4000/resources/uploads/${res.gambar}`} class="d-block w-100" alt="..." width={1200} height={500} w />
                       <div class="carousel-caption d-none d-md-block">
                         {/* <h5>{res.judul}</h5>
@@ -90,7 +106,26 @@ export default function Home() {
             <h2 style={{ fontWeight: 'bold' }}><u>Donasi Terkini</u></h2>
             <div className='container'>
               <div className='row'>
-                <div className='col-4'>
+                {
+                  collection2.reverse().map((res, i) => (
+                    <div className='col-4' key={i}>
+                      <div className={styles.boxDonasi}>
+                        <img src={`http://localhost:4000/resources/uploads/${res.foto}`} className={styles.imgPosition} />
+                        <h5>{res.judul}</h5>
+                        <div>
+                          <p>Dana Terkumpul : {res.terkumpul}</p>
+                          <p>Rp. {res.target}</p>
+                        </div>
+                        <div className={styles.btnWidth}>
+                          <Link href={`/donasi/detail-donasi?id=${res._id}`}>
+                            <button onClick={()=>SendIdDonasi(res._id)} className={'btn btn-outline-success ' + styles.btnWidth} >Donasi</button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                }
+                {/* <div className='col-4'>
                   <div className={styles.boxDonasi}>
                     <img className={styles.imgPosition} />
                     <h5>Bantuan Erupsi Gunung Semeru</h5>
@@ -128,7 +163,7 @@ export default function Home() {
                       <button className={'btn btn-outline-success ' + styles.btnWidth}>Donasi</button>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
