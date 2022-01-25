@@ -1,6 +1,8 @@
+import axios from 'axios';
 import Head from 'next/head';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import swal from 'sweetalert';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import styles from '../../styles/Home.module.css'
@@ -12,6 +14,7 @@ function index(props) {
     const [deskripsi, setDeskripsi] = useState('');
     const [targetDonasi, setTargetDonasi] = useState('');
     const [kategori, setKategori] = useState('');
+    const [ids, setIds] = useState('');
 
     const [image, setImage] = useState(null);
     const [imageName, setImageName] = useState(null);
@@ -38,6 +41,57 @@ function index(props) {
 
     // Function
 
+    const getDataId = () => {
+        var id = localStorage.getItem('loginKey');
+        axios.get(`http://localhost:4000/users/mail/${id}`).then(
+            res => {
+                console.log(res.data);
+                const a = res.data;
+                const ids = a._id;
+                setIds(ids)
+            }
+        )
+    }
+
+    const saveDonasi = () => {
+        console.log("di donasi : ", ids)
+        const data = {
+            iduser:ids,
+            judul: judul,
+            deskripsi: deskripsi,
+            target : targetDonasi,
+            kategori: kategori,
+            terkumpul: '0',
+            foto : 'donasiimages_' + image.name,
+            status_donasi : 'Sedang Diproses'
+        }
+
+        console.log(data)
+        axios.post(`http://localhost:4000/donasis`, data).then(
+            res => {
+                console.log(res.data)
+                setImageName(null); setDeskripsi(''); setJudul('');
+                setKategori(null); setTargetDonasi('');
+                swal("Donasi Berhasil Diajukan", {icon:"success"})
+            }
+        )
+    }
+
+    const saveFoto = () => {
+        let formdata = new FormData()
+        formdata.append("donasiimages", image)
+
+        axios.post(`http://localhost:4000/upload/donasi`, formdata).then(
+                res => {
+                    const respon = res.data;
+                }
+            )
+    }
+
+    useEffect(() => {
+        getDataId();
+    },[])
+
     // Views
     return (
         <div>
@@ -45,7 +99,7 @@ function index(props) {
             <div style={{ paddingBottom: 50 }}>
                 <div className='container'>
                     <h2 className={styles.textTitle}>Buat Donasi</h2>
-                    <form className='container'>
+                    <div className='container'>
                         <div>
                             <label className='form-label'>Judul Donasi</label>
                             <input maxLength={30} value={judul} onChange={handleJudul.bind(this)} className='form-control' placeholder='Ketik disini ...' type={"text"} required />
@@ -81,12 +135,12 @@ function index(props) {
                         </div>
 
                         <div className='d-grid gap-2' style={{ paddingTop: 10 }}>
-                            <button className='btn btn-outline-primary'>Buat Donasi</button>
+                            <button className='btn btn-outline-primary' onClick={()=>{saveDonasi(), saveFoto()}}>Buat Donasi</button>
                             <Link href={"/buat-donasi-dashboard"}>
                                 <button className='btn btn-outline-danger'>Kembali</button>
                             </Link>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
             <Footer />
