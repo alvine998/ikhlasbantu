@@ -20,6 +20,9 @@ function index(props) {
     const [alamat, setAlamat] = useState('');
     const [pekerjaan, setPekerjaan] = useState('');
     const [status, setStatus] = useState('');
+    const [statusktp, setStatusktp] = useState('');
+    const [statusrekening, setStatusrekening] = useState('');
+    const [fotorekening, setFotorekening] = useState('');
 
     const [id, setId] = useState('');
 
@@ -28,6 +31,9 @@ function index(props) {
 
     const [image2, setImage2] = useState(null);
     const [imageName2, setImageName2] = useState(null);
+
+    const [image3, setImage3] = useState(null);
+    const [imageName3, setImageName3] = useState(null);
 
     const getDataUsers = () => {
         var keys = localStorage.getItem('loginKey');
@@ -40,7 +46,8 @@ function index(props) {
                 setEmail(result.email); setNama(result.nama); setNohp(result.nohp);
                 setFoto(result.foto); setAlamat(result.alamat); setFotoktp(result.fotoktp);
                 setJenisk(result.jeniskelamin); setPekerjaan(result.pekerjaan);
-                setId(result._id); setStatus(result.statususer);
+                setId(result._id); setStatus(result.statususer); setStatusktp(result.statusktp);
+                setStatusrekening(result.statusrekening); setFotorekening(result.fotorekening);
                 console.log(result)
             }
         )
@@ -74,6 +81,12 @@ function index(props) {
         if (e.target.files && e.target.files[0]) {
             let img = e.target.files[0];
             setImage2(img); setImageName2(URL.createObjectURL(img))
+        }
+    }
+    const handleFotorekening = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            let img = e.target.files[0];
+            setImage3(img); setImageName3(URL.createObjectURL(img))
         }
     }
 
@@ -113,7 +126,22 @@ function index(props) {
     const updateFotoKtp = () => {
         const dataUpdate = {
             fotoktp: 'images_' + image2.name,
-            statususer: 'hold'
+            statusktp: 'hold ktp'
+        }
+
+        axios.put(`http://localhost:4000/users/${id}`, dataUpdate).then(
+            res => {
+                swal("Data berhasil diubah", { icon: "success" });
+                console.log(res.data);
+                getDataUsers();
+            }
+        )
+    }
+
+    const updateFotoRekening = () => {
+        const dataUpdate = {
+            fotorekening: 'images_' + image3.name,
+            statusrekening: 'hold rekening'
         }
 
         axios.put(`http://localhost:4000/users/${id}`, dataUpdate).then(
@@ -145,9 +173,25 @@ function index(props) {
         let formdata = new FormData()
         formdata.append("images", image2)
 
-        if (image2.name == foto) {
+        if (image2.name == fotoktp) {
             console.log("Foto sama")
-            return foto;
+            return fotoktp;
+        } else {
+            axios.post(`http://localhost:4000/upload/`, formdata).then(
+                res => {
+                    const respon = res.data;
+                }
+            )
+        }
+    }
+
+    const uploadImageRekening = () => {
+        let formdata = new FormData()
+        formdata.append("images", image3)
+
+        if (image3.name == fotorekening) {
+            console.log("Foto sama")
+            return fotorekening;
         } else {
             axios.post(`http://localhost:4000/upload/`, formdata).then(
                 res => {
@@ -163,6 +207,10 @@ function index(props) {
 
     const fileButton = () => {
         document.getElementById('fileid').click();
+    }
+
+    const fileButton2 = () => {
+        document.getElementById('fileid2').click();
     }
 
     return (
@@ -269,12 +317,44 @@ function index(props) {
                                                 <img src={`http://localhost:4000/resources/uploads/${fotoktp}`} className='w-100 h-100' />
                                             )
                                         }
-                                        <input id='fileid' disabled={status == 'verified' ? true : status === 'hold' ? true : false} onChange={handleFotoktp.bind(this)} hidden type={"file"} />
+                                        <input id='fileid' disabled={statusktp == 'verified' ? true : statusktp === 'hold ktp' ? true : false} onChange={handleFotoktp.bind(this)} hidden type={"file"} />
                                     </a>
                                 </div>
                                 <div className='d-grid gap-2' style={{ paddingTop: 20 }}>
-                                    <button disabled={status == 'verified' ? true : status === 'hold' ? true : false} onClick={() => { uploadImageKtp(), updateFotoKtp() }} className='btn btn-outline-primary'>
-                                        {status == 'hold' ? 'Menunggu Verifikasi' : status == 'verified' ? 'KTP Telah Diverifikasi' : 'Upload'}
+                                    <button disabled={statusktp == 'verified' ? true : statusktp === 'hold ktp' ? true : false} onClick={() => { uploadImageKtp(), updateFotoKtp() }} className='btn btn-outline-primary'>
+                                        {statusktp == 'hold ktp' ? 'Menunggu Verifikasi' : statusktp == 'verified' ? 'KTP Telah Diverifikasi' : 'Upload'}
+                                    </button>
+                                </div>
+
+                                {/* Upload Rekening */}
+                                <div className={styles.boxProfileKtp}>
+                                    <a onClick={() => fileButton2()} href='#uploadrekening' style={{ textDecoration: 'none' }}>
+                                        {
+                                            fotorekening == "" ? (
+                                                <div className={styles.ktpImg}>
+                                                    {
+                                                        imageName3 == null ? (
+                                                            <div>
+                                                                <Image src={ktp} />
+                                                                <p style={{ textAlign: 'center' }}>Upload Rekening Disini</p>
+                                                            </div>
+                                                        ) : (
+                                                            <div>
+                                                                <img src={imageName3} className='w-100 h-100' />
+                                                            </div>
+                                                        )
+                                                    }
+                                                </div>
+                                            ) : (
+                                                <img src={`http://localhost:4000/resources/uploads/${fotorekening}`} className='w-100 h-100' />
+                                            )
+                                        }
+                                        <input id='fileid2' disabled={statusrekening == 'verified' ? true : statusrekening === 'hold rekening' ? true : false} onChange={handleFotorekening.bind(this)} hidden type={"file"} />
+                                    </a>
+                                </div>
+                                <div className='d-grid gap-2' style={{ paddingTop: 20 }}>
+                                    <button disabled={statusrekening == 'verified' ? true : statusrekening === 'hold rekening' ? true : false} onClick={() => { uploadImageRekening(), updateFotoRekening() }} className='btn btn-outline-primary'>
+                                        {statusrekening == 'hold rekening' ? 'Menunggu Verifikasi' : statusrekening == 'verified' ? 'Rekening Telah Diverifikasi' : 'Upload'}
                                     </button>
                                 </div>
                             </div>

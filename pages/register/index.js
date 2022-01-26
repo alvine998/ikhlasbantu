@@ -84,7 +84,7 @@ function index(props) {
                                     </div>
                                     <div className={styles.inputWidth} style={{ marginTop: 10 }}>
                                         <label>No Handphone</label>
-                                        <input value={nohp} onChange={handlingNohp.bind(this)} className='form-control' placeholder='+62' type={"text"} required />
+                                        <input value={nohp} maxLength={12} onChange={handlingNohp.bind(this)} className='form-control' placeholder='+62' type={"text"} required />
                                     </div>
                                     <div className={styles.inputWidth} style={{ marginTop: 10 }}>
                                         <label>Email</label>

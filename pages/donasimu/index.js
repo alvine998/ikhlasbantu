@@ -8,22 +8,10 @@ import styles from '../../styles/Home.module.css'
 index.title = "Donasimu"
 
 function index(props) {
-    // State
-    const [collection, setCollection] = useState([]);
-
-    // Function
-    const getDataDonasi = () => {
-        axios.get(`http://localhost:4000/donasis`).then(
-            res => {
-                const collection = res.data;
-                setCollection(collection);
-                console.log(collection);
-            }
-        )
-    }
+    
 
     useEffect(() => {
-
+        
     }, [])
 
     return (
