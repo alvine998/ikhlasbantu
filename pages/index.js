@@ -107,7 +107,7 @@ export default function Home() {
             <div className='container'>
               <div className='row'>
                 {
-                  collection2.reverse().map((res, i) => (
+                  collection2.reverse().map((res, i) => i < 3 ? (
                     <div className='col-4' key={i}>
                       <div className={styles.boxDonasi}>
                         <img src={`http://localhost:4000/resources/uploads/${res.foto}`} className={styles.imgPosition} />
@@ -123,7 +123,7 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
-                  ))
+                  ) : null)
                 }
                 {/* <div className='col-4'>
                   <div className={styles.boxDonasi}>

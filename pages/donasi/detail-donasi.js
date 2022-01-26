@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import NumberFormat from 'react-number-format';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import styles from '../../styles/Home.module.css'
@@ -31,7 +32,9 @@ function DetailDonasi(props) {
                 setTarget(result.target);
             }
         )
+    }
 
+    const getDataUser = () => {
         axios.get(`http://localhost:4000/users/${ids}`).then(
             res => {
                 const result = res.data;
@@ -43,6 +46,7 @@ function DetailDonasi(props) {
 
     useEffect(() => {
         getDataDonasi();
+        getDataUser();
     },[])
 
     return (
@@ -62,7 +66,7 @@ function DetailDonasi(props) {
 
                             <div className='row' style={{ marginTop: 20 }}>
                                 <div className='col'>
-                                    <h5 >Dana Terkumpul : Rp. {terkumpul},-</h5>
+                                    <h5 >Dana Terkumpul : <NumberFormat value={terkumpul} displayType='text' thousandSeparator prefix='Rp ' />,-</h5>
                                     <div className={styles.btnDetailDonasi}>
                                         <Link href={"/donasi/pembayaran"}>
                                             <button className={'btn btn-outline-success ' + styles.btnDetailDonasi}>Donasi Sekarang</button>
@@ -70,7 +74,7 @@ function DetailDonasi(props) {
                                     </div>
                                 </div>
                                 <div className='col'>
-                                    <h5 style={{textAlign:'right'}}>Target : Rp. {target},-</h5>
+                                    <h5 style={{textAlign:'right'}}>Target : <NumberFormat value={target} displayType='text' thousandSeparator prefix='Rp ' />,-</h5>
                                 </div>
                             </div>
                         </div>

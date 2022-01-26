@@ -9,6 +9,7 @@ import logo from './images/logo_ikhlasbantu.png'
 import thanks from './images/thnks.jpg'
 import default_profile from './images/usr_profile.png'
 import ktp from './images/ktp.jpg'
+import muamalat from './images/muamalat.png'
 
 
 export {
@@ -22,5 +23,6 @@ export {
     logo,
     thanks,
     default_profile,
-    ktp
+    ktp,
+    muamalat
 }

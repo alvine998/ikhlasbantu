@@ -1,12 +1,40 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
-import { logo_bsi, thanks } from '../../assets';
+import React, { useEffect, useState } from 'react';
+import { logo, logo_bsi, muamalat, thanks } from '../../assets';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import styles from '../../styles/Home.module.css'
 
+Konfirmasi.title = "Konfirmasi Pembayaran"
+
 function Konfirmasi(props) {
+    // State
+    const [bank, setBank] = useState('');
+    const [nominal, setNominal] = useState('');
+    const [image, setImage] = useState(null);
+    const [imageName, setImageName] = useState(null);
+
+    // Handling State
+    const handleFoto = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            let img = e.target.files[0];
+            setImage(img); setImageName(URL.createObjectURL(img))
+        }
+    }
+
+    // Function
+    const getValue = () => {
+        var key = localStorage.getItem('valueKey');
+        var keys = JSON.parse(key);
+        console.log(keys);
+        setBank(keys.bank);
+        setNominal(keys.harga);
+    }
+
+    useEffect(() => {
+        getValue();
+    }, [])
     return (
         <div>
             <Navbar donasi />
@@ -19,39 +47,46 @@ function Konfirmasi(props) {
                     </div>
                     <h2 style={{ fontWeight: 'bold', marginTop: 20, textAlign: 'center' }}><u>DONASI</u></h2>
                     <div>
-                        <h5>Transfer Bank Syariah Indonesia (BSI)</h5>
+                        <h5>Transfer Bank {bank}</h5>
                         <div className={styles.flexImg}>
-                            <Image src={logo_bsi} className={styles.centerImg} height={150} width={390} />
+                            <Image src={bank == 'Muamalat' ? muamalat : bank == 'BSI' ? logo_bsi : logo} className={styles.centerImg} height={150} width={390} />
                         </div>
-                        <h5 style={{ textAlign: 'center' }}>No Rekening : 555666777809 <br /> a.n Ikhlas Bantu</h5>
-                        <div className='container'>
+                        <h5 style={{ textAlign: 'center' }}>No Rekening : (147) 3460006152 <br /> a.n Yayasan Semesta Bertasbih</h5>
+                        <div className='container' style={{ paddingTop: 20 }}>
                             <div className='row'>
-                                <div className='col'>
-                                    <p style={{ fontWeight: 'bold' }}>Cara Pembayaran di ATM BSI :</p>
+                                <div className='col-md'>
+                                    <p style={{ fontWeight: 'bold' }}>Cara Pembayaran di ATM {bank} :</p>
                                     <p className='container'>
                                         1. Klik transfer<br />
-                                        2. Klik ke rekening BSI<br />
-                                        3. Masukkan no rekening Ikhlas Bantu<br />
+                                        2. Klik ke rekening {bank}<br />
+                                        3. Masukkan no rekening Yayasan Semesta Bertasbih<br />
                                         4. Masukkan nominal jumlah uang
                                     </p>
 
-                                    <p style={{ fontWeight: 'bold' }}>Cara Pembayaran di M-Banking BSI :</p>
+                                    <p style={{ fontWeight: 'bold' }}>Cara Pembayaran di M-Banking {bank} :</p>
                                     <p className='container'>
-                                        1. Login ke menu m-banking BSI<br />
+                                        1. Login ke menu m-banking {bank}<br />
                                         2. Pilih menu transfer<br />
                                         3. Di kategori daftar transfer pilih antar rekening<br />
                                         4. Masukkan no rekening Ikhlas Bantu<br />
                                         5. Di kategori transfer pilih antar rekening<br />
                                         6. Pilih rekening atas nama Ikhlas Bantu<br />
                                         7. Masukkan nominal jumlah uang<br />
-                                        8. Pilih send dan masukkan pin atm BSI
+                                        8. Pilih send dan masukkan pin atm {bank}
                                     </p>
-                                    <div>
-                                        <a className='btn btn-outline-success' style={{width:'100%'}}>Konfirmasi Pembayaran</a>
-                                    </div>
+
                                 </div>
-                                <div className='col'>
-                                    <Image src={thanks} height={326} width={600}/>
+                                <div className='col-md'>
+                                    <form>
+                                        <div style={{ paddingTop: 20 }}>
+                                            <h5>Upload Bukti Pembayaran</h5>
+                                            <input onChange={handleFoto.bind(this)} type={"file"} className='form-control' required />
+                                            <img src={imageName} className='w-100 h-100' style={{paddingTop:10}} />
+                                        </div>
+                                        <div style={{ paddingTop: 20 }}>
+                                            <button className='btn btn-outline-success' style={{ width: '100%' }}>Konfirmasi Pembayaran</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
 

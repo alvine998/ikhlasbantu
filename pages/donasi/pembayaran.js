@@ -1,8 +1,12 @@
+import axios from 'axios';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import swal from 'sweetalert';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import styles from '../../styles/Home.module.css'
+
+Pembayaran.title = "Pembayaran"
 
 function Pembayaran(props) {
     const [harga, setHarga] = useState('');
@@ -10,9 +14,9 @@ function Pembayaran(props) {
     const [nama, setNama] = useState('');
     const [noemail, setNoemail] = useState('');
     const [pesan, setPesan] = useState('');
+    const [bank, setBank] = useState('');
 
-
-    const clickHarga = (total=0) => {
+    const clickHarga = (total = 0) => {
         setHarga(total);
         console.log('Rp. ', total);
     }
@@ -29,25 +33,50 @@ function Pembayaran(props) {
         setNoemail(e.target.value)
     }
 
+    const handlingBank = (e) => {
+        setBank(e.target.value)
+    }
+
     const handlingPesan = (e) => {
         setPesan(e.target.value)
     }
 
-    const onBayar = (total) => {
-        if(total < 10000){
-            alert("Pembayaran minimal Rp 10.000")
-        } else if(nama == ''){
-            alert("Nama tidak boleh kosong!")
-        } else if(noemail == ''){
-            alert("No Hp atau Email tidak boleh kosong!")
+    const onBayar = (total, bank) => {
+        if (total < 10000) {
+            swal("Pembayaran minimal Rp 10.000", {icon:"warning"})
+        } else if (nama == '') {
+            swal("Nama tidak boleh kosong!", {icon:"warning"})
+        } else if (noemail == '') {
+            swal("No Hp atau Email tidak boleh kosong!", {icon:"warning"})
+        } else if (bank == '') {
+            swal("Bank tidak boleh kosong!", {icon:"warning"})
         }
+    }
+
+    const sendData = (nama, noemail, harga, bank, pesan) => {
+        var value = { nama: nama, noemail: noemail, harga: harga, bank: bank, pesan: pesan }
+        localStorage.setItem("valueKey", JSON.stringify(value))
     }
 
     useEffect(() => {
         clickHarga();
+        getDataUser();
     }, [])
 
-    const banks = <Pembayaran bank="1" />
+    const getDataUser = () => {
+        var key = localStorage.getItem('loginKey')
+        axios.get(`http://localhost:4000/users/mail/${key}`).then(
+            res => {
+                console.log(res.data);
+                const result = res.data;
+                setNama(result.nama); setNoemail(result.nohp);
+            }
+        )
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     return (
         <div>
             <Navbar donasi />
@@ -61,9 +90,10 @@ function Pembayaran(props) {
                                 <h5>Pilih Metode Pembayaran : </h5>
                             </div>
                             <div className='col-4'>
-                                <select className='form-select' aria-label='Default select example'>
-                                    <option value={"BSI"} selected>Transfer Bank Syariah Indonesia (BSI)</option>
-                                    <option value={"BCA"}>Transfer Bank BCA</option>
+                                <select onChange={handlingBank.bind(this)} value={bank} className='form-select' aria-label='Default select example'>
+                                    <option selected>Pilih Bank</option>
+                                    {/* <option value={"BSI"}>Transfer Bank Syariah Indonesia (BSI)</option>
+                                    <option value={"BCA"}>Transfer Bank BCA</option> */}
                                     <option value={"Muamalat"}>Transfer Bank Muamalat</option>
                                 </select>
                             </div>
@@ -73,25 +103,25 @@ function Pembayaran(props) {
                             <h5>Pilih Jumlah Uang Yang Akan Didonasikan : </h5>
                             <div className='row'>
                                 <div className='col-md-3'>
-                                    <div onClick={() => {clickHarga('10000'), setNominal(false)}} className={styles.boxUangDonasi}>
+                                    <div onClick={() => { clickHarga('10000'), setNominal(false) }} className={styles.boxUangDonasi}>
                                         <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 10.000</p>
                                     </div>
                                 </div>
 
                                 <div className='col-md-3'>
-                                    <div onClick={() => {clickHarga('50000'), setNominal(false)}} className={styles.boxUangDonasi}>
+                                    <div onClick={() => { clickHarga('50000'), setNominal(false) }} className={styles.boxUangDonasi}>
                                         <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 50.000</p>
                                     </div>
                                 </div>
 
                                 <div className='col-md-3'>
-                                    <div onClick={() => {clickHarga('100000'), setNominal(false)}} className={styles.boxUangDonasi}>
+                                    <div onClick={() => { clickHarga('100000'), setNominal(false) }} className={styles.boxUangDonasi}>
                                         <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 100.000</p>
                                     </div>
                                 </div>
 
                                 <div className='col-md-3'>
-                                    <div onClick={() => {clickHarga('200000'), setNominal(false)}} className={styles.boxUangDonasi}>
+                                    <div onClick={() => { clickHarga('200000'), setNominal(false) }} className={styles.boxUangDonasi}>
                                         <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 200.000</p>
                                     </div>
                                 </div>
@@ -99,25 +129,25 @@ function Pembayaran(props) {
 
                             <div className='row'>
                                 <div className='col-md-3'>
-                                    <div onClick={() =>{ clickHarga('500000'), setNominal(false)}} className={styles.boxUangDonasi}>
+                                    <div onClick={() => { clickHarga('500000'), setNominal(false) }} className={styles.boxUangDonasi}>
                                         <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 500.000</p>
                                     </div>
                                 </div>
 
                                 <div className='col-md-3'>
-                                    <div onClick={() => {clickHarga('1000000'), setNominal(false)}} className={styles.boxUangDonasi}>
+                                    <div onClick={() => { clickHarga('1000000'), setNominal(false) }} className={styles.boxUangDonasi}>
                                         <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 1.000.000</p>
                                     </div>
                                 </div>
 
                                 <div className='col-md-3'>
-                                    <div onClick={() => {clickHarga('2000000'), setNominal(false)}} className={styles.boxUangDonasi}>
+                                    <div onClick={() => { clickHarga('2000000'), setNominal(false) }} className={styles.boxUangDonasi}>
                                         <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 2.000.000</p>
                                     </div>
                                 </div>
 
                                 <div className='col-md-3'>
-                                    <div onClick={() =>{ setNominal(true)}} className={styles.boxUangDonasi}>
+                                    <div onClick={() => { setNominal(true) }} className={styles.boxUangDonasi}>
                                         <p style={{ textAlign: 'center', fontSize: 20 }}>Nominal Lain</p>
                                     </div>
                                 </div>
@@ -125,7 +155,7 @@ function Pembayaran(props) {
 
                             <div className={styles.inputWidthDonasi}>
                                 <label>Jumlah Donasi : </label>
-                                <input disabled={nominal == false ? true : false} onChange={ nominal == true ? handlingHarga.bind(this) : {}} className='form-control' value={harga} placeholder='Masukkan nominal' />
+                                <input disabled={nominal == false ? true : false} onChange={nominal == true ? handlingHarga.bind(this) : {}} className='form-control' value={harga} placeholder='Masukkan nominal' />
                             </div>
 
                             <div className={styles.boxDataDiri}>
@@ -133,23 +163,23 @@ function Pembayaran(props) {
                                 <form >
                                     <div>
                                         <label>Nama Lengkap</label>
-                                        <input onChange={handlingNama.bind(this)} value={nama} className='form-control' placeholder='Ketik disini ...' type={"text"} />
+                                        <input onChange={handlingNama.bind(this)} value={nama} className='form-control' placeholder='Ketik disini ...' type={"text"} required />
                                     </div>
                                     <div style={{ paddingTop: 20 }}>
                                         <label>No Handphone / Email</label>
-                                        <input onChange={handlingNoemail.bind(this)} value={noemail} className='form-control' placeholder='Ketik disini ...' type={"text"} />
+                                        <input onChange={handlingNoemail.bind(this)} value={noemail} className='form-control' placeholder='Ketik disini ...' type={"text"} required />
                                     </div>
                                 </form>
                             </div>
 
                             <div className={styles.widthInputPesan}>
-                                <label>Pesan :</label>
+                                <label>Pesan : (optional)</label>
                                 <textarea onChange={handlingPesan.bind(this)} value={pesan} className='form-control' rows={4} placeholder='Ketik disini ...' />
-                            </div> 
+                            </div>
 
                             <div style={{ paddingTop: 20 }}>
-                                <Link href={ harga >= 10000 && nama !== '' && noemail !== '' ? "/donasi/konfirmasi-pembayaran" : "?Wrong-Input"}>
-                                    <button onClick={()=>onBayar(harga)} className={'btn btn-outline-success ' + styles.widthInputPesan}>Bayar Sekarang</button>
+                                <Link href={harga >= 10000 && nama !== '' && noemail !== '' && bank !== '' ? "/donasi/konfirmasi-pembayaran" : "?Wrong-Input"}>
+                                    <button onClick={() => { onBayar(harga, bank), sendData(nama, noemail, harga, bank, pesan) }} className={'btn btn-outline-success ' + styles.widthInputPesan}>Bayar Sekarang</button>
                                 </Link>
                             </div>
                         </div>
