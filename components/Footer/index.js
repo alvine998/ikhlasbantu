@@ -10,11 +10,11 @@ function Footer(props) {
             <div className={styles.boxFooter}>
                 <div className='container'>
                     <div className='row'>
-                        <div className='col'>
+                        <div className='col-md'>
                             <Image src={logo} width={80} height={80}/>
                             <p style={{color:'white'}}>D'Kranji Residence 1 <br/>No.67, Kranji, Bekasi Barat, 17134</p>
                         </div>
-                        <div className='col'>
+                        <div className='col-md'>
                             <h5 style={{color:'white'}}>Sosial Media</h5>
                             <ul className='list-unstyled text-muted'>
                                 <li>
@@ -28,7 +28,7 @@ function Footer(props) {
                                 </li>
                             </ul>
                         </div>
-                        <div className='col'>
+                        <div className='col-md'>
                             <h5 style={{color:'white'}}>Menu Navigasi</h5>
                             <ul className='list-unstyled text-muted'>
                                 <li>

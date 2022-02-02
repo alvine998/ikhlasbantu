@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { default_profile, ktp } from '../../assets';
 import axios from 'axios';
 import swal from 'sweetalert';
+import useMediaQuery from '../../components/MediaQuery';
 
 index.title = "Your Profile"
 
@@ -213,6 +214,8 @@ function index(props) {
         document.getElementById('fileid2').click();
     }
 
+    const isBreakpoint = useMediaQuery(768);
+
     return (
         <div>
             <Navbar />
@@ -255,108 +258,223 @@ function index(props) {
                     <div className={styles.btnCenter}>
                         <div className='row'>
                             <div className='col-md'>
-                                <div className={styles.boxProfile}>
-                                    <div>
-                                        <div className={styles.boxDonasiProfile}>
-                                            <p>Total Donasimu : <br />Rp. 0,-</p>
+                                {
+                                    isBreakpoint ? (
+                                        <div className={styles.boxProfile2}>
+                                            <div>
+                                                <div className={styles.boxDonasiProfile}>
+                                                    <p>Total Donasimu : <br />Rp. 0,-</p>
+                                                </div>
+                                                <div>
+                                                    <label className='form-label'>Nama</label>
+                                                    <input type={"text"} value={nama} onChange={handleNama.bind(this)} className='form-control' />
+                                                </div>
+                                                <div className={styles.inputProfile}>
+                                                    <label className='form-label'>No Telepon</label>
+                                                    <input type={"text"} maxLength={12} value={nohp} onChange={handleNohp.bind(this)} className='form-control' />
+                                                </div>
+                                                <div className={styles.inputProfile}>
+                                                    <label className='form-label'>Email</label>
+                                                    <input type={"email"} value={email} onChange={handleEmail.bind(this)} className='form-control' />
+                                                </div>
+                                                <div className={styles.inputProfile}>
+                                                    <label className='form-label'>Jenis Kelamin</label>
+                                                    <select className='form-select' value={jenisk} onChange={handleJenisk.bind(this)} >
+                                                        <option selected>Pilih Jenis Kelamin</option>
+                                                        <option value={"Laki-laki"}>Laki-laki</option>
+                                                        <option value={"Perempuan"}>Perempuan</option>
+                                                    </select>
+                                                </div>
+                                                <div className={styles.inputProfile}>
+                                                    <label className='form-label'>Alamat</label>
+                                                    <textarea rows={4} value={alamat} onChange={handleAlamat.bind(this)} className='form-control' />
+                                                </div>
+                                                <div className={styles.inputProfile}>
+                                                    <label className='form-label'>Pekerjaan</label>
+                                                    <input type={"text"} value={pekerjaan} onChange={handlePekerjaan.bind(this)} className='form-control' />
+                                                </div>
+                                                <div>
+                                                    <button type='submit' className={'btn btn-outline-primary ' + styles.inputProfileBtn} onClick={() => updateProfile()}>Ganti</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <label className='form-label'>Nama</label>
-                                            <input type={"text"} value={nama} onChange={handleNama.bind(this)} className='form-control' />
+                                    ) : (
+                                        <div className={styles.boxProfile}>
+                                            <div>
+                                                <div className={styles.boxDonasiProfile}>
+                                                    <p>Total Donasimu : <br />Rp. 0,-</p>
+                                                </div>
+                                                <div>
+                                                    <label className='form-label'>Nama</label>
+                                                    <input type={"text"} value={nama} onChange={handleNama.bind(this)} className='form-control' />
+                                                </div>
+                                                <div className={styles.inputProfile}>
+                                                    <label className='form-label'>No Telepon</label>
+                                                    <input type={"text"} maxLength={12} value={nohp} onChange={handleNohp.bind(this)} className='form-control' />
+                                                </div>
+                                                <div className={styles.inputProfile}>
+                                                    <label className='form-label'>Email</label>
+                                                    <input type={"email"} value={email} onChange={handleEmail.bind(this)} className='form-control' />
+                                                </div>
+                                                <div className={styles.inputProfile}>
+                                                    <label className='form-label'>Jenis Kelamin</label>
+                                                    <select className='form-select' value={jenisk} onChange={handleJenisk.bind(this)} >
+                                                        <option selected>Pilih Jenis Kelamin</option>
+                                                        <option value={"Laki-laki"}>Laki-laki</option>
+                                                        <option value={"Perempuan"}>Perempuan</option>
+                                                    </select>
+                                                </div>
+                                                <div className={styles.inputProfile}>
+                                                    <label className='form-label'>Alamat</label>
+                                                    <textarea rows={4} value={alamat} onChange={handleAlamat.bind(this)} className='form-control' />
+                                                </div>
+                                                <div className={styles.inputProfile}>
+                                                    <label className='form-label'>Pekerjaan</label>
+                                                    <input type={"text"} value={pekerjaan} onChange={handlePekerjaan.bind(this)} className='form-control' />
+                                                </div>
+                                                <div>
+                                                    <button type='submit' className={'btn btn-outline-primary ' + styles.inputProfileBtn} onClick={() => updateProfile()}>Ganti</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className={styles.inputProfile}>
-                                            <label className='form-label'>No Telepon</label>
-                                            <input type={"text"} maxLength={12} value={nohp} onChange={handleNohp.bind(this)} className='form-control' />
-                                        </div>
-                                        <div className={styles.inputProfile}>
-                                            <label className='form-label'>Email</label>
-                                            <input type={"email"} value={email} onChange={handleEmail.bind(this)} className='form-control' />
-                                        </div>
-                                        <div className={styles.inputProfile}>
-                                            <label className='form-label'>Jenis Kelamin</label>
-                                            <select className='form-select' value={jenisk} onChange={handleJenisk.bind(this)} >
-                                                <option selected>Pilih Jenis Kelamin</option>
-                                                <option value={"Laki-laki"}>Laki-laki</option>
-                                                <option value={"Perempuan"}>Perempuan</option>
-                                            </select>
-                                        </div>
-                                        <div className={styles.inputProfile}>
-                                            <label className='form-label'>Alamat</label>
-                                            <textarea rows={4} value={alamat} onChange={handleAlamat.bind(this)} className='form-control' />
-                                        </div>
-                                        <div className={styles.inputProfile}>
-                                            <label className='form-label'>Pekerjaan</label>
-                                            <input type={"text"} value={pekerjaan} onChange={handlePekerjaan.bind(this)} className='form-control' />
-                                        </div>
-                                        <div>
-                                            <button type='submit' className={'btn btn-outline-primary ' + styles.inputProfileBtn} onClick={() => updateProfile()}>Ganti</button>
-                                        </div>
-                                    </div>
-                                </div>
+                                    )
+                                }
                             </div>
                             <div className='col-md'>
-                                <div className={styles.boxProfileKtp}>
-                                    <a onClick={() => fileButton()} href='#uploadktp' style={{ textDecoration: 'none' }}>
-                                        {
-                                            fotoktp == "" ? (
-                                                <div className={styles.ktpImg}>
+                                {
+                                    isBreakpoint ? (
+                                        <div>
+                                            <div className={styles.boxProfileKtp2}>
+                                                <a onClick={() => fileButton()} href='#uploadktp' style={{ textDecoration: 'none' }}>
                                                     {
-                                                        imageName2 == null ? (
-                                                            <div>
-                                                                <Image src={ktp} />
-                                                                <p style={{ textAlign: 'center' }}>Upload KTP Disini</p>
+                                                        fotoktp == "" ? (
+                                                            <div className={styles.ktpImg}>
+                                                                {
+                                                                    imageName2 == null ? (
+                                                                        <div>
+                                                                            <Image src={ktp} />
+                                                                            <p style={{ textAlign: 'center' }}>Upload KTP Disini</p>
+                                                                        </div>
+                                                                    ) : (
+                                                                        <div>
+                                                                            <img src={imageName2} className='w-100 h-100' />
+                                                                        </div>
+                                                                    )
+                                                                }
                                                             </div>
                                                         ) : (
-                                                            <div>
-                                                                <img src={imageName2} className='w-100 h-100' />
-                                                            </div>
+                                                            <img src={`http://localhost:4000/resources/uploads/${fotoktp}`} className='w-100 h-100' />
                                                         )
                                                     }
-                                                </div>
-                                            ) : (
-                                                <img src={`http://localhost:4000/resources/uploads/${fotoktp}`} className='w-100 h-100' />
-                                            )
-                                        }
-                                        <input id='fileid' disabled={statusktp == 'verified' ? true : statusktp === 'hold ktp' ? true : false} onChange={handleFotoktp.bind(this)} hidden type={"file"} />
-                                    </a>
-                                </div>
-                                <div className='d-grid gap-2' style={{ paddingTop: 20 }}>
-                                    <button disabled={statusktp == 'verified' ? true : statusktp === 'hold ktp' ? true : false} onClick={() => { uploadImageKtp(), updateFotoKtp() }} className='btn btn-outline-primary'>
-                                        {statusktp == 'hold ktp' ? 'Menunggu Verifikasi' : statusktp == 'verified' ? 'KTP Telah Diverifikasi' : 'Upload'}
-                                    </button>
-                                </div>
+                                                    <input id='fileid' disabled={statusktp == 'verified' ? true : statusktp === 'hold ktp' ? true : false} onChange={handleFotoktp.bind(this)} hidden type={"file"} />
+                                                </a>
+                                            </div>
+                                            <div className='d-grid gap-2' style={{ paddingTop: 20 }}>
+                                                <button disabled={statusktp == 'verified' ? true : statusktp === 'hold ktp' ? true : false} onClick={() => { uploadImageKtp(), updateFotoKtp() }} className='btn btn-outline-primary'>
+                                                    {statusktp == 'hold ktp' ? 'Menunggu Verifikasi' : statusktp == 'verified' ? 'KTP Telah Diverifikasi' : 'Upload'}
+                                                </button>
+                                            </div>
 
-                                {/* Upload Rekening */}
-                                <div className={styles.boxProfileKtp}>
-                                    <a onClick={() => fileButton2()} href='#uploadrekening' style={{ textDecoration: 'none' }}>
-                                        {
-                                            fotorekening == "" ? (
-                                                <div className={styles.ktpImg}>
+                                            {/* Upload Rekening */}
+                                            <div className={styles.boxProfileKtp2}>
+                                                <a onClick={() => fileButton2()} href='#uploadrekening' style={{ textDecoration: 'none' }}>
                                                     {
-                                                        imageName3 == null ? (
-                                                            <div>
-                                                                <Image src={ktp} />
-                                                                <p style={{ textAlign: 'center' }}>Upload Rekening Disini</p>
+                                                        fotorekening == "" ? (
+                                                            <div className={styles.ktpImg}>
+                                                                {
+                                                                    imageName3 == null ? (
+                                                                        <div>
+                                                                            <Image src={ktp} />
+                                                                            <p style={{ textAlign: 'center' }}>Upload Rekening Disini</p>
+                                                                        </div>
+                                                                    ) : (
+                                                                        <div>
+                                                                            <img src={imageName3} className='w-100 h-100' />
+                                                                        </div>
+                                                                    )
+                                                                }
                                                             </div>
                                                         ) : (
-                                                            <div>
-                                                                <img src={imageName3} className='w-100 h-100' />
-                                                            </div>
+                                                            <img src={`http://localhost:4000/resources/uploads/${fotorekening}`} className='w-100 h-100' />
                                                         )
                                                     }
-                                                </div>
-                                            ) : (
-                                                <img src={`http://localhost:4000/resources/uploads/${fotorekening}`} className='w-100 h-100' />
-                                            )
-                                        }
-                                        <input id='fileid2' disabled={statusrekening == 'verified' ? true : statusrekening === 'hold rekening' ? true : false} onChange={handleFotorekening.bind(this)} hidden type={"file"} />
-                                    </a>
-                                </div>
-                                <div className='d-grid gap-2' style={{ paddingTop: 20 }}>
-                                    <button disabled={statusrekening == 'verified' ? true : statusrekening === 'hold rekening' ? true : false} onClick={() => { uploadImageRekening(), updateFotoRekening() }} className='btn btn-outline-primary'>
-                                        {statusrekening == 'hold rekening' ? 'Menunggu Verifikasi' : statusrekening == 'verified' ? 'Rekening Telah Diverifikasi' : 'Upload'}
-                                    </button>
-                                </div>
+                                                    <input id='fileid2' disabled={statusrekening == 'verified' ? true : statusrekening === 'hold rekening' ? true : false} onChange={handleFotorekening.bind(this)} hidden type={"file"} />
+                                                </a>
+                                            </div>
+                                            <div className='d-grid gap-2' style={{ paddingTop: 20 }}>
+                                                <button disabled={statusrekening == 'verified' ? true : statusrekening === 'hold rekening' ? true : false} onClick={() => { uploadImageRekening(), updateFotoRekening() }} className='btn btn-outline-primary'>
+                                                    {statusrekening == 'hold rekening' ? 'Menunggu Verifikasi' : statusrekening == 'verified' ? 'Rekening Telah Diverifikasi' : 'Upload'}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            <div className={styles.boxProfileKtp}>
+                                                <a onClick={() => fileButton()} href='#uploadktp' style={{ textDecoration: 'none' }}>
+                                                    {
+                                                        fotoktp == "" ? (
+                                                            <div className={styles.ktpImg}>
+                                                                {
+                                                                    imageName2 == null ? (
+                                                                        <div>
+                                                                            <Image src={ktp} />
+                                                                            <p style={{ textAlign: 'center' }}>Upload KTP Disini</p>
+                                                                        </div>
+                                                                    ) : (
+                                                                        <div>
+                                                                            <img src={imageName2} className='w-100 h-100' />
+                                                                        </div>
+                                                                    )
+                                                                }
+                                                            </div>
+                                                        ) : (
+                                                            <img src={`http://localhost:4000/resources/uploads/${fotoktp}`} className='w-100 h-100' />
+                                                        )
+                                                    }
+                                                    <input id='fileid' disabled={statusktp == 'verified' ? true : statusktp === 'hold ktp' ? true : false} onChange={handleFotoktp.bind(this)} hidden type={"file"} />
+                                                </a>
+                                            </div>
+                                            <div className='d-grid gap-2' style={{ paddingTop: 20 }}>
+                                                <button disabled={statusktp == 'verified' ? true : statusktp === 'hold ktp' ? true : false} onClick={() => { uploadImageKtp(), updateFotoKtp() }} className='btn btn-outline-primary'>
+                                                    {statusktp == 'hold ktp' ? 'Menunggu Verifikasi' : statusktp == 'verified' ? 'KTP Telah Diverifikasi' : 'Upload'}
+                                                </button>
+                                            </div>
+
+                                            {/* Upload Rekening */}
+                                            <div className={styles.boxProfileKtp}>
+                                                <a onClick={() => fileButton2()} href='#uploadrekening' style={{ textDecoration: 'none' }}>
+                                                    {
+                                                        fotorekening == "" ? (
+                                                            <div className={styles.ktpImg}>
+                                                                {
+                                                                    imageName3 == null ? (
+                                                                        <div>
+                                                                            <Image src={ktp} />
+                                                                            <p style={{ textAlign: 'center' }}>Upload Rekening Disini</p>
+                                                                        </div>
+                                                                    ) : (
+                                                                        <div>
+                                                                            <img src={imageName3} className='w-100 h-100' />
+                                                                        </div>
+                                                                    )
+                                                                }
+                                                            </div>
+                                                        ) : (
+                                                            <img src={`http://localhost:4000/resources/uploads/${fotorekening}`} className='w-100 h-100' />
+                                                        )
+                                                    }
+                                                    <input id='fileid2' disabled={statusrekening == 'verified' ? true : statusrekening === 'hold rekening' ? true : false} onChange={handleFotorekening.bind(this)} hidden type={"file"} />
+                                                </a>
+                                            </div>
+                                            <div className='d-grid gap-2' style={{ paddingTop: 20 }}>
+                                                <button disabled={statusrekening == 'verified' ? true : statusrekening === 'hold rekening' ? true : false} onClick={() => { uploadImageRekening(), updateFotoRekening() }} className='btn btn-outline-primary'>
+                                                    {statusrekening == 'hold rekening' ? 'Menunggu Verifikasi' : statusrekening == 'verified' ? 'Rekening Telah Diverifikasi' : 'Upload'}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )
+                                }
+
                             </div>
                         </div>
 

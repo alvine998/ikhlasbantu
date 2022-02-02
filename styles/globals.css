@@ -28,3 +28,32 @@ p{
 * {
   box-sizing: border-box;
 }
+
+.textPad{
+  margin-top: 100px;
+}
+
+@media screen and (min-width: 700px ) {
+  .textPad{
+    margin-top: 0px;
+  }
+
+  .imgTentang{
+    width: 200px;
+    height: 50px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.imgTentang{
+  width: 600px;
+  height: 500px;
+  margin-top: 20px;
+}
+
+.centering{
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -3,10 +3,11 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import NumberFormat from 'react-number-format';
 import Footer from '../../components/Footer';
+import useMediaQuery from '../../components/MediaQuery';
 import Navbar from '../../components/Navbar';
 import styles from '../../styles/Home.module.css'
 
-DetailDonasi.title="Detail-Donasi"
+DetailDonasi.title = "Detail-Donasi"
 
 function DetailDonasi(props) {
     // State
@@ -47,7 +48,9 @@ function DetailDonasi(props) {
     useEffect(() => {
         getDataDonasi();
         getDataUser();
-    },[])
+    }, [])
+
+    const isBreakpoint = useMediaQuery(768);
 
     return (
         <div>
@@ -55,7 +58,13 @@ function DetailDonasi(props) {
             <div style={{ paddingBottom: 50 }}>
                 <h2 style={{ fontWeight: 'bold', marginTop: 20, textAlign: 'center' }}><u>DONASI</u></h2>
                 <div className='container'>
-                    <img src={`http://localhost:4000/resources/uploads/${foto}`} className={styles.imgDetailDonasi} alt='musibah' />
+                    {
+                        isBreakpoint ? (
+                            <img src={`http://localhost:4000/resources/uploads/${foto}`} className={styles.imgDetailDonasi2} alt='musibah' />
+                        ) : (
+                            <img src={`http://localhost:4000/resources/uploads/${foto}`} className={styles.imgDetailDonasi} alt='musibah' />
+                        )
+                    }
                     <div>
                         <h2 style={{ fontWeight: 'bold', marginTop: 10 }}>{judul}</h2>
                         <h5>Penggalang Dana : {nama}</h5>
@@ -65,17 +74,34 @@ function DetailDonasi(props) {
                             </p>
 
                             <div className='row' style={{ marginTop: 20 }}>
-                                <div className='col'>
-                                    <h5 >Dana Terkumpul : <NumberFormat value={terkumpul} displayType='text' thousandSeparator prefix='Rp ' />,-</h5>
-                                    <div className={styles.btnDetailDonasi}>
-                                        <Link href={"/donasi/pembayaran"}>
-                                            <button className={'btn btn-outline-success ' + styles.btnDetailDonasi}>Donasi Sekarang</button>
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className='col'>
-                                    <h5 style={{textAlign:'right'}}>Target : <NumberFormat value={target} displayType='text' thousandSeparator prefix='Rp ' />,-</h5>
-                                </div>
+                                {
+                                    isBreakpoint ? (
+                                        <div>
+                                            <h5 >Dana Terkumpul : <NumberFormat value={terkumpul} displayType='text' thousandSeparator prefix='Rp ' />,-</h5>
+                                            <h5>Target : <NumberFormat value={target} displayType='text' thousandSeparator prefix='Rp ' />,-</h5>
+                                            <div className={styles.btnDetailDonasi}>
+                                                <Link href={"/donasi/pembayaran"}>
+                                                    <button className={'btn btn-outline-success ' + styles.btnDetailDonasi}>Donasi Sekarang</button>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            <div className='col-md'>
+                                                <h5 >Dana Terkumpul : <NumberFormat value={terkumpul} displayType='text' thousandSeparator prefix='Rp ' />,-</h5>
+                                                <div className={styles.btnDetailDonasi}>
+                                                    <Link href={"/donasi/pembayaran"}>
+                                                        <button className={'btn btn-outline-success ' + styles.btnDetailDonasi}>Donasi Sekarang</button>
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                            <div className='col-md'>
+                                                <h5 style={{ textAlign: 'right' }}>Target : <NumberFormat value={target} displayType='text' thousandSeparator prefix='Rp ' />,-</h5>
+                                            </div>
+                                        </div>
+                                    )
+                                }
+
                             </div>
                         </div>
                     </div>

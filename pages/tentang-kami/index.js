@@ -1,29 +1,41 @@
+import Head from 'next/head';
 import Image from 'next/image';
 import React from 'react';
 import { dokter } from '../../assets';
 import Footer from '../../components/Footer';
+import useMediaQuery from '../../components/MediaQuery';
 import Navbar from '../../components/Navbar';
 import styles from '../../styles/Home.module.css'
 
 index.title = 'Tentang Kami';
 function index(props) {
+    const isBreakpoint = useMediaQuery(768);
     return (
         <div>
+            <Head>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            </Head>
             <div style={{ paddingBottom: 50 }}>
                 <Navbar tentang />
                 <div className='container'>
-                    <div className={styles.imgTentang}>
-                        <Image layout='responsive' alt='Logo Ikhlas Bantu' src={dokter} />
+                    <div className='centering'>
+                        {
+                            isBreakpoint ? (
+                                <img style={{width:'100%', height:300, paddingTop:20, paddingBottom:10}} alt='Logo Ikhlas Bantu' src="/dokter.jpeg" />
+                            ) : (
+                                <img className='imgTentang' alt='Logo Ikhlas Bantu' src="/dokter.jpeg" />
+                            )
+                        }
                     </div>
 
                     <div>
                         <h2 style={{ fontWeight: 'bold' }}><u>Tentang Ikhlas Bantu</u></h2>
                         <div className={styles.padTextTentang}>
                             <p style={{ textAlign: 'justify' }}>
-                                Lembaga ikhlas bantu pertama kali berdiri merupakan gerakan sosial yang mengajak 
+                                Lembaga ikhlas bantu pertama kali berdiri merupakan gerakan sosial yang mengajak
                                 kalangan teman, sahabat untuk membantu orang yang terkena musibah dan tidak memiliki
                                 biaya untuk dirawat di Rumah Sakit. Ikhlas bantu kemudian menjadi lembaga sosial berbadan hukum
-                                bernama Yayasan Semesta Bertasbih sehingga kegiatan kami menjadi gerakan membantu dengan 
+                                bernama Yayasan Semesta Bertasbih sehingga kegiatan kami menjadi gerakan membantu dengan
                                 skala yang lebih luas dan berbadan hukum.
                             </p>
                         </div>

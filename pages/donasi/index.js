@@ -2,16 +2,19 @@ import axios from 'axios';
 import { Head } from 'next/document';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import NumberFormat from 'react-number-format';
 import { dokter } from '../../assets';
 import Footer from '../../components/Footer';
+import useMediaQuery from '../../components/MediaQuery';
 import Navbar from '../../components/Navbar';
 import styles from '../../styles/Home.module.css'
 
 index.title = 'Donasi';
+
 function index(props) {
     // State
+    const isBreakpoint = useMediaQuery(768);
     const [collection, setCollection] = useState([]);
     const [collection2, setCollection2] = useState([]);
     const [collection3, setCollection3] = useState([]);
@@ -78,17 +81,29 @@ function index(props) {
                     <div className='row'>
                         <div className='col-md'>
                             <div className={styles.imgDonasi}>
-                                <Image src={dokter} layout="responsive" objectFit='cover' />
+                                <Image src={dokter} layout='responsive' />
                             </div>
                         </div>
-                        <div className='col-md'>
-                            <div className={styles.textPad}>
-                                <p>
-                                    Mari kita mulai bantu orang-orang sekitar, karena
-                                    masih banyak dari mereka yang membutuhkan
-                                    uluran tangan dari kita. Dengan niat  yang ikhlas
-                                    mari kita bantu mereka.
-                                </p>
+                        <div className={'col-md'}>
+                            <div>
+                                {
+                                    isBreakpoint ? (
+                                        <p style={{textAlign:'justify'}}>
+                                            Mari kita mulai bantu orang-orang sekitar, karena
+                                            masih banyak dari mereka yang membutuhkan
+                                            uluran tangan dari kita. Dengan niat  yang ikhlas
+                                            mari kita bantu mereka.
+                                        </p>
+                                    ) : (
+                                        <p className={styles.textPad}>
+                                            Mari kita mulai bantu orang-orang sekitar, karena
+                                            masih banyak dari mereka yang membutuhkan
+                                            uluran tangan dari kita. Dengan niat  yang ikhlas
+                                            mari kita bantu mereka.
+                                        </p>
+                                    )
+                                }
+
                             </div>
                         </div>
                     </div>

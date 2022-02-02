@@ -3,6 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { useEffect } from 'react'
 import Head from 'next/head'
 
+// import withCSS from '@zeit/next-css';
+// module.exports = withCSS()
+
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
     import('bootstrap/dist/js/bootstrap.bundle.min.js')

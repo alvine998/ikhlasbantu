@@ -109,11 +109,36 @@
   margin-left: 0.5rem;
 }
 
-@media (max-width: 600px) {
+.sizeHeight{
+  width: 1200px;
+  height: 500px;
+}
+
+/* Responsive Settings CSS */
+@media screen and (max-width: 600px) {
   .grid {
     width: 100%;
     flex-direction: column;
   }
+
+  .sizeHeight{
+    height: 300px;
+  }
+
+  .boxFooter{
+    background: #752C8B;
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+  }
+
+  .textPad{
+    margin-top: -100px;
+  }
+}
+
+.textPad{
+  margin-top: 100px;
 }
 
 /* Home */
@@ -243,7 +268,7 @@
 .boxFooter{
   background: #752C8B;
   width: 100%;
-  height: 200px;
+  height: 100%;
   padding: 30px;
 }
 
@@ -253,13 +278,10 @@
 
 /* Donasi */
 .imgDonasi{
-  width: 600px;
-  height: 500px;
+  /* width: 600px;
+  height: 500px; */
   margin-top: 20px;
-}
-
-.textPad{
-  margin-top: 40%;
+  padding-bottom: 50px;
 }
 
 /* Tentang-Kami */
@@ -300,6 +322,12 @@
 .imgDetailDonasi{
   width: 100%;
   height: 600px;
+  margin-top: 20px;
+}
+
+.imgDetailDonasi2{
+  width: 100%;
+  height: 300px;
   margin-top: 20px;
 }
 
@@ -404,8 +432,30 @@
   margin-right: auto;
 }
 
+.boxProfile2{
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  border-style: groove;
+  margin-top: 20px;
+  padding: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .boxProfileKtp{
   width: 500px;
+  height: 300px;
+  border-radius: 50px;
+  border-style: groove;
+  margin-top: 20px;
+  padding: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.boxProfileKtp2{
+  width: 100%;
   height: 300px;
   border-radius: 50px;
   border-style: groove;
