@@ -114,7 +114,7 @@ function index(props) {
                         <div>
                             <div className='container'>
                                 <div className={styles.rightSide}>
-                                    <a href='#' style={{ textDecoration: 'none', color: 'black' }}>Lihat lainnya</a>
+                                    <a href='/donasi/bencana-alam' style={{ textDecoration: 'none', color: 'black' }}>Lihat lainnya</a>
                                 </div>
                                 <div className='row'>
                                     {
@@ -147,7 +147,7 @@ function index(props) {
                         <div>
                             <div className='container'>
                                 <div className={styles.rightSide}>
-                                    <a href='#' style={{ textDecoration: 'none', color: 'black' }}>Lihat lainnya</a>
+                                    <a href='/donasi/kesehatan' style={{ textDecoration: 'none', color: 'black' }}>Lihat lainnya</a>
                                 </div>
                                 <div className='row'>
                                     {
@@ -180,7 +180,7 @@ function index(props) {
                         <div>
                             <div className='container'>
                                 <div className={styles.rightSide}>
-                                    <a href='#' style={{ textDecoration: 'none', color: 'black' }}>Lihat lainnya</a>
+                                    <a href='/donasi/sedekah' style={{ textDecoration: 'none', color: 'black' }}>Lihat lainnya</a>
                                 </div>
                                 <div className='row'>
                                     {
@@ -213,7 +213,7 @@ function index(props) {
                         <div>
                             <div className='container'>
                                 <div className={styles.rightSide}>
-                                    <a href='#' style={{ textDecoration: 'none', color: 'black' }}>Lihat lainnya</a>
+                                    <a href='/donasi/lain-lain' style={{ textDecoration: 'none', color: 'black' }}>Lihat lainnya</a>
                                 </div>
                                 <div className='row'>
                                     {

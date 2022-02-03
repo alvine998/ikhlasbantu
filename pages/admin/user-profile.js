@@ -2,6 +2,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import swal from 'sweetalert';
 import Navadmin from '../../components/NavAdmin';
 import NavMain from '../../components/NavMain';
 import styles from '../../styles/Home.module.css'
@@ -30,11 +31,41 @@ function UserProfile(props) {
         )
     }
 
+    const updateData = (id) => {
+        const data = {
+            statususer: 'verified',
+            statusktp: 'verified',
+            statusrekening: 'verified',
+        }
+        axios.put(`http://localhost:4000/users/${id}`, data).then(
+            res => {
+                swal("Berhasil Verifikasi",{icon:"success"});
+                console.log(res.data);
+                getDataUsers();
+            }
+        )
+    }
+
+    const updateDataTolak = (id) => {
+        const data = {
+            statususer: 'not verified',
+            statusktp: 'not verified',
+            statusrekening: 'not verified',
+        }
+        axios.put(`http://localhost:4000/users/${id}`, data).then(
+            res => {
+                swal("Penolakan Berhasil",{icon:"success"});
+                console.log(res.data);
+                getDataUsers();
+            }
+        )
+    }
+
     useEffect(() => {
         getDataLogin();
         getDataUsers();
-    },[])
-    
+    }, [])
+
     return (
         <div style={{ overflow: 'hidden' }}>
             <div className='row'>
@@ -66,6 +97,8 @@ function UserProfile(props) {
                                             <th scope="col">Nama</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">No Hp</th>
+                                            <th scope="col">Status User</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -73,10 +106,41 @@ function UserProfile(props) {
                                             collection.reverse().map((res, i) => (
                                                 <tr>
                                                     <th scope="row">{i + 1}</th>
-                                                    <td>{res._id.substr(0,10)}</td>
+                                                    <td>{res._id.substr(0, 10)}</td>
                                                     <td>{res.nama}</td>
                                                     <td>{res.email}</td>
                                                     <td>{res.nohp}</td>
+                                                    <td>{res.statususer}</td>
+                                                    <td>
+                                                        {/* Modal */}
+                                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Verifikasi Identitas</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div style={{paddingTop:20}}>
+                                                                            <h5>E-KTP :</h5>
+                                                                            <img src={`http://localhost:4000/resources/uploads/${res.fotoktp}`} className='w-100 h-100' />
+                                                                        </div>
+                                                                        <div style={{paddingTop:20}}>
+                                                                            <h5>Rekening Bank :</h5>
+                                                                            <img src={`http://localhost:4000/resources/uploads/${res.fotorekening}`} className='w-100 h-100' />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick={()=>updateDataTolak(res._id)}>Tolak</button>
+                                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={()=>updateData(res._id)}>Verifikasi</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal" className='btn btn-outline-warning'>Verifikasi</button>
+                                                    </td>
                                                 </tr>
                                             ))
                                         }

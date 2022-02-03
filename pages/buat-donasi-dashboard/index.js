@@ -35,7 +35,7 @@ function index(props) {
     const deleteDonasi = (id) => {
         axios.delete(`http://localhost:4000/donasis/${id}`).then(
             res => {
-                swal("Berhasil Hapus Data", {icon:"success"})
+                swal("Berhasil Hapus Data", { icon: "success" })
                 getDataDonasi();
             }
         )
@@ -57,6 +57,9 @@ function index(props) {
                                 <button className='btn btn-outline-primary'>+ Buat Donasi</button>
                             </Link>
                         </div>
+                        <div style={{ marginTop: 10 }}>
+
+                        </div>
                         <table class="table stripped">
                             <thead>
                                 <tr>
@@ -73,22 +76,29 @@ function index(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                    {
-                                        collection.map((res, i) => (
-                                            <tr key={i}>
-                                                <th scope="row">{i+1}</th>
-                                                <td>{res.judul}</td>
-                                                <td>{res.kategori}</td>
-                                                <td>{res.target}</td>
-                                                <td>{res.terkumpul}</td>
-                                                <td><img src={`http://localhost:4000/resources/uploads/${res.foto}`} className='w-100 h-100' /></td>
-                                                <td>{res.deskripsi.substr(0,10)}</td>
-                                                <td>{res.durasi}</td>
-                                                <td>{res.status_donasi}</td>
-                                                <td><button className='btn btn-outline-danger' onClick={()=>deleteDonasi(res._id)}>Hapus</button></td>
-                                            </tr>
-                                        ))
-                                    }
+                                {
+                                    collection.map((res, i) => (
+                                        <tr key={i}>
+                                            <th scope="row">{i + 1}</th>
+                                            <td>{res.judul}</td>
+                                            <td>{res.kategori}</td>
+                                            <td>{res.target}</td>
+                                            <td>{res.terkumpul}</td>
+                                            <td><img src={`http://localhost:4000/resources/uploads/${res.foto}`} className='w-100 h-100' /></td>
+                                            <td>{res.deskripsi.substr(0, 10)}</td>
+                                            <td>{res.durasi}</td>
+                                            <td>{res.status_donasi}</td>
+                                            <td>
+                                                <div className=' d-grid gap-2'>
+                                                    <button className='btn btn-outline-danger' onClick={() => deleteDonasi(res._id)}>Hapus</button>
+                                                    <Link href={"/withdraw"}>
+                                                        <button className='btn btn-outline-success'>Tarik Dana</button>
+                                                    </Link>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))
+                                }
                             </tbody>
                         </table>
                     </div>
