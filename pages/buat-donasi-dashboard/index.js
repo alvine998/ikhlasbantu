@@ -41,6 +41,10 @@ function index(props) {
         )
     }
 
+    const sendData = (id) => {
+        localStorage.setItem("wdKey", id)
+    }
+
     useEffect(() => {
         getDataDonasi();
     }, [])
@@ -91,8 +95,8 @@ function index(props) {
                                             <td>
                                                 <div className=' d-grid gap-2'>
                                                     <button className='btn btn-outline-danger' onClick={() => deleteDonasi(res._id)}>Hapus</button>
-                                                    <Link href={"/withdraw"}>
-                                                        <button className='btn btn-outline-success'>Tarik Dana</button>
+                                                    <Link href={`/withdraw?id=${res.judul}`}>
+                                                        <button onClick={()=>sendData(res._id)} className='btn btn-outline-success'>Tarik Dana</button>
                                                     </Link>
                                                 </div>
                                             </td>

@@ -39,7 +39,7 @@ function UserProfile(props) {
         }
         axios.put(`http://localhost:4000/users/${id}`, data).then(
             res => {
-                swal("Berhasil Verifikasi",{icon:"success"});
+                swal("Berhasil Verifikasi", { icon: "success" });
                 console.log(res.data);
                 getDataUsers();
             }
@@ -54,7 +54,7 @@ function UserProfile(props) {
         }
         axios.put(`http://localhost:4000/users/${id}`, data).then(
             res => {
-                swal("Penolakan Berhasil",{icon:"success"});
+                swal("Penolakan Berhasil", { icon: "success" });
                 console.log(res.data);
                 getDataUsers();
             }
@@ -121,25 +121,27 @@ function UserProfile(props) {
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <div style={{paddingTop:20}}>
+                                                                        <div style={{ paddingTop: 20 }}>
                                                                             <h5>E-KTP :</h5>
                                                                             <img src={`http://localhost:4000/resources/uploads/${res.fotoktp}`} className='w-100 h-100' />
                                                                         </div>
-                                                                        <div style={{paddingTop:20}}>
+                                                                        <div style={{ paddingTop: 20 }}>
                                                                             <h5>Rekening Bank :</h5>
                                                                             <img src={`http://localhost:4000/resources/uploads/${res.fotorekening}`} className='w-100 h-100' />
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick={()=>updateDataTolak(res._id)}>Tolak</button>
-                                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={()=>updateData(res._id)}>Verifikasi</button>
+                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick={() => updateDataTolak(res._id)}>Tolak</button>
+                                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => updateData(res._id)}>Verifikasi</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal" className='btn btn-outline-warning'>Verifikasi</button>
+                                                        <div className='d-grid gap-2'>
+                                                            <button data-bs-toggle="modal" data-bs-target="#exampleModal" className='btn btn-outline-warning'>Verifikasi</button>
+                                                            <button className='btn btn-outline-danger'>Suspend</button>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             ))

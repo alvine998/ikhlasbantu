@@ -47,7 +47,7 @@ function index(props) {
                 const collection3 = res.data;
                 console.log(collection3);
                 setCollection3(collection3);
-                const result = collection3.reduce((a,v)=> a = a + v.terkumpul,0);
+                const result = collection3.reduce((a, v) => a = a + v.terkumpul, 0);
                 console.log(result);
                 setTotal(result);
             }
@@ -77,29 +77,42 @@ function index(props) {
                         <div className='container'>
                             <div className='row'>
                                 <div className='col'>
-                                    <div className={styles.boxTotalDonasi}>
-                                        <h5>Total Donasi Aktif :</h5>
-                                        <h3>{collection3.length}</h3>
+                                    <div className={styles.boxTotalDonasi} style={{ backgroundColor: "#B22222" }}>
+                                        <h5 style={{ color: "white" }}>Total Donasi Aktif :</h5>
+                                        <h3 style={{ color: "white" }}>{collection3.length}</h3>
                                     </div>
                                 </div>
                                 <div className='col'>
-                                    <div className={styles.boxTotalDonasi}>
-                                        <h5>Total Seluruh Donasi :</h5>
-                                        <h3>{collection2.length}</h3>
+                                    <div className={styles.boxTotalDonasi} style={{ backgroundColor: "#5BB222" }}>
+                                        <h5 style={{ color: "white" }}>Total Seluruh Donasi :</h5>
+                                        <h3 style={{ color: "white" }}>{collection2.length}</h3>
                                     </div>
                                 </div>
                                 <div className='col'>
-                                    <div className={styles.boxTotalDonasi}>
-                                        <h5>Total User :</h5>
-                                        <h3>{collection.length}</h3>
+                                    <div className={styles.boxTotalDonasi} style={{ backgroundColor: "#229CB2" }}>
+                                        <h5 style={{ color: "white" }}>Total User :</h5>
+                                        <h3 style={{ color: "white" }}>{collection.length}</h3>
                                     </div>
                                 </div>
                                 <div className='col' style={{ paddingTop: 10 }}>
-                                    <div className={styles.boxTotalDonasi}>
-                                        <h5>Total Value Donasi :</h5>
-                                        <h3><NumberFormat value={total} displayType='text' thousandSeparator prefix='Rp ' />,-</h3>
+                                    <div className={styles.boxTotalDonasi} style={{ backgroundColor: "#6122B2" }}>
+                                        <h5 style={{ color: "white" }}>Total Value Donasi :</h5>
+                                        <h3 style={{ color: "white" }}><NumberFormat value={total} displayType='text' thousandSeparator prefix='Rp ' />,-</h3>
                                     </div>
                                 </div>
+                                <div className='col' style={{ paddingTop: 10 }}>
+                                    <div className={styles.boxTotalDonasi} style={{ backgroundColor: "#22B277" }}>
+                                        <h5 style={{ color: "white" }}>Total Transaksi Donasi :</h5>
+                                        <h3 style={{ color: "white" }}><NumberFormat value={total} displayType='text' thousandSeparator prefix='Rp ' />,-</h3>
+                                    </div>
+                                </div>
+                                <div className='col' style={{ paddingTop: 10 }}>
+                                    <div className={styles.boxTotalDonasi} style={{ backgroundColor: "#CEDA1E" }}>
+                                        <h5 style={{ color: "white" }}>Total Transaksi Withdraw :</h5>
+                                        <h3 style={{ color: "white" }}><NumberFormat value={total} displayType='text' thousandSeparator prefix='Rp ' />,-</h3>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         {/* End Box Total */}
