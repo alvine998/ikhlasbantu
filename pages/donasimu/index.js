@@ -20,7 +20,7 @@ function index(props) {
             <div style={{ paddingBottom: 200 }}>
                 <div className='container'>
                     <h2 className={styles.textTitle}>DONASIMU</h2>
-                    <div>
+                    <div className='table-responsive'>
                         <table class="table stripped">
                             <thead>
                                 <tr>

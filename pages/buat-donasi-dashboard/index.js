@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import swal from 'sweetalert';
 import Footer from '../../components/Footer';
+import useMediaQuery from '../../components/MediaQuery';
 import Navbar from '../../components/Navbar';
 import styles from '../../styles/Home.module.css'
 
@@ -41,6 +42,8 @@ function index(props) {
         )
     }
 
+    let isBreakpoint = useMediaQuery(768);
+
     const sendData = (id) => {
         localStorage.setItem("wdKey", id)
     }
@@ -64,47 +67,95 @@ function index(props) {
                         <div style={{ marginTop: 10 }}>
 
                         </div>
-                        <table class="table stripped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Judul</th>
-                                    <th scope="col">Kategori</th>
-                                    <th scope="col">Target</th>
-                                    <th scope="col">Dana Terkumpul</th>
-                                    <th scope="col">Foto</th>
-                                    <th scope="col">Deskripsi</th>
-                                    <th scope="col">Durasi</th>
-                                    <th scope="col">Keterangan</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    collection.map((res, i) => (
-                                        <tr key={i}>
-                                            <th scope="row">{i + 1}</th>
-                                            <td>{res.judul}</td>
-                                            <td>{res.kategori}</td>
-                                            <td>{res.target}</td>
-                                            <td>{res.terkumpul}</td>
-                                            <td><img src={`http://localhost:4000/resources/uploads/${res.foto}`} className='w-100 h-100' /></td>
-                                            <td>{res.deskripsi.substr(0, 10)}</td>
-                                            <td>{res.durasi}</td>
-                                            <td>{res.status_donasi}</td>
-                                            <td>
-                                                <div className=' d-grid gap-2'>
-                                                    <button className='btn btn-outline-danger' onClick={() => deleteDonasi(res._id)}>Hapus</button>
-                                                    <Link href={`/withdraw?id=${res.judul}`}>
-                                                        <button onClick={()=>sendData(res._id)} className='btn btn-outline-success'>Tarik Dana</button>
-                                                    </Link>
-                                                </div>
-                                            </td>
+                        {
+                            isBreakpoint ? (
+                                <div className='table-responsive'>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">No</th>
+                                                <th scope="col">Judul</th>
+                                                <th scope="col">Kategori</th>
+                                                <th scope="col">Target</th>
+                                                <th scope="col">Dana Terkumpul</th>
+                                                <th scope="col">Foto</th>
+                                                <th scope="col">Deskripsi</th>
+                                                <th scope="col">Durasi</th>
+                                                <th scope="col">Keterangan</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                collection.map((res, i) => (
+                                                    <tr key={i}>
+                                                        <th scope="row">{i + 1}</th>
+                                                        <td>{res.judul}</td>
+                                                        <td>{res.kategori}</td>
+                                                        <td>{res.target}</td>
+                                                        <td>{res.terkumpul}</td>
+                                                        <td><img src={`http://localhost:4000/resources/uploads/${res.foto}`} className='w-100 h-100' /></td>
+                                                        <td>{res.deskripsi.substr(0, 10)}</td>
+                                                        <td>{res.durasi}</td>
+                                                        <td>{res.status_donasi}</td>
+                                                        <td>
+                                                            <div className=' d-grid gap-2'>
+                                                                <button className='btn btn-outline-danger' onClick={() => deleteDonasi(res._id)}>Hapus</button>
+                                                                <Link href={`/withdraw?id=${res.judul}`}>
+                                                                    <button onClick={() => sendData(res._id)} className='btn btn-outline-success'>Tarik Dana</button>
+                                                                </Link>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                ))
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            ) : (
+                                <table class="table stripped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No</th>
+                                            <th scope="col">Judul</th>
+                                            <th scope="col">Kategori</th>
+                                            <th scope="col">Target</th>
+                                            <th scope="col">Dana Terkumpul</th>
+                                            <th scope="col">Foto</th>
+                                            <th scope="col">Deskripsi</th>
+                                            <th scope="col">Durasi</th>
+                                            <th scope="col">Keterangan</th>
+                                            <th scope="col">Action</th>
                                         </tr>
-                                    ))
-                                }
-                            </tbody>
-                        </table>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            collection.map((res, i) => (
+                                                <tr key={i}>
+                                                    <th scope="row">{i + 1}</th>
+                                                    <td>{res.judul}</td>
+                                                    <td>{res.kategori}</td>
+                                                    <td>{res.target}</td>
+                                                    <td>{res.terkumpul}</td>
+                                                    <td><img src={`http://localhost:4000/resources/uploads/${res.foto}`} className='w-100 h-100' /></td>
+                                                    <td>{res.deskripsi.substr(0, 10)}</td>
+                                                    <td>{res.durasi}</td>
+                                                    <td>{res.status_donasi}</td>
+                                                    <td>
+                                                        <div className=' d-grid gap-2'>
+                                                            <button className='btn btn-outline-danger' onClick={() => deleteDonasi(res._id)}>Hapus</button>
+                                                            <Link href={`/withdraw?id=${res.judul}`}>
+                                                                <button onClick={() => sendData(res._id)} className='btn btn-outline-success'>Tarik Dana</button>
+                                                            </Link>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        }
+                                    </tbody>
+                                </table>
+                            )
+                        }
                     </div>
                 </div>
             </div>

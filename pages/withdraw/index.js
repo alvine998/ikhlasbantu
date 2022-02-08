@@ -34,6 +34,19 @@ function index(props) {
         var key = localStorage.getItem("wdKey");
         console.log(key);
 
+        var key2 = localStorage.getItem("loginKey");
+        console.log(key2)
+
+        axios.get(`http://localhost:4000/users/mail/${key2}`).then(
+            res => {
+                console.log(res.data);
+                const result = res.data;
+                let id = result._id
+
+                axios.get(`http://localhost:4000/transaksi/`)
+            }
+        )
+
         axios.get(`http://localhost:4000/donasis/${key}`).then(
             res => {
                 console.log(res.data);
@@ -41,11 +54,16 @@ function index(props) {
                 setSaldo(result.terkumpul)
             }
         )
+
     }
 
     const onVerification = () => {
         if(nominal > saldo){
             swal("Nominal tidak sesuai saldo dana",{icon:"warning"})
+        } else if(!nominal){
+            swal("Nominal harus diisi",{icon:"warning"})
+        } else if(nominal < 10000){
+            swal("Nominal harus diatas 10.000",{icon:"warning"})
         }
     }
 
@@ -83,7 +101,7 @@ function index(props) {
                                                     <p style={{ color: "white" }}>Saldo Donasi : <NumberFormat value={saldo} displayType='text' thousandSeparator prefix='Rp ' />,-</p>
                                                 </div>
                                                 <div style={{ paddingTop: 10 }}>
-                                                    <input value={nominal} onChange={handlingNominal.bind(this)} placeholder='Nominal Tarik Dana' type={"text"} className='form-control' />
+                                                    <input value={nominal} onChange={handlingNominal.bind(this)} placeholder='Nominal Tarik Dana' type={"number"} className='form-control' />
                                                 </div>
                                                 <div style={{ paddingTop: 10, paddingBottom: 20 }}>
                                                     <button onClick={()=>{onVerification()}} className='btn btn-warning w-100'>Tarik Dana</button>
@@ -108,7 +126,7 @@ function index(props) {
                                                     <p style={{ color: "white" }}>Saldo Donasi : <NumberFormat value={saldo} displayType='text' thousandSeparator prefix='Rp ' />,-</p>
                                                 </div>
                                                 <div style={{ paddingTop: 10 }}>
-                                                    <input value={nominal} onChange={handlingNominal.bind(this)} placeholder='Nominal Tarik Dana' type={"text"} className='form-control' />
+                                                    <input value={nominal} onChange={handlingNominal.bind(this)} placeholder='Nominal Tarik Dana' type={"number"} className='form-control' />
                                                 </div>
                                                 <div style={{ paddingTop: 10, paddingBottom: 20 }}>
                                                     <button onClick={()=>{onVerification()}} className='btn btn-warning w-100'>Tarik Dana</button>
@@ -128,7 +146,7 @@ function index(props) {
                                 * Data kepemilikan rekening yang telah dimasukkan
                                 harus sesuai dengan buku rekening yang telah diupload
                                 di halaman profil, jika tidak sama maka proses penarikan
-                                dana akan ditolak.
+                                dana akan ditolak. Lebih lanjut hubungi kami.
                             </p>
                         </div>
                     </div>

@@ -19,8 +19,8 @@ function index(props) {
                             <div className='col'>
                                 <h2 style={{ fontWeight: 'bold' }}>Alamat Kantor</h2>
                                 <p>
-                                    D'Kranji Residence No.67<br />
-                                    Kranji, Bekasi Barat, Kota Bekasi <br />
+                                    Jl. Taman Cendana 16D (My Dentist Lt. 2)<br />
+                                    Galaxy, Bekasi Selatan, Kota Bekasi <br />
                                     17134
                                 </p>
 
@@ -31,7 +31,7 @@ function index(props) {
 
                                 <h2 style={{ fontWeight: 'bold' }}>No Telepon</h2>
                                 <p>
-                                    +62878-6339-7900
+                                    +62 878-6339-7900
                                 </p>
                             </div>
 
