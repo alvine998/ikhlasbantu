@@ -5,6 +5,7 @@ import swal from 'sweetalert';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import styles from '../../styles/Home.module.css'
+import useMediaQuery from '../../components/MediaQuery';
 
 Pembayaran.title = "Pembayaran"
 
@@ -43,13 +44,13 @@ function Pembayaran(props) {
 
     const onBayar = (total, bank) => {
         if (total < 10000) {
-            swal("Pembayaran minimal Rp 10.000", {icon:"warning"})
+            swal("Pembayaran minimal Rp 10.000", { icon: "warning" })
         } else if (nama == '') {
-            swal("Nama tidak boleh kosong!", {icon:"warning"})
+            swal("Nama tidak boleh kosong!", { icon: "warning" })
         } else if (noemail == '') {
-            swal("No Hp atau Email tidak boleh kosong!", {icon:"warning"})
+            swal("No Hp atau Email tidak boleh kosong!", { icon: "warning" })
         } else if (bank == '') {
-            swal("Bank tidak boleh kosong!", {icon:"warning"})
+            swal("Bank tidak boleh kosong!", { icon: "warning" })
         }
     }
 
@@ -62,6 +63,8 @@ function Pembayaran(props) {
         clickHarga();
         getDataUser();
     }, [])
+
+    const isBreakpoint = useMediaQuery(768)
 
     const getDataUser = () => {
         var key = localStorage.getItem('loginKey')
@@ -86,10 +89,10 @@ function Pembayaran(props) {
                     <h2 style={{ fontWeight: 'bold', marginTop: 10 }}>Pembayaran Donasi</h2>
                     <div className='container'>
                         <div className='row'>
-                            <div className='col-4'>
+                            <div className='col-md-4'>
                                 <h5>Pilih Metode Pembayaran : </h5>
                             </div>
-                            <div className='col-4'>
+                            <div className='col-md-4'>
                                 <select onChange={handlingBank.bind(this)} value={bank} className='form-select' aria-label='Default select example'>
                                     <option selected>Pilih Bank</option>
                                     {/* <option value={"BSI"}>Transfer Bank Syariah Indonesia (BSI)</option>
@@ -101,64 +104,130 @@ function Pembayaran(props) {
 
                         <div style={{ marginTop: 30 }}>
                             <h5>Pilih Jumlah Uang Yang Akan Didonasikan : </h5>
-                            <div className='row'>
-                                <div className='col-md-3'>
-                                    <div onClick={() => { clickHarga('10000'), setNominal(false) }} className={styles.boxUangDonasi}>
-                                        <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 10.000</p>
+                            {
+                                isBreakpoint ? (
+                                    <div className={styles.centering}>
+                                        <div className='row'>
+                                            <div className='col-md-3'>
+                                                <div onClick={() => { clickHarga('10000'), setNominal(false) }} className={styles.boxUangDonasi}>
+                                                    <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 10.000</p>
+                                                </div>
+                                            </div>
+
+                                            <div className='col-md-3'>
+                                                <div onClick={() => { clickHarga('50000'), setNominal(false) }} className={styles.boxUangDonasi}>
+                                                    <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 50.000</p>
+                                                </div>
+                                            </div>
+
+                                            <div className='col-md-3'>
+                                                <div onClick={() => { clickHarga('100000'), setNominal(false) }} className={styles.boxUangDonasi}>
+                                                    <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 100.000</p>
+                                                </div>
+                                            </div>
+
+                                            <div className='col-md-3'>
+                                                <div onClick={() => { clickHarga('200000'), setNominal(false) }} className={styles.boxUangDonasi}>
+                                                    <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 200.000</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className='row'>
+                                            <div className='col-md-3'>
+                                                <div onClick={() => { clickHarga('500000'), setNominal(false) }} className={styles.boxUangDonasi}>
+                                                    <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 500.000</p>
+                                                </div>
+                                            </div>
+
+                                            <div className='col-md-3'>
+                                                <div onClick={() => { clickHarga('1000000'), setNominal(false) }} className={styles.boxUangDonasi}>
+                                                    <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 1.000.000</p>
+                                                </div>
+                                            </div>
+
+                                            <div className='col-md-3'>
+                                                <div onClick={() => { clickHarga('2000000'), setNominal(false) }} className={styles.boxUangDonasi}>
+                                                    <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 2.000.000</p>
+                                                </div>
+                                            </div>
+
+                                            <div className='col-md-3'>
+                                                <div onClick={() => { setNominal(true) }} className={styles.boxUangDonasi}>
+                                                    <p style={{ textAlign: 'center', fontSize: 20 }}>Nominal Lain</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className={styles.inputWidthDonasi}>
+                                            <label>Jumlah Donasi : </label>
+                                            <input disabled={nominal == false ? true : false} onChange={nominal == true ? handlingHarga.bind(this) : {}} className='form-control' value={harga} placeholder='Masukkan nominal' />
+                                        </div>
                                     </div>
-                                </div>
+                                ) : (
+                                    <div>
+                                        <div className='row'>
+                                            <div className='col-md-3'>
+                                                <div onClick={() => { clickHarga('10000'), setNominal(false) }} className={styles.boxUangDonasi}>
+                                                    <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 10.000</p>
+                                                </div>
+                                            </div>
 
-                                <div className='col-md-3'>
-                                    <div onClick={() => { clickHarga('50000'), setNominal(false) }} className={styles.boxUangDonasi}>
-                                        <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 50.000</p>
+                                            <div className='col-md-3'>
+                                                <div onClick={() => { clickHarga('50000'), setNominal(false) }} className={styles.boxUangDonasi}>
+                                                    <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 50.000</p>
+                                                </div>
+                                            </div>
+
+                                            <div className='col-md-3'>
+                                                <div onClick={() => { clickHarga('100000'), setNominal(false) }} className={styles.boxUangDonasi}>
+                                                    <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 100.000</p>
+                                                </div>
+                                            </div>
+
+                                            <div className='col-md-3'>
+                                                <div onClick={() => { clickHarga('200000'), setNominal(false) }} className={styles.boxUangDonasi}>
+                                                    <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 200.000</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className='row'>
+                                            <div className='col-md-3'>
+                                                <div onClick={() => { clickHarga('500000'), setNominal(false) }} className={styles.boxUangDonasi}>
+                                                    <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 500.000</p>
+                                                </div>
+                                            </div>
+
+                                            <div className='col-md-3'>
+                                                <div onClick={() => { clickHarga('1000000'), setNominal(false) }} className={styles.boxUangDonasi}>
+                                                    <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 1.000.000</p>
+                                                </div>
+                                            </div>
+
+                                            <div className='col-md-3'>
+                                                <div onClick={() => { clickHarga('2000000'), setNominal(false) }} className={styles.boxUangDonasi}>
+                                                    <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 2.000.000</p>
+                                                </div>
+                                            </div>
+
+                                            <div className='col-md-3'>
+                                                <div onClick={() => { setNominal(true) }} className={styles.boxUangDonasi}>
+                                                    <p style={{ textAlign: 'center', fontSize: 20 }}>Nominal Lain</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className={styles.inputWidthDonasi}>
+                                            <label>Jumlah Donasi : </label>
+                                            <input disabled={nominal == false ? true : false} onChange={nominal == true ? handlingHarga.bind(this) : {}} className='form-control' value={harga} placeholder='Masukkan nominal' />
+                                        </div>
                                     </div>
-                                </div>
+                                )
+                            }
 
-                                <div className='col-md-3'>
-                                    <div onClick={() => { clickHarga('100000'), setNominal(false) }} className={styles.boxUangDonasi}>
-                                        <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 100.000</p>
-                                    </div>
-                                </div>
 
-                                <div className='col-md-3'>
-                                    <div onClick={() => { clickHarga('200000'), setNominal(false) }} className={styles.boxUangDonasi}>
-                                        <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 200.000</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className='row'>
-                                <div className='col-md-3'>
-                                    <div onClick={() => { clickHarga('500000'), setNominal(false) }} className={styles.boxUangDonasi}>
-                                        <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 500.000</p>
-                                    </div>
-                                </div>
-
-                                <div className='col-md-3'>
-                                    <div onClick={() => { clickHarga('1000000'), setNominal(false) }} className={styles.boxUangDonasi}>
-                                        <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 1.000.000</p>
-                                    </div>
-                                </div>
-
-                                <div className='col-md-3'>
-                                    <div onClick={() => { clickHarga('2000000'), setNominal(false) }} className={styles.boxUangDonasi}>
-                                        <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 2.000.000</p>
-                                    </div>
-                                </div>
-
-                                <div className='col-md-3'>
-                                    <div onClick={() => { setNominal(true) }} className={styles.boxUangDonasi}>
-                                        <p style={{ textAlign: 'center', fontSize: 20 }}>Nominal Lain</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className={styles.inputWidthDonasi}>
-                                <label>Jumlah Donasi : </label>
-                                <input disabled={nominal == false ? true : false} onChange={nominal == true ? handlingHarga.bind(this) : {}} className='form-control' value={harga} placeholder='Masukkan nominal' />
-                            </div>
-
-                            <div className={styles.boxDataDiri}>
+                            <div className={isBreakpoint ? styles.boxDataDiri2 : styles.boxDataDiri}>
                                 <h5 className={styles.textUpper}>Isi Data Dibawah Ini</h5>
                                 <form >
                                     <div>
@@ -172,14 +241,14 @@ function Pembayaran(props) {
                                 </form>
                             </div>
 
-                            <div className={styles.widthInputPesan}>
+                            <div className={isBreakpoint ? styles.widthInputPesan2 : styles.widthInputPesan}>
                                 <label>Pesan : (optional)</label>
                                 <textarea onChange={handlingPesan.bind(this)} value={pesan} className='form-control' rows={4} placeholder='Ketik disini ...' />
                             </div>
 
-                            <div style={{ paddingTop: 20 }}>
-                                <Link href={harga >= 10000 && nama !== '' && noemail !== '' && bank !== '' ? "/donasi/konfirmasi-pembayaran" : "?Wrong-Input"}>
-                                    <button onClick={() => { onBayar(harga, bank), sendData(nama, noemail, harga, bank, pesan) }} className={'btn btn-outline-success ' + styles.widthInputPesan}>Bayar Sekarang</button>
+                            <div style={{ paddingTop: 20 }} >
+                                <Link href={harga >= 10000 && nama !== '' && noemail !== '' && bank == 'Muamalat' ? "/donasi/konfirmasi-pembayaran" : "?Wrong-Input"}>
+                                    <button onClick={() => { onBayar(harga, bank), sendData(nama, noemail, harga, bank, pesan) }} className={'btn btn-outline-success ' + (isBreakpoint ? 'w-100' : styles.widthInputPesan)}>Bayar Sekarang</button>
                                 </Link>
                             </div>
                         </div>

@@ -56,7 +56,7 @@ function Navbar(props) {
                                 <a style={{ color: 'white' }} className={'nav-link ' + (props.tentang ? 'active' : '')} href="/tentang-kami">Tentang Kami</a>
                             </li>
                             <li class="nav-item">
-                                <a style={{ color: 'white' }} className={'nav-link ' + (props.hubungi ? 'active' : '')} href="hubungi-kami">Hubungi Kami</a>
+                                <a style={{ color: 'white' }} className={'nav-link ' + (props.hubungi ? 'active' : '')} href="/hubungi-kami">Hubungi Kami</a>
                             </li>
                         </ul>
                         <form class="d-flex" style={{ paddingRight: 20 }}>

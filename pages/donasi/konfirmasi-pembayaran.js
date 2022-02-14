@@ -1,6 +1,9 @@
+import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import swal from 'sweetalert';
 import { logo, logo_bsi, muamalat, thanks } from '../../assets';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
@@ -13,6 +16,9 @@ function Konfirmasi(props) {
     const [bank, setBank] = useState('');
     const [nominal, setNominal] = useState('');
     const [image, setImage] = useState(null);
+    const [mail, setMail] = useState('');
+    const [donasiId, setDonasiId] = useState('');
+    const [poin, setPoin] = useState(0);
     const [imageName, setImageName] = useState(null);
 
     // Handling State
@@ -30,10 +36,96 @@ function Konfirmasi(props) {
         console.log(keys);
         setBank(keys.bank);
         setNominal(keys.harga);
+
+        const result = keys.harga / 100;
+        setPoin(result);
+        console.log(poin)
+    }
+
+    const idUser = () => {
+        var id = localStorage.getItem('loginKey');
+        console.log(id)
+        setMail(id)
+    }
+
+    const idDonasi = () => {
+        var idDonasi = localStorage.getItem('donasiKey');
+        console.log(idDonasi);
+        setDonasiId(idDonasi)
+    }
+
+    const router = useRouter();
+
+    const saveTransaksi = () => {
+        if (image) {
+            uploadImage();
+            const data = {
+                iduser: mail,
+                iddonasi: donasiId,
+                foto: 'images_' + image.name,
+                bank: bank,
+                nominal: nominal,
+                poin: poin,
+                status_transaksi: 'waiting',
+                keterangan: 'donatur'
+            }
+
+            axios.post(`http://localhost:4000/transaksi`, data).then(
+                res => {
+                    console.log("Terimakasih");
+                    swal("Terima kasih telah berdonasi", { icon: "success" });
+                    router.push("/");
+                    removeDonasiId();
+                }
+            )
+        } else {
+            const data = {
+                iduser: mail,
+                iddonasi: donasiId,
+                bank: bank,
+                nominal: nominal,
+                poin: poin,
+                status_transaksi: 'waiting',
+                keterangan: 'donatur'
+            }
+
+            axios.post(`http://localhost:4000/transaksi`, data).then(
+                res => {
+                    console.log("Terimakasih");
+                    swal("Terima kasih telah berdonasi", { icon: "success" });
+                    router.push("/");
+                    removeDonasiId();
+                }
+            )
+        }
+
+
+    }
+
+    const uploadImage = () => {
+        let formdata = new FormData()
+        formdata.append("images", image)
+
+        if (image.name == foto) {
+            console.log("Foto sama")
+            return foto;
+        } else {
+            axios.post(`http://localhost:4000/upload/`, formdata).then(
+                res => {
+                    const respon = res.data;
+                }
+            )
+        }
+    }
+
+    const removeDonasiId = () => {
+        localStorage.removeItem("valueKey");
     }
 
     useEffect(() => {
         getValue();
+        idUser();
+        idDonasi();
     }, [])
     return (
         <div>
@@ -77,16 +169,16 @@ function Konfirmasi(props) {
 
                                 </div>
                                 <div className='col-md'>
-                                    <form>
+                                    <div>
                                         <div style={{ paddingTop: 20 }}>
                                             <h5>Upload Bukti Pembayaran</h5>
-                                            <input onChange={handleFoto.bind(this)} type={"file"} className='form-control' required />
-                                            <img src={imageName} className='w-100 h-100' style={{paddingTop:10}} />
+                                            <input onChange={handleFoto.bind(this)} type={"file"} className='form-control' />
+                                            <img src={imageName} className='w-100 h-100' style={{ paddingTop: 10 }} />
                                         </div>
                                         <div style={{ paddingTop: 20 }}>
-                                            <button className='btn btn-outline-success' style={{ width: '100%' }}>Konfirmasi Pembayaran</button>
+                                            <button onClick={() => saveTransaksi()} className='btn btn-outline-success' style={{ width: '100%' }}>Konfirmasi Pembayaran</button>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
 
