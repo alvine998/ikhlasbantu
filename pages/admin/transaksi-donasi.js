@@ -23,6 +23,8 @@ function TransaksiDonasi(props) {
 
     const router = useRouter();
     const [collection, setCollection] = useState([])
+    const [ids, setIds] = useState('')
+    const [foto, setFoto] = useState(null)
 
     const getDataTransaksi = () => {
         axios.get(`http://localhost:4000/transaksi/donasi`).then(
@@ -30,6 +32,17 @@ function TransaksiDonasi(props) {
                 const collection = res.data;
                 console.log(collection);
                 setCollection(collection)
+            }
+        )
+    }
+
+    const getDataTransaksiDetail = (id) => {
+        axios.get(`http://localhost:4000/transaksi/${id}`).then(
+            res => {
+                const collection = res.data;
+                console.log(collection);
+                setIds(collection._id);
+                setFoto(collection.foto)
             }
         )
     }
@@ -105,7 +118,7 @@ function TransaksiDonasi(props) {
                                             collection.reverse().map((res, i) => (
                                                 <tr>
                                                     <th scope="row">{i + 1}</th>
-                                                    <td>{res._id.substr(0, 10)}</td>
+                                                    <td>{res.iddonasi.substr(0, 10)}</td>
                                                     <td>{res.iduser}</td>
                                                     <td>Transfer Bank {res.bank}</td>
                                                     <td><NumberFormat value={res.nominal} displayType='text' thousandSeparator prefix='Rp ' />,-</td>
@@ -123,24 +136,24 @@ function TransaksiDonasi(props) {
                                                                         <div style={{ paddingTop: 20 }}>
                                                                             <h5>Bukti Transaksi Donasi :</h5>
                                                                             {
-                                                                                res.foto == null ? (
+                                                                                foto == null ? (
                                                                                     <p>Tidak ada bukti transaksi</p>
                                                                                 ) : (
-                                                                                    <img src={`http://localhost:4000/resources/uploads/${res.foto}`} className='w-100 h-100' />
+                                                                                    <img src={`http://localhost:4000/resources/uploads/${foto}`} className='w-100 h-100' />
                                                                                 )
                                                                             }
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         {/* <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button> */}
-                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick={() => updateDataTolak(res._id)}>Tolak</button>
-                                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => updateData(res._id)}>Verifikasi</button>
+                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick={() => {updateDataTolak(ids), console.log(ids)}}>Tolak</button>
+                                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => updateData(ids)}>Verifikasi</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className='d-grid gap-2'>
-                                                            <button data-bs-toggle="modal" data-bs-target="#exampleModal" className='btn btn-outline-warning'>Verifikasi</button>
+                                                            <button onClick={()=>getDataTransaksiDetail(res._id)} data-bs-toggle="modal" data-bs-target="#exampleModal" className='btn btn-outline-warning'>Verifikasi</button>
                                                             {/* <button className='btn btn-outline-danger'>Tolak</button> */}
                                                         </div>
                                                     </td>
