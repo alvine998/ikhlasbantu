@@ -35,6 +35,35 @@ function Navadmin(props) {
                                 </a>
                             </Link>
                         </li>
+                        {/* <li> */}
+                            <div className='accordion' id='accordionExample'>
+                                <div className='accordion-item'>
+                                    <h2 className='accordion-header' id='headingOne'>
+                                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Data Transaksi
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <li>
+                                            <Link href={"/admin/transaksi-donasi"}>
+                                                <a className={"nav-link " + (props.TDonasi ? "active" : "link-dark")}>
+                                                    Transaksi Donasi
+                                                </a>
+                                            </Link>
+                                            </li>
+                                            <li>
+                                            <Link href={"/admin/transaksi-withdraw"}>
+                                                <a className={"nav-link " + (props.TWithdraw ? "active" : "link-dark")}>
+                                                    Transaksi WithDraw
+                                                </a>
+                                            </Link>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {/* </li> */}
                         <li>
                             <Link href={"/admin/company-profile"}>
                                 <a className={"nav-link " + (props.companyprofile ? "active" : "link-dark")}>

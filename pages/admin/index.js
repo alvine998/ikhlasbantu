@@ -20,6 +20,8 @@ function index(props) {
     const [collection2, setCollection2] = useState([])
     const [collection3, setCollection3] = useState([])
     const [total, setTotal] = useState('')
+    const [totalTransaksi, setTotalTransaksi] = useState(0)
+    const [totalTransaksi2, setTotalTransaksi2] = useState(0)
 
     const getDataUsers = () => {
         axios.get(`http://localhost:4000/users`).then(
@@ -54,6 +56,29 @@ function index(props) {
         )
     }
 
+    const getDataTransaksiWd = () => {
+        axios.get(`http://localhost:4000/donasis/valid`).then(
+            res => {
+                const collection5 = res.data;
+                console.log(collection5);
+                const result = collection5.reduce((a, v) => a = a + v.nominal, 0);
+                console.log(result);
+                setTotalTransaksi2(result);
+            }
+        )
+    }
+
+    const getDataTransaksi = () => {
+        axios.get(`http://localhost:4000/transaksi/donasi`).then(
+            res => {
+                const collection4 = res.data;
+                console.log(collection4);
+                const result = collection4.reduce((a,v) => a = a + v.nominal, 0);
+                setTotalTransaksi(result)
+            }
+        )
+    }
+
     const router = useRouter();
 
     useEffect(() => {
@@ -61,6 +86,8 @@ function index(props) {
         getDataUsers();
         getDataDonasi();
         getDataDonasiAktif();
+        getDataTransaksi();
+        getDataTransaksiWd();
     }, [])
 
     return (
@@ -103,13 +130,13 @@ function index(props) {
                                 <div className='col' style={{ paddingTop: 10 }}>
                                     <div className={styles.boxTotalDonasi} style={{ backgroundColor: "#22B277" }}>
                                         <h5 style={{ color: "white" }}>Total Transaksi Donasi :</h5>
-                                        <h3 style={{ color: "white" }}><NumberFormat value={total} displayType='text' thousandSeparator prefix='Rp ' />,-</h3>
+                                        <h3 style={{ color: "white" }}><NumberFormat value={totalTransaksi} displayType='text' thousandSeparator prefix='Rp ' />,-</h3>
                                     </div>
                                 </div>
                                 <div className='col' style={{ paddingTop: 10 }}>
                                     <div className={styles.boxTotalDonasi} style={{ backgroundColor: "#CEDA1E" }}>
                                         <h5 style={{ color: "white" }}>Total Transaksi Withdraw :</h5>
-                                        <h3 style={{ color: "white" }}><NumberFormat value={total} displayType='text' thousandSeparator prefix='Rp ' />,-</h3>
+                                        <h3 style={{ color: "white" }}><NumberFormat value={totalTransaksi2} displayType='text' thousandSeparator prefix='Rp ' />,-</h3>
                                     </div>
                                 </div>
 

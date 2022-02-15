@@ -6,6 +6,7 @@ import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import styles from '../../styles/Home.module.css'
 import useMediaQuery from '../../components/MediaQuery';
+import { useRouter } from 'next/router';
 
 Pembayaran.title = "Pembayaran"
 
@@ -16,6 +17,7 @@ function Pembayaran(props) {
     const [noemail, setNoemail] = useState('');
     const [pesan, setPesan] = useState('');
     const [bank, setBank] = useState('');
+
 
     const clickHarga = (total = 0) => {
         setHarga(total);
@@ -42,6 +44,14 @@ function Pembayaran(props) {
         setPesan(e.target.value)
     }
 
+    const idDonasi = () => {
+        var idDonasi = localStorage.getItem('donasiKey');
+        console.log(idDonasi);
+        setDonasiId(idDonasi)
+    }
+
+    const router = useRouter();
+
     const onBayar = (total, bank) => {
         if (total < 10000) {
             swal("Pembayaran minimal Rp 10.000", { icon: "warning" })
@@ -51,17 +61,55 @@ function Pembayaran(props) {
             swal("No Hp atau Email tidak boleh kosong!", { icon: "warning" })
         } else if (bank == '') {
             swal("Bank tidak boleh kosong!", { icon: "warning" })
+        } else {
+            const data = {
+                iduser: noemail,
+                iddonasi: donasiId,
+                bank: bank,
+                nominal: harga,
+                poin: poin,
+                status_transaksi: 'waiting',
+                keterangan: 'donatur'
+            }
+
+            axios.post(`http://localhost:4000/transaksi`, data).then(
+                res => {
+                    console.log("Terimakasih");
+                    swal("Terima kasih telah berdonasi", { icon: "success" });
+                    router.push("/donasi/konfirmasi-pembayaran");
+                }
+            )
         }
     }
 
-    const sendData = (nama, noemail, harga, bank, pesan) => {
-        var value = { nama: nama, noemail: noemail, harga: harga, bank: bank, pesan: pesan }
-        localStorage.setItem("valueKey", JSON.stringify(value))
+    // const sendData = (nama, noemail, harga, bank, pesan) => {
+    //     var value = { nama: nama, noemail: noemail, harga: harga, bank: bank, pesan: pesan }
+    //     localStorage.setItem("valueKey", JSON.stringify(value))
+    // }
+
+    const sendData = (bank) => {
+        localStorage.setItem("valueKey", bank)
     }
+
+    const [mail, setMail] = useState('');
+    const [donasiId, setDonasiId] = useState('');
+    const [poin, setPoin] = useState(0);
+
+    const getPoin = (total = 0) => {
+        const result = total / 1000;
+        setPoin(result);
+        console.log("Poin ", result)
+    }
+
+    // const removeDonasiId = () => {
+    //     localStorage.removeItem("valueKey");
+    // }
 
     useEffect(() => {
         clickHarga();
         getDataUser();
+        getPoin();
+        idDonasi();
     }, [])
 
     const isBreakpoint = useMediaQuery(768)
@@ -109,13 +157,13 @@ function Pembayaran(props) {
                                     <div className={styles.centering}>
                                         <div className='row'>
                                             <div className='col-md-3'>
-                                                <div onClick={() => { clickHarga('10000'), setNominal(false) }} className={styles.boxUangDonasi}>
+                                                <div onClick={() => { clickHarga('10000'), setNominal(false), getPoin(10000) }} className={styles.boxUangDonasi}>
                                                     <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 10.000</p>
                                                 </div>
                                             </div>
 
                                             <div className='col-md-3'>
-                                                <div onClick={() => { clickHarga('50000'), setNominal(false) }} className={styles.boxUangDonasi}>
+                                                <div onClick={() => { clickHarga('50000'), setNominal(false), getPoin(50000) }} className={styles.boxUangDonasi}>
                                                     <p style={{ textAlign: 'center', fontSize: 20 }}>Rp. 50.000</p>
                                                 </div>
                                             </div>
@@ -247,9 +295,7 @@ function Pembayaran(props) {
                             </div>
 
                             <div style={{ paddingTop: 20 }} >
-                                <Link href={harga >= 10000 && nama !== '' && noemail !== '' && bank == 'Muamalat' ? "/donasi/konfirmasi-pembayaran" : "?Wrong-Input"}>
-                                    <button onClick={() => { onBayar(harga, bank), sendData(nama, noemail, harga, bank, pesan) }} className={'btn btn-outline-success ' + (isBreakpoint ? 'w-100' : styles.widthInputPesan)}>Bayar Sekarang</button>
-                                </Link>
+                                <button onClick={() => { onBayar(harga, bank), sendData(bank) }} className={'btn btn-outline-success ' + (isBreakpoint ? 'w-100' : styles.widthInputPesan)}>Bayar Sekarang</button>
                             </div>
                         </div>
                     </div>

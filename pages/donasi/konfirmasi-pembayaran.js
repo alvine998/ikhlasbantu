@@ -17,8 +17,6 @@ function Konfirmasi(props) {
     const [nominal, setNominal] = useState('');
     const [image, setImage] = useState(null);
     const [mail, setMail] = useState('');
-    const [donasiId, setDonasiId] = useState('');
-    const [poin, setPoin] = useState(0);
     const [imageName, setImageName] = useState(null);
 
     // Handling State
@@ -30,47 +28,16 @@ function Konfirmasi(props) {
     }
 
     // Function
-    const getValue = () => {
-        var key = localStorage.getItem('valueKey');
-        var keys = JSON.parse(key);
-        console.log(keys);
-        setBank(keys.bank);
-        setNominal(keys.harga);
-
-        const result = keys.harga / 100;
-        setPoin(result);
-        console.log(poin)
-    }
-
-    const idUser = () => {
-        var id = localStorage.getItem('loginKey');
-        console.log(id)
-        setMail(id)
-    }
-
-    const idDonasi = () => {
-        var idDonasi = localStorage.getItem('donasiKey');
-        console.log(idDonasi);
-        setDonasiId(idDonasi)
-    }
-
     const router = useRouter();
 
-    const saveTransaksi = () => {
+    const saveTransaksi = (id) => {
         if (image) {
             uploadImage();
             const data = {
-                iduser: mail,
-                iddonasi: donasiId,
                 foto: 'images_' + image.name,
-                bank: bank,
-                nominal: nominal,
-                poin: poin,
-                status_transaksi: 'waiting',
-                keterangan: 'donatur'
             }
 
-            axios.post(`http://localhost:4000/transaksi`, data).then(
+            axios.put(`http://localhost:4000/transaksi/${id}`, data).then(
                 res => {
                     console.log("Terimakasih");
                     swal("Terima kasih telah berdonasi", { icon: "success" });
@@ -79,27 +46,10 @@ function Konfirmasi(props) {
                 }
             )
         } else {
-            const data = {
-                iduser: mail,
-                iddonasi: donasiId,
-                bank: bank,
-                nominal: nominal,
-                poin: poin,
-                status_transaksi: 'waiting',
-                keterangan: 'donatur'
-            }
-
-            axios.post(`http://localhost:4000/transaksi`, data).then(
-                res => {
-                    console.log("Terimakasih");
-                    swal("Terima kasih telah berdonasi", { icon: "success" });
-                    router.push("/");
-                    removeDonasiId();
-                }
-            )
+            swal("Terima kasih telah berdonasi", { icon: "success" });
+            router.push("/");
+            removeDonasiId();
         }
-
-
     }
 
     const uploadImage = () => {
@@ -122,21 +72,28 @@ function Konfirmasi(props) {
         localStorage.removeItem("valueKey");
     }
 
+    const getValue = () => {
+        var key = localStorage.getItem('valueKey');
+        // var keys = JSON.parse(key);
+        console.log(key);
+        setBank(key);
+        // setNominal(keys.harga);
+
+    }
+
     useEffect(() => {
         getValue();
-        idUser();
-        idDonasi();
     }, [])
     return (
         <div>
             <Navbar donasi />
             <div style={{ paddingBottom: 50 }}>
                 <div className='container'>
-                    <div style={{ paddingTop: 20 }}>
+                    {/* <div style={{ paddingTop: 20 }}>
                         <Link href={"/donasi/pembayaran"}>
                             <button className='btn btn-outline-danger'>Kembali</button>
                         </Link>
-                    </div>
+                    </div> */}
                     <h2 style={{ fontWeight: 'bold', marginTop: 20, textAlign: 'center' }}><u>DONASI</u></h2>
                     <div>
                         <h5>Transfer Bank {bank}</h5>
