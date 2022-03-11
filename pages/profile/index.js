@@ -75,6 +75,7 @@ function index(props) {
     const handleFoto = (e) => {
         if (e.target.files && e.target.files[0]) {
             let img = e.target.files[0];
+            console.log(img);
             setImage(img); setImageName(URL.createObjectURL(img))
         }
     }
@@ -165,6 +166,7 @@ function index(props) {
             axios.post(`http://localhost:4000/upload/`, formdata).then(
                 res => {
                     const respon = res.data;
+                    console.log(respon)
                 }
             )
         }
