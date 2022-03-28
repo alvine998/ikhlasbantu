@@ -56,7 +56,7 @@ function Banner(props) {
         }
 
         console.log(data)
-        axios.post(`http://localhost:4000/banners`, data).then(
+        axios.post(`https://ikhlasbantu.herokuapp.com/banners`, data).then(
             res => {
                 const respon = res.data;
                 setDeskripsi(""); setImageName(null); setJudul("");
@@ -67,7 +67,7 @@ function Banner(props) {
     }
 
     const getDataBanner = () => {
-        axios.get(`http://localhost:4000/banners`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/banners`).then(
             res => {
                 const collection = res.data;
                 console.log(collection);
@@ -77,7 +77,7 @@ function Banner(props) {
     }
 
     const deleteBanner = (id) => {
-        axios.delete(`http://localhost:4000/banners/${id}`).then(
+        axios.delete(`https://ikhlasbantu.herokuapp.com/banners/${id}`).then(
             res => {
                 const collection = res.data;
                 swal("Berhasil Hapus Banner", { icon: "success" })
@@ -90,7 +90,7 @@ function Banner(props) {
         let formdata = new FormData()
         formdata.append("bannerimages", image)
 
-        axios.post(`http://localhost:4000/upload/banner`, formdata).then(
+        axios.post(`https://ikhlasbantu.herokuapp.com/upload/banner`, formdata).then(
             res => {
                 const respon = res.data;
             }
@@ -98,7 +98,7 @@ function Banner(props) {
     }
 
     const deleteImage = (name) => {
-        axios.delete(`http://localhost:4000/delete/banner/${name}`).then(
+        axios.delete(`https://ikhlasbantu.herokuapp.com/delete/banner/${name}`).then(
             res => console.log("Deleted Image")
         )
     }
@@ -173,7 +173,7 @@ function Banner(props) {
                                                     <tr key={i}>
                                                         <th scope="row">{i+1}</th>
                                                         <td>{res.judul}</td>
-                                                        <td><img src={`http://localhost:4000/resources/uploads/${res.gambar}`} className={'w-50 h-50 ' + (styles.centering)} /></td>
+                                                        <td><img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.gambar}`} className={'w-50 h-50 ' + (styles.centering)} /></td>
                                                         <td>{res.deskripsi}</td>
                                                         <td><button onClick={()=>{deleteBanner(res._id), deleteImage(res.gambar)}} className='btn btn-outline-danger'>Hapus</button></td>
                                                     </tr>

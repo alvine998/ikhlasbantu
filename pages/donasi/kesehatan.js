@@ -11,7 +11,7 @@ function Kesehatan(props) {
     const [collection2, setCollection2] = useState([]);
 
     const getDataKesehatan = () => {
-        axios.get(`http://localhost:4000/donasis/valid/kesehatan`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/donasis/valid/kesehatan`).then(
             res => {
                 const collection2 = res.data;
                 setCollection2(collection2);
@@ -42,7 +42,7 @@ function Kesehatan(props) {
                                             collection2.reverse().map((res, i) => i < 3 ? (
                                                 <div key={i} className='col-md-4'>
                                                     <div className={styles.boxDonasi}>
-                                                        <img src={`http://localhost:4000/resources/uploads/${res.foto}`} className={styles.imgPosition} />
+                                                        <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.foto}`} className={styles.imgPosition} />
                                                         <h5>{res.judul}</h5>
                                                         <div>
                                                             <p>Dana Terkumpul : </p>

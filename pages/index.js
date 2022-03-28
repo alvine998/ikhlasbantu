@@ -16,7 +16,7 @@ export default function Home() {
   const [collection2, setCollection2] = useState([]);
 
   const getDataBanner = () => {
-    axios.get(`http://localhost:4000/banners`).then(
+    axios.get(`https://ikhlasbantu.herokuapp.com/banners`).then(
       res => {
         console.log(res.data)
         const collection = res.data;
@@ -30,7 +30,7 @@ export default function Home() {
   }
 
   const getDataDonasiValid = () => {
-    axios.get(`http://localhost:4000/donasis/valid`).then(
+    axios.get(`https://ikhlasbantu.herokuapp.com/donasis/valid`).then(
       res => {
         const collection2 = res.data;
         console.log(collection2);
@@ -81,7 +81,7 @@ export default function Home() {
                 {
                   collection.map((res, i) => (
                     <div className={"carousel-item " + (i == 0 ? "active" : "")} key={i}>
-                      <img src={`http://localhost:4000/resources/uploads/${res.gambar}`} className={"d-block w-100 " + styles.sizeHeight} alt="..." />
+                      <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.gambar}`} className={"d-block w-100 " + styles.sizeHeight} alt="..." />
                       <div class="carousel-caption d-none d-md-block">
                         {/* <h5>{res.judul}</h5>
                         <p>{res.deskripsi}</p> */}
@@ -111,7 +111,7 @@ export default function Home() {
                   collection2.reverse().map((res, i) => i < 9 ? (
                     <div className='col-md-4' key={i}>
                       <div className={styles.boxDonasi}>
-                        <img src={`http://localhost:4000/resources/uploads/${res.foto}`} className={styles.imgPosition} />
+                        <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.foto}`} className={styles.imgPosition} />
                         <h5>{res.judul}</h5>
                         <div>
                           <p>Dana Terkumpul : {res.terkumpul}</p>

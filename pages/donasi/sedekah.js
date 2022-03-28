@@ -11,7 +11,7 @@ function Sedekah(props) {
     const [collection3, setCollection3] = useState([]);
 
     const getDataSedekah = () => {
-        axios.get(`http://localhost:4000/donasis/valid/sedekah`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/donasis/valid/sedekah`).then(
             res => {
                 const collection3 = res.data;
                 setCollection3(collection3);
@@ -42,7 +42,7 @@ function Sedekah(props) {
                                             collection3.reverse().map((res, i) => i < 3 ? (
                                                 <div key={i} className='col-md-4'>
                                                     <div className={styles.boxDonasi}>
-                                                        <img src={`http://localhost:4000/resources/uploads/${res.foto}`} className={styles.imgPosition} />
+                                                        <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.foto}`} className={styles.imgPosition} />
                                                         <h5>{res.judul}</h5>
                                                         <div>
                                                             <p>Dana Terkumpul : </p>

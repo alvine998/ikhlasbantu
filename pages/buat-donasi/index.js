@@ -55,7 +55,7 @@ function index(props) {
 
     const getDataId = () => {
         var id = localStorage.getItem('loginKey');
-        axios.get(`http://localhost:4000/users/mail/${id}`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/users/mail/${id}`).then(
             res => {
                 console.log(res.data);
                 const a = res.data;
@@ -80,7 +80,7 @@ function index(props) {
         }
 
         console.log(data)
-        axios.post(`http://localhost:4000/donasis`, data).then(
+        axios.post(`https://ikhlasbantu.herokuapp.com/donasis`, data).then(
             res => {
                 console.log(res.data)
                 setImageName(null); setDeskripsi(''); setJudul('');
@@ -94,7 +94,7 @@ function index(props) {
         let formdata = new FormData()
         formdata.append("donasiimages", image)
 
-        axios.post(`http://localhost:4000/upload/donasi`, formdata).then(
+        axios.post(`https://ikhlasbantu.herokuapp.com/upload/donasi`, formdata).then(
                 res => {
                     const respon = res.data;
                 }

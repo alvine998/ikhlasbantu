@@ -41,7 +41,7 @@ function index(props) {
         console.log(keys)
         setKeys(keys)
 
-        axios.get(`http://localhost:4000/users/mail/${keys}`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/users/mail/${keys}`).then(
             res => {
                 const result = res.data;
                 setEmail(result.email); setNama(result.nama); setNohp(result.nohp);
@@ -102,7 +102,7 @@ function index(props) {
             pekerjaan: pekerjaan
         }
 
-        axios.put(`http://localhost:4000/users/${id}`, dataUpdate).then(
+        axios.put(`https://ikhlasbantu.herokuapp.com/users/${id}`, dataUpdate).then(
             res => {
                 swal("Data berhasil diubah", { icon: "success" });
                 console.log(res.data);
@@ -116,7 +116,7 @@ function index(props) {
             foto: 'images_' + image.name
         }
 
-        axios.put(`http://localhost:4000/users/${id}`, dataUpdate).then(
+        axios.put(`https://ikhlasbantu.herokuapp.com/users/${id}`, dataUpdate).then(
             res => {
                 swal("Data berhasil diubah", { icon: "success" });
                 console.log(res.data);
@@ -131,7 +131,7 @@ function index(props) {
             statusktp: 'hold ktp'
         }
 
-        axios.put(`http://localhost:4000/users/${id}`, dataUpdate).then(
+        axios.put(`https://ikhlasbantu.herokuapp.com/users/${id}`, dataUpdate).then(
             res => {
                 swal("Data berhasil diubah", { icon: "success" });
                 console.log(res.data);
@@ -146,7 +146,7 @@ function index(props) {
             statusrekening: 'hold rekening'
         }
 
-        axios.put(`http://localhost:4000/users/${id}`, dataUpdate).then(
+        axios.put(`https://ikhlasbantu.herokuapp.com/users/${id}`, dataUpdate).then(
             res => {
                 swal("Data berhasil diubah", { icon: "success" });
                 console.log(res.data);
@@ -163,7 +163,7 @@ function index(props) {
             console.log("Foto sama")
             return foto;
         } else {
-            axios.post(`http://localhost:4000/upload/`, formdata).then(
+            axios.post(`https://ikhlasbantu.herokuapp.com/upload/`, formdata).then(
                 res => {
                     const respon = res.data;
                     console.log(respon)
@@ -180,7 +180,7 @@ function index(props) {
             console.log("Foto sama")
             return fotoktp;
         } else {
-            axios.post(`http://localhost:4000/upload/`, formdata).then(
+            axios.post(`https://ikhlasbantu.herokuapp.com/upload/`, formdata).then(
                 res => {
                     const respon = res.data;
                 }
@@ -196,7 +196,7 @@ function index(props) {
             console.log("Foto sama")
             return fotorekening;
         } else {
-            axios.post(`http://localhost:4000/upload/`, formdata).then(
+            axios.post(`https://ikhlasbantu.herokuapp.com/upload/`, formdata).then(
                 res => {
                     const respon = res.data;
                 }
@@ -229,7 +229,7 @@ function index(props) {
                                 foto === "" ? (
                                     <Image src={default_profile} />
                                 ) : (
-                                    <img src={`http://localhost:4000/resources/uploads/${foto}`} className='w-100 h-100' style={{ borderRadius: 100 }} />
+                                    <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${foto}`} className='w-100 h-100' style={{ borderRadius: 100 }} />
                                 )
                             }
                         </div>
@@ -365,7 +365,7 @@ function index(props) {
                                                                 }
                                                             </div>
                                                         ) : (
-                                                            <img src={`http://localhost:4000/resources/uploads/${fotoktp}`} className='w-100 h-100' />
+                                                            <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${fotoktp}`} className='w-100 h-100' />
                                                         )
                                                     }
                                                     <input id='fileid' disabled={statusktp == 'verified' ? true : statusktp === 'hold ktp' ? true : false} onChange={handleFotoktp.bind(this)} hidden type={"file"} />
@@ -397,7 +397,7 @@ function index(props) {
                                                                 }
                                                             </div>
                                                         ) : (
-                                                            <img src={`http://localhost:4000/resources/uploads/${fotorekening}`} className='w-100 h-100' />
+                                                            <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${fotorekening}`} className='w-100 h-100' />
                                                         )
                                                     }
                                                     <input id='fileid2' disabled={statusrekening == 'verified' ? true : statusrekening === 'hold rekening' ? true : false} onChange={handleFotorekening.bind(this)} hidden type={"file"} />
@@ -430,7 +430,7 @@ function index(props) {
                                                                 }
                                                             </div>
                                                         ) : (
-                                                            <img src={`http://localhost:4000/resources/uploads/${fotoktp}`} className='w-100 h-100' />
+                                                            <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${fotoktp}`} className='w-100 h-100' />
                                                         )
                                                     }
                                                     <input id='fileid' disabled={statusktp == 'verified' ? true : statusktp === 'hold ktp' ? true : false} onChange={handleFotoktp.bind(this)} hidden type={"file"} />
@@ -462,7 +462,7 @@ function index(props) {
                                                                 }
                                                             </div>
                                                         ) : (
-                                                            <img src={`http://localhost:4000/resources/uploads/${fotorekening}`} className='w-100 h-100' />
+                                                            <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${fotorekening}`} className='w-100 h-100' />
                                                         )
                                                     }
                                                     <input id='fileid2' disabled={statusrekening == 'verified' ? true : statusrekening === 'hold rekening' ? true : false} onChange={handleFotorekening.bind(this)} hidden type={"file"} />

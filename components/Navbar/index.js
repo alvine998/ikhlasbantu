@@ -16,7 +16,7 @@ function Navbar(props) {
         console.log(key)
         setKey(key)
 
-        axios.get(`http://localhost:4000/users/mail/${key}`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/users/mail/${key}`).then(
             res => {
                 const result = res.data;
                 setPoin(result.poin); setFreq(result.frekuensi_donasi);

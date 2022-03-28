@@ -22,7 +22,7 @@ function index(props) {
 
     // Function
     const getDataBencana = () => {
-        axios.get(`http://localhost:4000/donasis/valid/bencana`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/donasis/valid/bencana`).then(
             res => {
                 const collection = res.data;
                 setCollection(collection);
@@ -32,7 +32,7 @@ function index(props) {
     }
 
     const getDataKesehatan = () => {
-        axios.get(`http://localhost:4000/donasis/valid/kesehatan`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/donasis/valid/kesehatan`).then(
             res => {
                 const collection2 = res.data;
                 setCollection2(collection2);
@@ -42,7 +42,7 @@ function index(props) {
     }
 
     const getDataSedekah = () => {
-        axios.get(`http://localhost:4000/donasis/valid/sedekah`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/donasis/valid/sedekah`).then(
             res => {
                 const collection3 = res.data;
                 setCollection3(collection3);
@@ -52,7 +52,7 @@ function index(props) {
     }
 
     const getDataLain = () => {
-        axios.get(`http://localhost:4000/donasis/valid/lain-lain`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/donasis/valid/lain-lain`).then(
             res => {
                 const collection4 = res.data;
                 setCollection4(collection4);
@@ -121,7 +121,7 @@ function index(props) {
                                         collection.reverse().map((res, i) => i < 3 ? (
                                             <div key={i} className='col-md-4'>
                                                 <div className={styles.boxDonasi}>
-                                                    <img src={`http://localhost:4000/resources/uploads/${res.foto}`} className={styles.imgPosition} />
+                                                    <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.foto}`} className={styles.imgPosition} />
                                                     <h5>{res.judul}</h5>
                                                     <div>
                                                         <p>Dana Terkumpul : </p>
@@ -154,7 +154,7 @@ function index(props) {
                                         collection2.reverse().map((res, i) => i < 3 ? (
                                             <div key={i} className='col-md-4'>
                                                 <div className={styles.boxDonasi}>
-                                                    <img src={`http://localhost:4000/resources/uploads/${res.foto}`} className={styles.imgPosition} />
+                                                    <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.foto}`} className={styles.imgPosition} />
                                                     <h5>{res.judul}</h5>
                                                     <div>
                                                         <p>Dana Terkumpul : </p>
@@ -187,7 +187,7 @@ function index(props) {
                                         collection3.reverse().map((res, i) => i < 3 ? (
                                             <div key={i} className='col-md-4'>
                                                 <div className={styles.boxDonasi}>
-                                                    <img src={`http://localhost:4000/resources/uploads/${res.foto}`} className={styles.imgPosition} />
+                                                    <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.foto}`} className={styles.imgPosition} />
                                                     <h5>{res.judul}</h5>
                                                     <div>
                                                         <p>Dana Terkumpul : </p>
@@ -220,7 +220,7 @@ function index(props) {
                                         collection4.reverse().map((res, i) => i < 3 ? (
                                             <div key={i} className='col-md-4'>
                                                 <div className={styles.boxDonasi}>
-                                                    <img src={`http://localhost:4000/resources/uploads/${res.foto}`} className={styles.imgPosition} />
+                                                    <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.foto}`} className={styles.imgPosition} />
                                                     <h5>{res.judul}</h5>
                                                     <div>
                                                         <p>Dana Terkumpul : </p>

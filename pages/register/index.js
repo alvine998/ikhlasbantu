@@ -54,7 +54,7 @@ function index(props) {
         }
 
         console.log(data)
-        axios.post(`http://localhost:4000/users`, data).then(
+        axios.post(`https://ikhlasbantu.herokuapp.com/users`, data).then(
             res => {
                 console.log(res.data);
                 swal("Berhasil mendaftar", { icon: "success" });

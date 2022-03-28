@@ -11,7 +11,7 @@ function BencanaAlam(props) {
     const [collection, setCollection] = useState([]);
 
     const getDataBencana = () => {
-        axios.get(`http://localhost:4000/donasis/valid/bencana`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/donasis/valid/bencana`).then(
             res => {
                 const collection = res.data;
                 setCollection(collection);
@@ -42,7 +42,7 @@ function BencanaAlam(props) {
                                             collection.reverse().map((res, i) => i < 3 ? (
                                                 <div key={i} className='col-md-4'>
                                                     <div className={styles.boxDonasi}>
-                                                        <img src={`http://localhost:4000/resources/uploads/${res.foto}`} className={styles.imgPosition} />
+                                                        <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.foto}`} className={styles.imgPosition} />
                                                         <h5>{res.judul}</h5>
                                                         <div>
                                                             <p>Dana Terkumpul : </p>

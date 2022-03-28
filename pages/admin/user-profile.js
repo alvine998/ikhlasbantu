@@ -22,7 +22,7 @@ function UserProfile(props) {
     const [collection, setCollection] = useState([])
 
     const getDataUsers = () => {
-        axios.get(`http://localhost:4000/users`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/users`).then(
             res => {
                 const collection = res.data;
                 console.log(collection);
@@ -37,7 +37,7 @@ function UserProfile(props) {
             statusktp: 'verified',
             statusrekening: 'verified',
         }
-        axios.put(`http://localhost:4000/users/${id}`, data).then(
+        axios.put(`https://ikhlasbantu.herokuapp.com/users/${id}`, data).then(
             res => {
                 swal("Berhasil Verifikasi", { icon: "success" });
                 console.log(res.data);
@@ -52,7 +52,7 @@ function UserProfile(props) {
             statusktp: 'not verified',
             statusrekening: 'not verified',
         }
-        axios.put(`http://localhost:4000/users/${id}`, data).then(
+        axios.put(`https://ikhlasbantu.herokuapp.com/users/${id}`, data).then(
             res => {
                 swal("Penolakan Berhasil", { icon: "success" });
                 console.log(res.data);
@@ -123,11 +123,11 @@ function UserProfile(props) {
                                                                     <div class="modal-body">
                                                                         <div style={{ paddingTop: 20 }}>
                                                                             <h5>E-KTP :</h5>
-                                                                            <img src={`http://localhost:4000/resources/uploads/${res.fotoktp}`} className='w-100 h-100' />
+                                                                            <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.fotoktp}`} className='w-100 h-100' />
                                                                         </div>
                                                                         <div style={{ paddingTop: 20 }}>
                                                                             <h5>Rekening Bank :</h5>
-                                                                            <img src={`http://localhost:4000/resources/uploads/${res.fotorekening}`} className='w-100 h-100' />
+                                                                            <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.fotorekening}`} className='w-100 h-100' />
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">

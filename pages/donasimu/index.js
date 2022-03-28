@@ -13,7 +13,7 @@ function index(props) {
 
     const getData = () => {
         var log = localStorage.getItem('loginKey')
-        axios.get(`http://localhost:4000/transaksi/user/${log}`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/transaksi/user/${log}`).then(
             res => {
                 const collect = res.data;
                 setCollect(collect);

@@ -37,17 +37,17 @@ function index(props) {
         var key2 = localStorage.getItem("loginKey");
         console.log(key2)
 
-        axios.get(`http://localhost:4000/users/mail/${key2}`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/users/mail/${key2}`).then(
             res => {
                 console.log(res.data);
                 const result = res.data;
                 let id = result._id
 
-                axios.get(`http://localhost:4000/transaksi/`)
+                axios.get(`https://ikhlasbantu.herokuapp.com/transaksi/`)
             }
         )
 
-        axios.get(`http://localhost:4000/donasis/${key}`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/donasis/${key}`).then(
             res => {
                 console.log(res.data);
                 const result = res.data;

@@ -24,7 +24,7 @@ function DetailDonasi(props) {
     const getDataDonasi = () => {
         var key = localStorage.getItem('donasiKey');
 
-        axios.get(`http://localhost:4000/donasis/${key}`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/donasis/${key}`).then(
             res => {
                 console.log(res.data);
                 const result = res.data;
@@ -36,7 +36,7 @@ function DetailDonasi(props) {
     }
 
     const getDataUser = () => {
-        axios.get(`http://localhost:4000/users/${ids}`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/users/${ids}`).then(
             res => {
                 const result = res.data;
                 console.log(result);
@@ -60,9 +60,9 @@ function DetailDonasi(props) {
                 <div className='container'>
                     {
                         isBreakpoint ? (
-                            <img src={`http://localhost:4000/resources/uploads/${foto}`} className={styles.imgDetailDonasi2} alt='musibah' />
+                            <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${foto}`} className={styles.imgDetailDonasi2} alt='musibah' />
                         ) : (
-                            <img src={`http://localhost:4000/resources/uploads/${foto}`} className={styles.imgDetailDonasi} alt='musibah' />
+                            <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${foto}`} className={styles.imgDetailDonasi} alt='musibah' />
                         )
                     }
                     <div>

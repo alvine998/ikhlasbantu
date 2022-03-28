@@ -37,7 +37,7 @@ function Konfirmasi(props) {
                 foto: 'images_' + image.name,
             }
 
-            axios.put(`http://localhost:4000/transaksi/${id}`, data).then(
+            axios.put(`https://ikhlasbantu.herokuapp.com/transaksi/${id}`, data).then(
                 res => {
                     console.log("Terimakasih");
                     swal("Terima kasih telah berdonasi", { icon: "success" });
@@ -60,7 +60,7 @@ function Konfirmasi(props) {
             console.log("Foto sama")
             return foto;
         } else {
-            axios.post(`http://localhost:4000/upload/`, formdata).then(
+            axios.post(`https://ikhlasbantu.herokuapp.com/upload/`, formdata).then(
                 res => {
                     const respon = res.data;
                 }

@@ -72,7 +72,7 @@ function Pembayaran(props) {
                 keterangan: 'donatur'
             }
 
-            axios.post(`http://localhost:4000/transaksi`, data).then(
+            axios.post(`https://ikhlasbantu.herokuapp.com/transaksi`, data).then(
                 res => {
                     console.log("Terimakasih");
                     swal("Terima kasih telah berdonasi", { icon: "success" });
@@ -116,7 +116,7 @@ function Pembayaran(props) {
 
     const getDataUser = () => {
         var key = localStorage.getItem('loginKey')
-        axios.get(`http://localhost:4000/users/mail/${key}`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/users/mail/${key}`).then(
             res => {
                 console.log(res.data);
                 const result = res.data;

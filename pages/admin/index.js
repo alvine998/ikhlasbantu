@@ -24,7 +24,7 @@ function index(props) {
     const [totalTransaksi2, setTotalTransaksi2] = useState(0)
 
     const getDataUsers = () => {
-        axios.get(`http://localhost:4000/users`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/users`).then(
             res => {
                 const collection = res.data;
                 console.log(collection);
@@ -34,7 +34,7 @@ function index(props) {
     }
 
     const getDataDonasi = () => {
-        axios.get(`http://localhost:4000/donasis`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/donasis`).then(
             res => {
                 const collection2 = res.data;
                 console.log(collection2);
@@ -44,7 +44,7 @@ function index(props) {
     }
 
     const getDataDonasiAktif = () => {
-        axios.get(`http://localhost:4000/donasis/valid`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/donasis/valid`).then(
             res => {
                 const collection3 = res.data;
                 console.log(collection3);
@@ -57,7 +57,7 @@ function index(props) {
     }
 
     const getDataTransaksiWd = () => {
-        axios.get(`http://localhost:4000/donasis/valid`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/donasis/valid`).then(
             res => {
                 const collection5 = res.data;
                 console.log(collection5);
@@ -69,7 +69,7 @@ function index(props) {
     }
 
     const getDataTransaksi = () => {
-        axios.get(`http://localhost:4000/transaksi/donasi`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/transaksi/donasi`).then(
             res => {
                 const collection4 = res.data;
                 console.log(collection4);

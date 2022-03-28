@@ -16,7 +16,7 @@ function TransaksiDonasi(props) {
         console.log(key)
         if (key == null) {
             router.push('/login')
-        } else if (key !== 'admin') {
+        } else if (key !== 'admin@ikhlasbantu.com') {
             router.push('/login')
         }
     }
@@ -27,7 +27,7 @@ function TransaksiDonasi(props) {
     const [foto, setFoto] = useState(null)
 
     const getDataTransaksi = () => {
-        axios.get(`http://localhost:4000/transaksi/donasi`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/transaksi/donasi`).then(
             res => {
                 const collection = res.data;
                 console.log(collection);
@@ -37,7 +37,7 @@ function TransaksiDonasi(props) {
     }
 
     const getDataTransaksiDetail = (id) => {
-        axios.get(`http://localhost:4000/transaksi/${id}`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/transaksi/${id}`).then(
             res => {
                 const collection = res.data;
                 console.log(collection);
@@ -51,7 +51,7 @@ function TransaksiDonasi(props) {
         const data = {
             status_transaksi: 'verified',
         }
-        axios.put(`http://localhost:4000/transaksi/${id}`, data).then(
+        axios.put(`https://ikhlasbantu.herokuapp.com/transaksi/${id}`, data).then(
             res => {
                 swal("Berhasil Verifikasi", { icon: "success" });
                 console.log(res.data);
@@ -64,7 +64,7 @@ function TransaksiDonasi(props) {
         const data = {
             status_transaksi: 'not verified',
         }
-        axios.put(`http://localhost:4000/transaksi/${id}`, data).then(
+        axios.put(`https://ikhlasbantu.herokuapp.com/transaksi/${id}`, data).then(
             res => {
                 swal("Penolakan Berhasil", { icon: "success" });
                 console.log(res.data);
@@ -139,7 +139,7 @@ function TransaksiDonasi(props) {
                                                                                 foto == null ? (
                                                                                     <p>Tidak ada bukti transaksi</p>
                                                                                 ) : (
-                                                                                    <img src={`http://localhost:4000/resources/uploads/${foto}`} className='w-100 h-100' />
+                                                                                    <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${foto}`} className='w-100 h-100' />
                                                                                 )
                                                                             }
                                                                         </div>

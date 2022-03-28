@@ -34,7 +34,7 @@ function index(props) {
             password: password
         }
 
-        axios.post(`http://localhost:4000/users/login`, data).then(
+        axios.post(`https://ikhlasbantu.herokuapp.com/users/login`, data).then(
             res => {
                 swal("Berhasil Login", { icon: "success" })
                 dataLogin(emails)

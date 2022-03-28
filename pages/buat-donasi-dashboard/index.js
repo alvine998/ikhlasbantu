@@ -24,7 +24,7 @@ function index(props) {
 
     // function
     const getDataDonasi = () => {
-        axios.get(`http://localhost:4000/donasis`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/donasis`).then(
             res => {
                 const collection = res.data;
                 console.log(collection);
@@ -34,7 +34,7 @@ function index(props) {
     }
 
     const deleteDonasi = (id) => {
-        axios.delete(`http://localhost:4000/donasis/${id}`).then(
+        axios.delete(`https://ikhlasbantu.herokuapp.com/donasis/${id}`).then(
             res => {
                 swal("Berhasil Hapus Data", { icon: "success" })
                 getDataDonasi();
@@ -94,7 +94,7 @@ function index(props) {
                                                         <td>{res.kategori}</td>
                                                         <td>{res.target}</td>
                                                         <td>{res.terkumpul}</td>
-                                                        <td><img src={`http://localhost:4000/resources/uploads/${res.foto}`} className='w-100 h-100' /></td>
+                                                        <td><img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.foto}`} className='w-100 h-100' /></td>
                                                         <td>{res.deskripsi.substr(0, 10)}</td>
                                                         <td>{res.durasi}</td>
                                                         <td>{res.status_donasi}</td>
@@ -137,7 +137,7 @@ function index(props) {
                                                     <td>{res.kategori}</td>
                                                     <td>{res.target}</td>
                                                     <td>{res.terkumpul}</td>
-                                                    <td><img src={`http://localhost:4000/resources/uploads/${res.foto}`} className='w-100 h-100' /></td>
+                                                    <td><img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.foto}`} className='w-100 h-100' /></td>
                                                     <td>{res.deskripsi.substr(0, 10)}</td>
                                                     <td>{res.durasi}</td>
                                                     <td>{res.status_donasi}</td>
