@@ -20,6 +20,9 @@ function UserProfile(props) {
 
     const router = useRouter();
     const [collection, setCollection] = useState([])
+    const [ftktp, setFtktp] = useState('');
+    const [ftrek, setFtrek] = useState('');
+    const [idd, setIdd] = useState('');
 
     const getDataUsers = () => {
         axios.get(`https://ikhlasbantu.herokuapp.com/users`).then(
@@ -27,6 +30,17 @@ function UserProfile(props) {
                 const collection = res.data;
                 console.log(collection);
                 setCollection(collection)
+            }
+        )
+    }
+
+    const getDetailDataUsers = (id) => {
+        axios.get(`https://ikhlasbantu.herokuapp.com/users/${id}`).then(
+            res => {
+                console.log(res.data);
+                const datas = res.data;
+                setFtktp(datas.fotoktp); setFtrek(datas.fotorekening);
+                setIdd(datas._id);
             }
         )
     }
@@ -58,6 +72,39 @@ function UserProfile(props) {
                 console.log(res.data);
                 getDataUsers();
             }
+        )
+    }
+
+    const modalEvent = () => {
+        return (
+            <div>
+                {/* Modal */}
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Verifikasi Identitas</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div style={{ paddingTop: 20 }}>
+                                    <h5>E-KTP :</h5>
+                                    <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${ftktp}`} className='w-100 h-100' />
+                                </div>
+                                <div style={{ paddingTop: 20 }}>
+                                    <h5>Rekening Bank :</h5>
+                                    <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${ftrek}`} className='w-100 h-100' />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick={()=>console.log(idd)}>Tutup</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick={() => updateDataTolak(idd)}>Tolak</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => updateData(idd)}>Verifikasi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         )
     }
 
@@ -112,34 +159,11 @@ function UserProfile(props) {
                                                     <td>{res.nohp}</td>
                                                     <td>{res.statususer}</td>
                                                     <td>
-                                                        {/* Modal */}
-                                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">Verifikasi Identitas</h5>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div style={{ paddingTop: 20 }}>
-                                                                            <h5>E-KTP :</h5>
-                                                                            <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.fotoktp}`} className='w-100 h-100' />
-                                                                        </div>
-                                                                        <div style={{ paddingTop: 20 }}>
-                                                                            <h5>Rekening Bank :</h5>
-                                                                            <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.fotorekening}`} className='w-100 h-100' />
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick={() => updateDataTolak(res._id)}>Tolak</button>
-                                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => updateData(res._id)}>Verifikasi</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        {
+                                                            modalEvent()
+                                                        }
                                                         <div className='d-grid gap-2'>
-                                                            <button data-bs-toggle="modal" data-bs-target="#exampleModal" className='btn btn-outline-warning'>Verifikasi</button>
+                                                            <button data-bs-toggle="modal" onClick={()=>getDetailDataUsers(res._id)} data-bs-target="#exampleModal" className='btn btn-outline-warning'>Verifikasi</button>
                                                             <button className='btn btn-outline-danger'>Suspend</button>
                                                         </div>
                                                     </td>
