@@ -8,9 +8,9 @@ import Navadmin from '../../components/NavAdmin';
 import NavMain from '../../components/NavMain';
 import styles from '../../styles/Home.module.css'
 
-SemuaDonasi.title = "Semua Donasi"
+ValidDonasi.title = "Donasi Valid"
 
-function SemuaDonasi(props) {
+function ValidDonasi(props) {
     const getDataLogin = () => {
         var key = localStorage.getItem('loginKey')
         console.log(key)
@@ -26,7 +26,7 @@ function SemuaDonasi(props) {
     const [idd, setIdd] = useState('');
 
     const getDataDonasis = () => {
-        axios.get(`https://ikhlasbantu.herokuapp.com/donasis`).then(
+        axios.get(`https://ikhlasbantu.herokuapp.com/donasis/valid`).then(
             res => {
                 const collection = res.data;
                 console.log(collection);
@@ -119,13 +119,13 @@ function SemuaDonasi(props) {
         <div style={{ overflow: 'hidden' }}>
             <div className='row'>
                 <div className='col-2'>
-                    <Navadmin SDonasi />
+                    <Navadmin VDonasi />
                 </div>
                 <div className='col'>
                     <NavMain />
-                    <div className={styles.mainAdmin} style={{ width: '100%', height: '100%'}}>
+                    <div className={styles.mainAdmin} style={{ overflow: 'scroll', width: '100%', height: 570, overflowX: 'hidden' }}>
                         <div className='container'>
-                            <h2 style={{ fontWeight: 'bold', textAlign: 'center' }}>Semua Donasi</h2>
+                            <h2 style={{ fontWeight: 'bold', textAlign: 'center' }}>Donasi Valid</h2>
                             <div className={styles.toRight}>
                                 <div className='row'>
                                     <div className='col'>
@@ -137,7 +137,7 @@ function SemuaDonasi(props) {
                                 </div>
                             </div>
 
-                            <div style={{ paddingTop: 20, overflow:"scroll", overflowY:"hidden" }}>
+                            <div style={{ paddingTop: 20 }}>
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -150,8 +150,8 @@ function SemuaDonasi(props) {
                                             <th scope="col">Durasi</th>
                                             <th scope="col">Foto</th>
                                             <th scope="col">Kategori</th>
-                                            <th scope="col">Status Donasi</th>
-                                            <th scope="col">Action</th>
+                                            {/* <th scope="col">Status Donasi</th>
+                                            <th scope="col">Action</th> */}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -167,13 +167,13 @@ function SemuaDonasi(props) {
                                                     <td>{res.durasi}</td>
                                                     <td><img style={{ width: 200, height: 100 }} src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.foto}`} /></td>
                                                     <td>{res.kategori}</td>
-                                                    <td>{res.status_donasi}</td>
+                                                    {/* <td>{res.status_donasi}</td>
                                                     <td>
                                                         <div className='d-grid gap-2'>
                                                             <button onClick={() => verificationValid(res._id)}  className='btn btn-outline-warning'>Verifikasi</button>
                                                             <button onClick={() => verificationSuspend(res._id)} className='btn btn-outline-danger'>Suspend</button>
                                                         </div>
-                                                    </td>
+                                                    </td> */}
                                                 </tr>
                                             ))
                                         }
@@ -188,4 +188,4 @@ function SemuaDonasi(props) {
     );
 }
 
-export default SemuaDonasi;
+export default ValidDonasi;

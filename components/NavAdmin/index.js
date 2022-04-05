@@ -60,7 +60,7 @@ function Navadmin(props) {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link href={"/admin/validasi-donasi"}>
+                                            <Link href={"/admin/valid-donasi"}>
                                                 <a className={"nav-link " + (props.VDonasi ? "active" : "link-dark")}>
                                                     Donasi Valid
                                                 </a>
@@ -68,7 +68,7 @@ function Navadmin(props) {
                                         </li>
                                         <li>
                                             <Link href={"/admin/validasi-donasi"}>
-                                                <a className={"nav-link " + (props.VDonasi ? "active" : "link-dark")}>
+                                                <a className={"nav-link " + (props.TVDonasi ? "active" : "link-dark")}>
                                                     Donasi Belum Valid
                                                 </a>
                                             </Link>
