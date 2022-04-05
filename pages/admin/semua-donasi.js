@@ -7,7 +7,7 @@ import Navadmin from '../../components/NavAdmin';
 import NavMain from '../../components/NavMain';
 import styles from '../../styles/Home.module.css'
 
-SemuaDonasi.title = "User Profile"
+SemuaDonasi.title = "Semua Donasi"
 
 function SemuaDonasi(props) {
     const getDataLogin = () => {
@@ -24,7 +24,7 @@ function SemuaDonasi(props) {
     const [ftrek, setFtrek] = useState('');
     const [idd, setIdd] = useState('');
 
-    const getDataUsers = () => {
+    const getDataDonasis = () => {
         axios.get(`https://ikhlasbantu.herokuapp.com/donasis`).then(
             res => {
                 const collection = res.data;
@@ -47,70 +47,71 @@ function SemuaDonasi(props) {
 
     const updateData = (id) => {
         const data = {
-            statususer: 'verified',
-            statusktp: 'verified',
-            statusrekening: 'verified',
+            status_donasi:"Valid",
         }
         axios.put(`https://ikhlasbantu.herokuapp.com/donasis/${id}`, data).then(
             res => {
-                swal("Berhasil Verifikasi", { icon: "success" });
                 console.log(res.data);
-                getDataUsers();
+                getDataDonasis();
             }
         )
     }
 
     const updateDataTolak = (id) => {
         const data = {
-            statususer: 'not verified',
-            statusktp: 'not verified',
-            statusrekening: 'not verified',
+            status_donasi:"Ditolak",
         }
         axios.put(`https://ikhlasbantu.herokuapp.com/donasis/${id}`, data).then(
             res => {
-                swal("Penolakan Berhasil", { icon: "success" });
                 console.log(res.data);
-                getDataUsers();
+                getDataDonasis();
             }
         )
     }
 
-    const modalEvent = () => {
-        return (
-            <div>
-                {/* Modal */}
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Verifikasi Identitas</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div style={{ paddingTop: 20 }}>
-                                    <h5>E-KTP :</h5>
-                                    <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${ftktp}`} className='w-100 h-100' />
-                                </div>
-                                <div style={{ paddingTop: 20 }}>
-                                    <h5>Rekening Bank :</h5>
-                                    <img src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${ftrek}`} className='w-100 h-100' />
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick={()=>console.log(idd)}>Tutup</button>
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick={() => updateDataTolak(idd)}>Tolak</button>
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => updateData(idd)}>Verifikasi</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
+    const verificationValid = (id) => {
+        swal({
+            title: "Validasi Donasi",
+            text: "Klik Validasi untuk memvalidasi donasi ini untuk ditampilkan pada aplikasi ikhlasbantu",
+            buttons: "Validasi",
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    updateData(id)
+                    swal("Berhasil memvalidasi donasi ini !", {
+                        icon: "success",
+                        buttons: "Ok"
+                    });
+                } else {
+                    null;
+                }
+            })
+    }
+
+    const verificationSuspend = (id) => {
+        swal({
+            title: "Suspend Donasi",
+            text: "Klik Suspend untuk memblokir donasi ini",
+            icon: "warning",
+            buttons: [true, {text:"Suspend"}],
+            dangerMode: true
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    updateDataTolak(id)
+                    swal("Berhasil Suspend!", {
+                        icon: "success",
+                        buttons:"Ok"
+                    });
+                } else {
+                    null;
+                }
+            })
     }
 
     useEffect(() => {
         getDataLogin();
-        getDataUsers();
+        getDataDonasis();
     }, [])
 
     return (
@@ -146,6 +147,7 @@ function SemuaDonasi(props) {
                                             <th scope="col">Target</th>
                                             <th scope="col">Durasi</th>
                                             <th scope="col">Foto</th>
+                                            <th scope="col">Kategori</th>
                                             <th scope="col">Status Donasi</th>
                                             <th scope="col">Action</th>
                                         </tr>
@@ -160,15 +162,13 @@ function SemuaDonasi(props) {
                                                     <td>{res.deskripsi}</td>
                                                     <td>{res.target}</td>
                                                     <td>{res.durasi}</td>
-                                                    <td><img style={{width:200, height:100}} src={res.foto} /></td>
+                                                    <td><img style={{ width: 200, height: 100 }} src={`https://ikhlasbantu.herokuapp.com/resources/uploads/${res.foto}`} /></td>
+                                                    <td>{res.kategori}</td>
                                                     <td>{res.status_donasi}</td>
                                                     <td>
-                                                        {
-                                                            modalEvent()
-                                                        }
                                                         <div className='d-grid gap-2'>
-                                                            <button data-bs-toggle="modal" onClick={()=>getDetailDataUsers(res._id)} data-bs-target="#exampleModal" className='btn btn-outline-warning'>Verifikasi</button>
-                                                            <button className='btn btn-outline-danger'>Suspend</button>
+                                                            <button onClick={() => verificationValid(res._id)}  className='btn btn-outline-warning'>Verifikasi</button>
+                                                            <button onClick={() => verificationSuspend(res._id)} className='btn btn-outline-danger'>Suspend</button>
                                                         </div>
                                                     </td>
                                                 </tr>
